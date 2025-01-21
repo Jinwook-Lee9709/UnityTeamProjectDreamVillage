@@ -1,0 +1,178 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fade73c7ebd1e4b829b49ee25e970241, type: 3}
+  m_Name: BuildingDatabase
+  m_EditorClassIdentifier: 
+  list:
+    _serializedList:
+    - Key: 3001
+      Value:
+        name: "\uBC2D"
+        level: 1
+        exp: 5
+        productionTime: 0
+        cost: 0
+        size: {x: 0, y: 0}
+        prefab: {fileID: 0}
+    - Key: 3002
+      Value:
+        name: "\uACF3\uAC04"
+        level: 1
+        exp: 0
+        productionTime: 0
+        cost: 0
+        size: {x: 0, y: 0}
+        prefab: {fileID: 0}
+    - Key: 3003
+      Value:
+        name: "\uC0AC\uB8CC\uACF5\uC7A51_\uC18C"
+        level: 1
+        exp: 10
+        productionTime: 300
+        cost: 700
+        size: {x: 0, y: 0}
+        prefab: {fileID: 0}
+    - Key: 3004
+      Value:
+        name: "\uC0AC\uB8CC\uACF5\uC7A52_\uB2ED"
+        level: 2
+        exp: 15
+        productionTime: 900
+        cost: 1500
+        size: {x: 0, y: 0}
+        prefab: {fileID: 0}
+    - Key: 3005
+      Value:
+        name: "\uC0AC\uB8CC\uACF5\uC7A53_\uC591"
+        level: 7
+        exp: 20
+        productionTime: 1800
+        cost: 5000
+        size: {x: 0, y: 0}
+        prefab: {fileID: 0}
+    - Key: 3006
+      Value:
+        name: "\uC0AC\uB8CC\uACF5\uC7A54_\uBC8C"
+        level: 13
+        exp: 25
+        productionTime: 1800
+        cost: 8000
+        size: {x: 0, y: 0}
+        prefab: {fileID: 0}
+    - Key: 3007
+      Value:
+        name: "\uC0AC\uB8CC\uACF5\uC7A55_\uB3FC\uC9C0"
+        level: 16
+        exp: 30
+        productionTime: 1800
+        cost: 10000
+        size: {x: 0, y: 0}
+        prefab: {fileID: 0}
+    - Key: 3008
+      Value:
+        name: "\uCD95\uC0B01_\uC18C"
+        level: 1
+        exp: 10
+        productionTime: 120
+        cost: 1000
+        size: {x: 0, y: 0}
+        prefab: {fileID: 0}
+    - Key: 3009
+      Value:
+        name: "\uCD95\uC0B02_\uB2ED"
+        level: 3
+        exp: 15
+        productionTime: 240
+        cost: 3000
+        size: {x: 0, y: 0}
+        prefab: {fileID: 0}
+    - Key: 3010
+      Value:
+        name: "\uCD95\uC0B03_\uC591"
+        level: 5
+        exp: 20
+        productionTime: 1800
+        cost: 5000
+        size: {x: 0, y: 0}
+        prefab: {fileID: 0}
+    - Key: 3011
+      Value:
+        name: "\uCD95\uC0B04_\uBC8C"
+        level: 18
+        exp: 25
+        productionTime: 240
+        cost: 7000
+        size: {x: 0, y: 0}
+        prefab: {fileID: 0}
+    - Key: 3012
+      Value:
+        name: "\uCD95\uC0B05_\uB3FC\uC9C0"
+        level: 20
+        exp: 30
+        productionTime: 240
+        cost: 9000
+        size: {x: 0, y: 0}
+        prefab: {fileID: 0}
+    - Key: 3013
+      Value:
+        name: "\uBE75\uC9D1"
+        level: 1
+        exp: 10
+        productionTime: 60
+        cost: 800
+        size: {x: 0, y: 0}
+        prefab: {fileID: 0}
+    - Key: 3014
+      Value:
+        name: "\uC720\uC81C\uD488 \uACF5\uC7A5"
+        level: 1
+        exp: 10
+        productionTime: 180
+        cost: 1300
+        size: {x: 0, y: 0}
+        prefab: {fileID: 0}
+    - Key: 3015
+      Value:
+        name: "\uC12C\uC720 \uACF5\uC7A5"
+        level: 7
+        exp: 30
+        productionTime: 1800
+        cost: 1500
+        size: {x: 0, y: 0}
+        prefab: {fileID: 0}
+    - Key: 3016
+      Value:
+        name: "\uC77C\uBC18 \uAC74\uBB3C1_\uC8FC\uD0DD"
+        level: 2
+        exp: 15
+        productionTime: 0
+        cost: 500
+        size: {x: 0, y: 0}
+        prefab: {fileID: 0}
+    - Key: 3017
+      Value:
+        name: "\uC77C\uBC18 \uAC74\uBB3C2_\uBE4C\uB529"
+        level: 5
+        exp: 15
+        productionTime: 0
+        cost: 1000
+        size: {x: 0, y: 0}
+        prefab: {fileID: 0}
+    - Key: 3018
+      Value:
+        name: "\uC77C\uBC18 \uAC74\uBB3C3_\uB3C4\uC11C\uAD00"
+        level: 6
+        exp: 15
+        productionTime: 0
+        cost: 1200
+        size: {x: 0, y: 0}
+        prefab: {fileID: 0}
