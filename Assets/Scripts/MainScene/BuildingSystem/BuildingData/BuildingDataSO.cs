@@ -10,7 +10,7 @@ public class BuildingDatabaseSO : ScriptableObject
     [SerializedDictionary, SerializeField] private SerializedDictionary<int, BuildingData> list;
     private void OnEnable()
     {
-        list.Clear();
+        Load();
     }
 
     public void Load()
@@ -29,7 +29,10 @@ public class BuildingDatabaseSO : ScriptableObject
         BuildingDataConverter.Save(list);
     }
 
-    
+    public BuildingData Get(int id)
+    {
+        return list[id];
+    }
     
     
     

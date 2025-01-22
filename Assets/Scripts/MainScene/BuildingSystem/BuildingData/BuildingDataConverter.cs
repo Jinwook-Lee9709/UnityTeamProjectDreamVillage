@@ -11,7 +11,7 @@ public static class BuildingDataConverter
 {
     private static readonly string tableName = "BuildingTable";
     private static readonly string PATH = "tables/{0}";
-    private static readonly string PrefabPath = "Assets/Prefabs/{0}";
+    private static readonly string PrefabPath = "Assets/Prefabs/{0}.prefab";
     
     static Dictionary<int, BuildingData> dict = new Dictionary<int, BuildingData>();
     public class Data
@@ -38,6 +38,7 @@ public static class BuildingDataConverter
             building.productionTime = data.productionTime;
             building.cost = data.necessaryCost;
             building.prefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(String.Format(PrefabPath, data.Name));
+            building.size = building.prefab?.GetComponent<BuildingSize>()?.size ?? Vector2Int.zero;
             dict.Add(data.ID, building);
         }
     }

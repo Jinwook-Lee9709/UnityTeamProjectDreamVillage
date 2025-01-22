@@ -34,6 +34,9 @@ public class MultiTouchManager : Singleton<MultiTouchManager>
     public float Pinch { get; private set; }
     
     public float Rotate { get; private set; }
+
+    private Vector2 tapPosition = Vector2.negativeInfinity;
+    public Vector2 lastTapPosition { get; private set; } = Vector2.negativeInfinity;
     private void Start()
     {
         minSwipeDistancePixels = minSwipeDistance * Screen.dpi;
@@ -141,6 +144,7 @@ public class MultiTouchManager : Singleton<MultiTouchManager>
             if (doubleTapTime < Time.time && doubleTapTime > 0)
             {
                 Tap = true;
+                lastTapPosition = tapPosition;
                 doubleTapTime = -1;
             }
 
@@ -171,6 +175,7 @@ public class MultiTouchManager : Singleton<MultiTouchManager>
                         }
                         else if (touchedTime + tapInterval > Time.time)
                         {
+                            tapPosition = touch.position;
                             doubleTapTime = Time.time + doubleTapInterval;
                         }
 
@@ -188,6 +193,11 @@ public class MultiTouchManager : Singleton<MultiTouchManager>
         LongPress = false;
 
         Swipe = Vector2.zero;
+        if (lastTapPosition != Vector2.negativeInfinity)
+        {
+            lastTapPosition = Vector2.negativeInfinity;
+            tapPosition = lastTapPosition;
+        }
     }
 }
 

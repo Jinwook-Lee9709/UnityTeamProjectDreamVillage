@@ -4,7 +4,8 @@ using UnityEngine;
 
 public interface IBuildingState
 {
-    void OnAction();
+    bool OnAction();
+    void OnRotation();
     void UpdateState();
     void EndState();
 }

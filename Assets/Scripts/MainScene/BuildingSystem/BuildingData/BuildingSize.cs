@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class BuildingSize : MonoBehaviour
 {
-    public Vector2 size;
+    public Vector2Int size;
 }
