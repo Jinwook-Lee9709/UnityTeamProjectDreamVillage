@@ -1,0 +1,176 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eb41825d6db4802bfb694498d96cd5, type: 3}
+  m_Name: ItemDatabase
+  m_EditorClassIdentifier: 
+  dictionary:
+    _serializedList:
+    - Key: 1001
+      Value:
+        type: 1
+        price: 50
+        imageID: wheat
+    - Key: 1002
+      Value:
+        type: 1
+        price: 60
+        imageID: wheat
+    - Key: 1003
+      Value:
+        type: 1
+        price: 70
+        imageID: wheat
+    - Key: 1004
+      Value:
+        type: 1
+        price: 80
+        imageID: wheat
+    - Key: 1005
+      Value:
+        type: 1
+        price: 90
+        imageID: wheat
+    - Key: 1006
+      Value:
+        type: 1
+        price: 100
+        imageID: wheat
+    - Key: 1007
+      Value:
+        type: 1
+        price: 110
+        imageID: wheat
+    - Key: 1008
+      Value:
+        type: 1
+        price: 120
+        imageID: wheat
+    - Key: 1009
+      Value:
+        type: 1
+        price: 130
+        imageID: wheat
+    - Key: 1010
+      Value:
+        type: 1
+        price: 140
+        imageID: wheat
+    - Key: 2001
+      Value:
+        type: 2
+        price: 30
+        imageID: wheat
+    - Key: 2002
+      Value:
+        type: 2
+        price: 40
+        imageID: wheat
+    - Key: 2003
+      Value:
+        type: 2
+        price: 50
+        imageID: wheat
+    - Key: 2004
+      Value:
+        type: 2
+        price: 60
+        imageID: wheat
+    - Key: 2005
+      Value:
+        type: 2
+        price: 70
+        imageID: wheat
+    - Key: 2006
+      Value:
+        type: 2
+        price: 7
+        imageID: wheat
+    - Key: 2007
+      Value:
+        type: 2
+        price: 10
+        imageID: wheat
+    - Key: 2008
+      Value:
+        type: 2
+        price: 15
+        imageID: wheat
+    - Key: 2009
+      Value:
+        type: 2
+        price: 22
+        imageID: wheat
+    - Key: 2010
+      Value:
+        type: 2
+        price: 32
+        imageID: wheat
+    - Key: 2011
+      Value:
+        type: 2
+        price: 10
+        imageID: wheat
+    - Key: 2012
+      Value:
+        type: 2
+        price: 12
+        imageID: wheat
+    - Key: 2013
+      Value:
+        type: 2
+        price: 20
+        imageID: wheat
+    - Key: 2014
+      Value:
+        type: 2
+        price: 25
+        imageID: wheat
+    - Key: 2015
+      Value:
+        type: 2
+        price: 12
+        imageID: wheat
+    - Key: 2016
+      Value:
+        type: 2
+        price: 15
+        imageID: wheat
+    - Key: 2017
+      Value:
+        type: 2
+        price: 18
+        imageID: wheat
+    - Key: 2018
+      Value:
+        type: 2
+        price: 21
+        imageID: wheat
+    - Key: 2019
+      Value:
+        type: 2
+        price: 10
+        imageID: wheat
+    - Key: 2020
+      Value:
+        type: 2
+        price: 15
+        imageID: wheat
+    - Key: 2021
+      Value:
+        type: 2
+        price: 19
+        imageID: wheat
+    - Key: 2022
+      Value:
+        type: 2
+        price: 25
+        imageID: wheat

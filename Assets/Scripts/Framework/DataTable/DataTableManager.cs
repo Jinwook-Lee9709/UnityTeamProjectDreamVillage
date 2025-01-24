@@ -8,11 +8,11 @@ public static class DataTableManager
 
     static DataTableManager()
     {
-        var table = new StringTable();
-        table.Load(Variables.currentLanguage.ToString());
-        tables.Add(DataTableIds.String[(int)Variables.currentLanguage], table);
+        var table1 = new StringTable();
+        table1.Load(Variables.currentLanguage.ToString());
+        tables.Add(DataTableIds.String[(int)Variables.currentLanguage], table1);
+        
     }
-
     public static StringTable StringTable
     {
         get
@@ -20,7 +20,6 @@ public static class DataTableManager
             return Get<StringTable>(DataTableIds.String[(int)Variables.currentLanguage]);
         }
     }
-
     public static T Get<T>(string id) where T : DataTable
     {
         if (!tables.ContainsKey(id))
