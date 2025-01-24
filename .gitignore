@@ -73,3 +73,5 @@ crashlytics-build.properties
 
 
 Assets/3rdPartyAssets/
+# .gitignore 파일
+*.idea
