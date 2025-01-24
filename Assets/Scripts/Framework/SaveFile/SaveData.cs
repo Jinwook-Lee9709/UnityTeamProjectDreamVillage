@@ -10,13 +10,16 @@ public abstract class SaveData
 
 public class SaveDataV1 : SaveData
 {
+    public int gold;
+    public Dictionary<int, int> inventory = new Dictionary<int, int>();
+    
     public SaveDataV1()
     {
-        
+        Version = 1;
     }
 
     public override SaveData VersionUp()
     {
-        throw new System.NotImplementedException();
+        return new SaveDataV1();
     }
 }

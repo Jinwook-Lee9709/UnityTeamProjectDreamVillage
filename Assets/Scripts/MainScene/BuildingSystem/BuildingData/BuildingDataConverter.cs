@@ -1,20 +1,18 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using AYellowpaper.SerializedCollections;
-using CsvHelper;
 using UnityEngine;
 
 public static class BuildingDataConverter
 {
     private static readonly string tableName = "BuildingTable";
     private static readonly string PATH = "tables/{0}";
-    private static readonly string PrefabPath = "Assets/Prefabs/{0}.prefab";
+    private static readonly string PrefabPath = "Prefabs/Buildings/Building_Prefab_{0}";
     
     static Dictionary<int, BuildingData> dict = new Dictionary<int, BuildingData>();
-    public class Data
+    
+    public static Dictionary<int, BuildingData> GetTable  { get { return dict; } }
+    private class Data
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -37,7 +35,7 @@ public static class BuildingDataConverter
             building.exp = data.exp;
             building.productionTime = data.productionTime;
             building.cost = data.necessaryCost;
-            building.prefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(String.Format(PrefabPath, data.Name));
+            building.prefab = Resources.Load<GameObject>(String.Format(PrefabPath, data.ID));
             building.size = building.prefab?.GetComponent<BuildingSize>()?.size ?? Vector2Int.zero;
             dict.Add(data.ID, building);
         }
@@ -65,5 +63,5 @@ public static class BuildingDataConverter
         // }
     }
     
-    public static Dictionary<int, BuildingData> GetTable  { get { return dict; } }
+
 }

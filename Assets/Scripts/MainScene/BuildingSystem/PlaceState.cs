@@ -1,8 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlaceState : IBuildingState
@@ -43,7 +39,7 @@ public class PlaceState : IBuildingState
             return false;
 
         int guid = Guid.NewGuid().GetHashCode();
-        gridData.AddObject(guid, gridPosition, currentBuildingData, previewSystem.IsFlip);
+        gridData.AddObject(id, guid, gridPosition, currentBuildingData, previewSystem.IsFlip);
         objectPlacer.PlaceObject(guid, currentBuildingData.prefab, gridPosition, previewSystem.IsFlip);
         return true;
     }
@@ -60,6 +56,10 @@ public class PlaceState : IBuildingState
     public void OnRotation()
     {
         previewSystem.RotatePreview();
+    }
+
+    public void OnRemove()
+    {
     }
 
     public void UpdateState()

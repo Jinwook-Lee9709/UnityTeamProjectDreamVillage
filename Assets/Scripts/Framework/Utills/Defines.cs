@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,17 @@ public static class DataTableIds
         "StringTableKr",
         "StringTableEn",
     };
+}
+
+
+
+[Serializable]
+public enum MainSceneUiIds
+{
+    Default,
+    Building,
+    Farming,
+    Inventory,
 }
 
 public static class Variables

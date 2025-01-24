@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a2a4e03b84b48028d9f60b68772495, type: 3}
+  m_Name: CropRecipeDatabase
+  m_EditorClassIdentifier: 
+  dictionary:
+    _serializedList:
+    - Key: 1001
+      Value:
+        name: "\uBC00"
+        level: 1
+        exp: 3
+        productionTime: 5
+        productCount: 1
+        necessaryCost: 0
+    - Key: 1002
+      Value:
+        name: "\uC625\uC218\uC218"
+        level: 2
+        exp: 5
+        productionTime: 120
+        productCount: 1
+        necessaryCost: 1
+    - Key: 1003
+      Value:
+        name: "\uB2F9\uADFC"
+        level: 4
+        exp: 7
+        productionTime: 180
+        productCount: 1
+        necessaryCost: 2
+    - Key: 1004
+      Value:
+        name: "\uC0AC\uD0D5\uC218\uC218"
+        level: 7
+        exp: 10
+        productionTime: 360
+        productCount: 1
+        necessaryCost: 3
+    - Key: 1005
+      Value:
+        name: "\uBA74"
+        level: 10
+        exp: 13
+        productionTime: 720
+        productCount: 1
+        necessaryCost: 4
+    - Key: 1006
+      Value:
+        name: "\uB538\uAE30"
+        level: 12
+        exp: 15
+        productionTime: 1440
+        productCount: 1
+        necessaryCost: 5
+    - Key: 1007
+      Value:
+        name: "\uD1A0\uB9C8\uD1A0"
+        level: 14
+        exp: 17
+        productionTime: 1800
+        productCount: 1
+        necessaryCost: 6
+    - Key: 1008
+      Value:
+        name: "\uC18C\uB098\uBB34"
+        level: 16
+        exp: 20
+        productionTime: 2100
+        productCount: 1
+        necessaryCost: 7
+    - Key: 1009
+      Value:
+        name: "\uAC10\uC790"
+        level: 18
+        exp: 22
+        productionTime: 1800
+        productCount: 1
+        necessaryCost: 8
+    - Key: 1010
+      Value:
+        name: "\uCE74\uCE74\uC624"
+        level: 20
+        exp: 25
+        productionTime: 2100
+        productCount: 1
+        necessaryCost: 9

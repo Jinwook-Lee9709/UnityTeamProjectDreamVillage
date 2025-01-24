@@ -18,6 +18,10 @@ public class BuildingDatabaseEditor : Editor
         {
             BuildingDatabaseSO script = (BuildingDatabaseSO)target;
             script.Load();
+            
+            EditorUtility.SetDirty(script);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
         }
         EditorGUILayout.EndHorizontal();
         DrawDefaultInspector();

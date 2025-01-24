@@ -1,17 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GridData
 {
     Dictionary<Vector3Int,PlacementData> placedObects = new Dictionary<Vector3Int,PlacementData>();
-
-    public void AddObject(int guid, Vector3Int position, BuildingData buildingData, bool isFlip )
+    
+    public void AddObject(int buildingDataId, int guid, Vector3Int position, BuildingData buildingData, bool isFlip )
     {
         PlacementData data = new();
-        data.id = guid;
+        data.buildingDataID = buildingDataId;
+        data.guid = guid;
         Vector2 size = isFlip ? new Vector2(buildingData.size.y, buildingData.size.x) : new Vector2(buildingData.size.x, buildingData.size.y);
         for (int i = 0; i < buildingData.size.x; i++)
         {
@@ -28,16 +27,18 @@ public class GridData
         }
 
     }
-
     public void RemoveObject(int guid)
     {
-        var objects = placedObects.Where(x => x.Value.id == guid);
-        foreach (var obj in objects)
+        var keysToRemove = placedObects
+            .Where(x => x.Value.guid == guid)
+            .Select(x => x.Key)
+            .ToList();
+        
+        foreach (var key in keysToRemove)
         {
-            placedObects.Remove(obj.Key);
+            placedObects.Remove(key);
         }
     }
-
     public int GetGuid(Vector3Int position)
     {
         placedObects.TryGetValue(position, out var data);
@@ -45,9 +46,19 @@ public class GridData
         {
             return -1;
         }
-        return data.id;
+        return data.guid;
+    }
+    
+    public int GetBuildingDataId(int guid)
+    {
+        return placedObects.Where(x => x.Value.guid == guid).First().Value.buildingDataID;
     }
 
+    public bool GetIsFliped(int guid)
+    {
+        return placedObects.Where(x => x.Value.guid == guid).First().Value.isFlip;
+    }
+    
     public bool IsValid(Vector3Int position, Vector2Int size)
     {
         for (int i = 0; i < size.x; i++)

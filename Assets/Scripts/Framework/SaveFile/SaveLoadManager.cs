@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
-using Directory = UnityEngine.Windows.Directory;
+using Directory = System.IO.Directory;
 using SaveDataVC = SaveDataV1;
 
 public class SaveLoadManager : MonoBehaviour
@@ -25,7 +25,7 @@ public class SaveLoadManager : MonoBehaviour
     private static JsonSerializerSettings settings = new JsonSerializerSettings()
     {
         Formatting = Formatting.Indented,
-        TypeNameHandling = TypeNameHandling.Auto,
+        TypeNameHandling = TypeNameHandling.All,
     };
 
     static SaveLoadManager()
