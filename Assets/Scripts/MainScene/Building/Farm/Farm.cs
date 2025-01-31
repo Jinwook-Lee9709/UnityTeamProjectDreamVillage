@@ -197,6 +197,7 @@ public class Farm : MonoBehaviour, IBuilding
                     isTouching = false;
                     fingerId = -1;
                     currentCursorCropId = -1;
+                    farmingUI.SetScrollRectActivation(true);
                     if (isEverPlanted)
                     {
                         EndPlantState();
@@ -334,6 +335,7 @@ public class Farm : MonoBehaviour, IBuilding
         uiManager.SetDefaultUiInteract(true);
         farmingUI.StopFarmingUI();
         panel.SetActive(false);
+        farmingUI.SetScrollRectActivation(true);
         interactionState = InteractionState.None;
     }
 

@@ -72,9 +72,14 @@ public class Factory : MonoBehaviour, IBuilding
 
     private void OnAssignProduct(int id)
     {
-        productQueue.Enqueue(id);
-        if (productQueue.Count == 1)
-            productionStartTime = DateTime.Now;
+        if (recipeDatabase.IsProductable(id))
+        {
+            var data = recipeDatabase.Get(id);
+            productQueue.Enqueue(id);
+            if (productQueue.Count == 1)
+                productionStartTime = DateTime.Now;
+            recipeDatabase.CreateMaterial(id);
+        }
     }
 
     private void OnClaim()

@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using AYellowpaper.SerializedCollections;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -60,7 +57,7 @@ public class BuildingShopUI : MonoBehaviour
             );
             bool isAuthorized = SaveLoadManager.Data.Gold >= building.Value.cost;
             button.GetComponent<Button>().interactable = isAuthorized;
-
+            button.Init(building.Key, building.Value);
             button.transform.SetParent(contents);
             
         }
@@ -95,6 +92,5 @@ public class BuildingShopUI : MonoBehaviour
         categoryPanel.SetActive(true);
         buildingPanel.SetActive(false);
         gameObject.SetActive(false);
-        placementSystem.IsTouchable = true;
     }
 }

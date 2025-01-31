@@ -39,6 +39,14 @@ public enum BuildingTypes
     Decoration,
 }
 
+public static class StringFormat
+{
+    public const string itemName = "ITEM_NAME_{0}";
+    public const string itemDesc = "ITEM_DESC_{0}";
+    public const string buildingName = "BUILDING_NAME_{0}";
+    public const string buildingDesc = "BUILDING_DESC_{0}";
+}
+
 public static class CustomString
 {
     public static readonly string nullString = "NULL";

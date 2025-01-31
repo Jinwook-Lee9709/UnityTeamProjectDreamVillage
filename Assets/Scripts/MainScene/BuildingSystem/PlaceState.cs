@@ -38,7 +38,7 @@ public class PlaceState : IBuildingState
         var gridPosition = GetCurrentPreviewValidity(out var validity);
         if (validity == false)
             return false;
-
+        SaveLoadManager.Data.Gold -= buildingDatabase.Get(id).cost;
         int guid = Guid.NewGuid().GetHashCode();
         gridData.AddObject(id, guid, gridPosition, currentBuildingData, previewSystem.IsFlip);
         objectPlacer.PlaceObject(guid, currentBuildingData.prefab, gridPosition, previewSystem.IsFlip);

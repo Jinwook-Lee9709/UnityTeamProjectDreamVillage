@@ -9,9 +9,8 @@ public static class DataTableManager
     static DataTableManager()
     {
         var table1 = new StringTable();
-        table1.Load(Variables.currentLanguage.ToString());
+        table1.Load(DataTableIds.String[(int)Variables.currentLanguage]);
         tables.Add(DataTableIds.String[(int)Variables.currentLanguage], table1);
-        
     }
     public static StringTable StringTable
     {

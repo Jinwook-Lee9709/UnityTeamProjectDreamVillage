@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,9 +11,9 @@ public class BuildingPanelHandler : MonoBehaviour
     [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private Image buildingIcon;
     
-    public void Init(BuildingData data)
+    public void Init(int id, BuildingData data)
     {
-        buildingNameText.text = data.name;
+        buildingNameText.text = DataTableManager.StringTable.Get(String.Format(StringFormat.buildingName, id));
         priceText.text = data.cost.ToString();
     }
 }

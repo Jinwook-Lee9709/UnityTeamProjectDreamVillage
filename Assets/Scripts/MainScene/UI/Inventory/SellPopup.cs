@@ -19,7 +19,7 @@ public class SellPopup : MonoBehaviour
 
     // [SerializeField] private Image itemIcon;
     [SerializeField] private TextMeshProUGUI itemName;
-    [SerializeField] private TextMeshProUGUI itemDescription;
+    [SerializeField] private TextMeshProUGUI itemDesc;
     [SerializeField] private TextMeshProUGUI amountText;
     [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private Button sellButton;
@@ -50,6 +50,8 @@ public class SellPopup : MonoBehaviour
         gameObject.SetActive(true);
         currentItemId = itemId;
         CurrentAmount = minAmount;
+        itemName.text = DataTableManager.StringTable.Get(String.Format(StringFormat.itemName, itemId));
+        itemDesc.text = DataTableManager.StringTable.Get(String.Format(StringFormat.itemDesc, itemId));
 
         UpdateUI();
 

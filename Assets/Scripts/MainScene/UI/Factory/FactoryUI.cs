@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -9,8 +11,8 @@ using UnityEngine.UI;
 
 public class FactoryUI : MonoBehaviour
 {
-    private static readonly string iconPath = "Sprites/Icons/Item_Icon_{0}";
-    private static readonly string timeFormat = "{0:D2} : {1:D2}";
+    private const string iconPath = "Sprites/Icons/Item_Icon_{0}";
+    private const string timeFormat = "{0:D2} : {1:D2}";
 
     [SerializeField] private Sprite opendBoxSprite;
     [SerializeField] private Sprite closedBoxSprite;
@@ -29,18 +31,21 @@ public class FactoryUI : MonoBehaviour
     [SerializeField] private Button claimButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private FactoryImageHandler[] boxImages;
-    
+    [SerializeField] private ScrollRect scrollRect;
+
     //Prefabs
     [SerializeField] private Image bottomSlotPrefab;
     [SerializeField] private Image cursorPrefab;
 
     //Variables
-    private List<Image> images = new();
+    private Dictionary<int, Image> images = new();
     private ObjectPool<Image> imagePool;
     private Queue<int> productQueue, completeQueue;
     private int placeId;
-    private Coroutine timerCoroutine;
+    private bool timerRunning = false;
+    private UniTask timerTask;
     private Factory factory;
+    private CancellationTokenSource cancelToken = new();
 
     //For Touch Event
     private bool isTouching;
@@ -78,7 +83,7 @@ public class FactoryUI : MonoBehaviour
         OnQuitFactory += onQuit;
 
         nameText.text = buildingDatabase.Get(placeId).name;
-        
+
         InitBottmUI();
         UpdateUI();
     }
@@ -92,10 +97,10 @@ public class FactoryUI : MonoBehaviour
             var image = imagePool.GetFromPool();
             image.transform.SetParent(content.transform);
             image.sprite = Resources.Load<Sprite>(string.Format(iconPath, data.Key));
-            images.Add(image);
+            images.Add(data.Key, image);
             ImageTouchHandler imgTouchHandler = image.gameObject.GetComponent<ImageTouchHandler>();
-            imgTouchHandler.OnTouch += (Image image) => OnBottomItemTouched(data.Key);
-            imgTouchHandler.interactable = true;
+            imgTouchHandler.OnTouch += (Image image, bool interactable) => OnBottomItemTouched(data.Key, interactable);
+            imgTouchHandler.Interactable = recipeDatabase.IsProductable(data.Key);
         }
     }
 
@@ -124,15 +129,26 @@ public class FactoryUI : MonoBehaviour
             index++;
         }
 
-        if (timerCoroutine == null && productQueue.Count > 0)
+        if (!timerRunning && productQueue.Count > 0)
         {
-            StartCoroutine(TimerUpdateRoutine());
+            timerTask = TimerUpdateTask();
+            timerRunning = true;
+            ;
         }
         else if (productQueue.Count == 0)
         {
-            if(timerCoroutine != null)
-                StopCoroutine(timerCoroutine);
+            if (timerRunning)
+            {
+                cancelToken.Cancel();
+                timerRunning = false;
+            }
             timerText.text = String.Format(timeFormat, TimeSpan.Zero.Minutes, TimeSpan.Zero.Minutes);
+        }
+
+        foreach (var image in images)
+        {
+            image.Value.GetComponent<ImageTouchHandler>().Interactable = 
+                recipeDatabase.IsProductable(image.Key);
         }
     }
 
@@ -144,17 +160,19 @@ public class FactoryUI : MonoBehaviour
         boxImages[index].SetImage(boxSprite, sprite);
     }
 
-    private void OnBottomItemTouched(int id)
+    private void OnBottomItemTouched(int id, bool interactable)
     {
-        if (Input.touches.Length == 1)
+        if (Input.touches.Length == 1 && interactable)
         {
             currentCursorItemId = id;
             fingerId = Input.GetTouch(0).fingerId;
             isTouching = true;
             cursor = Instantiate(cursorPrefab, transform.parent);
             Image img = cursor.GetComponent<Image>();
-            cursor.GetComponent<Image>().sprite = Resources.Load<Sprite>(string.Format(iconPath, CustomString.nullString));
+            cursor.GetComponent<Image>().sprite =
+                Resources.Load<Sprite>(string.Format(iconPath, CustomString.nullString));
             availableSlotIndex = productQueue.Count + completeQueue.Count;
+            scrollRect.enabled = true;
         }
     }
 
@@ -181,24 +199,30 @@ public class FactoryUI : MonoBehaviour
                     isTouching = false;
                     fingerId = -1;
                     currentCursorItemId = -1;
+                    scrollRect.enabled = true;
                 }
+
                 if (isTouching)
                 {
                     cursor.transform.position = currentTouch.position;
-                    if (availableSlotIndex < boxImages.Length && 
-                        RectTransformUtility.RectangleContainsScreenPoint(boxImages[availableSlotIndex].GetComponent<Image>().rectTransform,
-                            currentTouch.position))
+                    if (availableSlotIndex < boxImages.Length)
                     {
-                        OnAssignProduct.Invoke(currentCursorItemId);
-                        availableSlotIndex = productQueue.Count + completeQueue.Count;
-                        UpdateUI();
+                        bool isCollidedeWithBoxImage = RectTransformUtility.RectangleContainsScreenPoint(
+                            boxImages[availableSlotIndex].GetComponent<Image>().rectTransform, currentTouch.position);
+                        bool isStockEnough = recipeDatabase.IsProductable(currentCursorItemId); 
+                        if (isCollidedeWithBoxImage && isStockEnough)
+                        {
+                            OnAssignProduct.Invoke(currentCursorItemId);
+                            availableSlotIndex = productQueue.Count + completeQueue.Count;
+                            UpdateUI();
+                        }
                     }
                 }
             }
         }
     }
 
-    private IEnumerator TimerUpdateRoutine()
+    private async UniTask TimerUpdateTask()
     {
         while (true)
         {
@@ -207,7 +231,8 @@ public class FactoryUI : MonoBehaviour
                 TimeSpan remainTime = factory.remainTime;
                 timerText.text = String.Format(timeFormat, remainTime.Minutes, remainTime.Seconds);
             }
-            yield return new WaitForSeconds(1f);
+
+            await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: cancelToken.Token);
         }
     }
 
@@ -215,7 +240,7 @@ public class FactoryUI : MonoBehaviour
     public void StopUI()
     {
         OnQuitFactory?.Invoke();
-        
+
         this.placeId = -1;
         this.productQueue = null;
         this.completeQueue = null;
@@ -223,15 +248,21 @@ public class FactoryUI : MonoBehaviour
         OnAssignProduct = null;
         OnClaimItem = null;
         OnQuitFactory = null;
-        
-        if(timerCoroutine != null)
-            StopCoroutine(timerCoroutine);
+
+        if (timerRunning)
+        {
+            cancelToken?.Cancel();
+            timerRunning = false;
+        }
+
+        scrollRect.enabled = true;
 
         foreach (var image in images)
         {
-            ImageTouchHandler imgTouchHandler = image.gameObject.GetComponent<ImageTouchHandler>();
+            ImageTouchHandler imgTouchHandler = image.Value.gameObject.GetComponent<ImageTouchHandler>();
             imgTouchHandler.ClearEvent();
-            imagePool.ReturnToPool(image);
+            imagePool.ReturnToPool(image.Value);
         }
+        images.Clear();
     }
 }

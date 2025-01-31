@@ -27,7 +27,7 @@ MonoBehaviour:
         name: "\uC625\uC218\uC218"
         level: 2
         exp: 5
-        productionTime: 120
+        productionTime: 5
         productCount: 1
         necessaryCost: 1
     - Key: 1003

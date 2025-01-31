@@ -49,7 +49,7 @@ MonoBehaviour:
         productionTime: 900
         cost: 1500
         size: {x: 0, y: 0}
-        prefab: {fileID: 0}
+        prefab: {fileID: 2533845934863396869, guid: c2206672412f74d5eae3f3d4b2de025b, type: 3}
     - Key: 3005
       Value:
         name: "\uC0AC\uB8CC\uACF5\uC7A53_\uC591"

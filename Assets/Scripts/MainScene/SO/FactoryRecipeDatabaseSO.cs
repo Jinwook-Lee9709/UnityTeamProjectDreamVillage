@@ -31,4 +31,42 @@ public class FactoryRecipeDatabaseSO : ScriptableObject
         else
             return null;
     }
+
+    public void CreateMaterial(int id)
+    {
+        var data = dictionary[id];
+        if (IsProductable(id))
+        {
+            DecreaseMaterial(data.materialID1, data.requiredCount1);
+            DecreaseMaterial(data.materialID2, data.requiredCount2);
+            DecreaseMaterial(data.materialID3, data.requiredCount3);
+        }
+    }
+
+    private void DecreaseMaterial(int materialID, int requiredCount)
+    {
+        if (materialID == 0)
+            return;
+        SaveLoadManager.Data.inventory.RemoveItem(materialID, requiredCount);
+    }
+    
+    public bool IsProductable(int id)
+    {
+        if (!dictionary.ContainsKey(id))
+            return false;
+        var data = dictionary[id];
+        
+        return CheckMaterial(data.materialID1, data.requiredCount1) &&
+               CheckMaterial(data.materialID2, data.requiredCount2) &&
+               CheckMaterial(data.materialID3, data.requiredCount3);
+    }
+    
+    private bool CheckMaterial(int materialID, int requiredCount)
+    {
+        if (materialID == 0)
+            return true;
+        
+        int amount = SaveLoadManager.Data.inventory.Get(materialID);
+        return amount >= requiredCount;
+    }
 }

@@ -8,8 +8,6 @@ public class FarmingUI : MonoBehaviour
 {
     private static readonly string sicklePath = "Sprites/Icons/Harvest_Icon_Sickle";
     private static readonly string iconPath = "Sprites/Icons/Item_Icon_{0}";
-    private static readonly Color activeColor = new Color(1f, 1f, 1f, 1f);
-    private static readonly Color inactiveColor = new Color(0.5f, 0.5f, 0.5f, 1f);
 
     [SerializeField] private Transform poolParent;
     [SerializeField] private GameObject content;
@@ -18,6 +16,7 @@ public class FarmingUI : MonoBehaviour
     [SerializeField] private ItemDatabaseSO itemDatabase;
     [SerializeField] private FarmPopup popup;
     [SerializeField] private RectTransform frameBoundary;
+    [SerializeField] private ScrollRect scrollRect;
     private ObjectPool<Image> imagePool;
     private List<Image> images = new();
     
@@ -39,14 +38,16 @@ public class FarmingUI : MonoBehaviour
             image.sprite = Resources.Load<Sprite>(string.Format(iconPath, data.Key));
             
             ImageTouchHandler imgTouchHandler = image.gameObject.GetComponent<ImageTouchHandler>();
-            imgTouchHandler.OnTouch += (Image image) =>
+            imgTouchHandler.OnTouch += (Image image, bool interactable) =>
             {
-                callback(data.Key);
+                if (interactable)
+                {
+                    callback(data.Key);
+                }
                 OnItemTouch(data.Key, image);
             };
             bool isAuthorized = SaveLoadManager.Data.gold >= data.Value.necessaryCost;
-            imgTouchHandler.interactable = isAuthorized;
-            image.material.SetColor("_Color", isAuthorized ? activeColor : inactiveColor);
+            imgTouchHandler.Interactable = isAuthorized;
             
             images.Add(image);
             i++;
@@ -62,16 +63,18 @@ public class FarmingUI : MonoBehaviour
             var frameTopPoint = frameBoundary.GetMiddleTopPosition();
             var popupRect = popup.GetComponent<RectTransform>();
             Vector3 popupPosition = new Vector3(imageRect.position.x, frameTopPoint.y + popupRect.rect.height / 2, 0);
-            
+
+            String itemName = DataTableManager.StringTable.Get(string.Format(StringFormat.itemName, itemId));
             popup.gameObject.SetActive(true);
-            popup.SetInfo("name", cropInfo.productionTime, cropInfo.necessaryCost);
+            popup.SetInfo(itemName, cropInfo.productionTime, cropInfo.necessaryCost);
+            scrollRect.enabled = false;
             popup.transform.position = popupPosition;
         }
     }
 
     private void Update()
     {
-        if (Input.touchCount > 2)
+        if (popup.gameObject.activeSelf && Input.touchCount != 1)
         {
             popup.gameObject.SetActive(false);
         }
@@ -94,9 +97,14 @@ public class FarmingUI : MonoBehaviour
         image.sprite = Resources.Load<Sprite>(sicklePath);
         images.Add(image);
         ImageTouchHandler imgTouchHandler = image.gameObject.GetComponent<ImageTouchHandler>();
-        imgTouchHandler.OnTouch += (Image image) => { callback(); };
-        imgTouchHandler.interactable = true;
+        imgTouchHandler.OnTouch += (Image image, bool interactable) => { if(interactable) callback(); };
+        imgTouchHandler.Interactable = true;
 
+    }
+
+    public void SetScrollRectActivation(bool isEnable)
+    {
+        scrollRect.enabled = isEnable;
     }
 
 

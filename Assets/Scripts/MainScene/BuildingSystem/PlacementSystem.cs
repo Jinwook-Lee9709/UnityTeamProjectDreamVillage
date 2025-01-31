@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -137,6 +139,12 @@ public class PlacementSystem : MonoBehaviour
                 StartModify(gridData.GetGuid(touchedTilePos));
             }
         }
+    }
+    
+    public async UniTask DelayedActivate(float duration = 0.01f)
+    {
+        await Task.Delay((int)(duration * 1000));
+        IsTouchable = true;
     }
 
     public Dictionary<int, GameObject> GetBuildingList()
