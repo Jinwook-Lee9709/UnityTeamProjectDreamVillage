@@ -29,7 +29,8 @@ public class PlaceState : IBuildingState
         this.previewSystem = previewSystem;
         currentBuildingData = buildingDatabase.Get(id);
         previewSystem.enabled = true;
-        previewSystem.ShowPlacementPreview(currentBuildingData.prefab, grid.WorldToCell(InputManager.Instance.CenterPositionToPlane()));
+        previewSystem.ShowPlacementPreview(currentBuildingData.prefab,
+        grid.WorldToCell(InputManager.Instance.CenterPositionToPlane()));
     }
 
     public bool OnAction()
@@ -48,8 +49,8 @@ public class PlaceState : IBuildingState
     {
         Vector3 previewPosition = previewSystem.currentPreviewPosition;
         Vector3Int gridPosition = grid.WorldToCell(previewPosition);
-        Vector2Int flipedSize = new Vector2Int(currentBuildingData.size.y,currentBuildingData.size.x);
-        validity = gridData.IsValid(gridPosition, previewSystem.IsFlip? flipedSize : currentBuildingData.size);
+        Vector2Int flipedSize = new Vector2Int(currentBuildingData.size.y, currentBuildingData.size.x);
+        validity = gridData.IsValid(gridPosition, previewSystem.IsFlip ? flipedSize : currentBuildingData.size);
         return gridPosition;
     }
 

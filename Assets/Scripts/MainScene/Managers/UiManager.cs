@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    [SerializedDictionary, SerializeField] private SerializedDictionary<MainSceneUiIds, GameObject> UiObjects = new ();
+    [SerializedDictionary, SerializeField] private SerializedDictionary<MainSceneUiIds, GameObject> UiObjects;
+    [SerializeField] private Button buildingShopButton;
     
     public GameObject GetPanel(MainSceneUiIds id)
     {
@@ -11,9 +14,13 @@ public class UiManager : MonoBehaviour
         {
             return UiObjects[id];
         }
-        else
-        {
-            return null;
-        }
+        return null;
+        
     }
+
+    public void SetDefaultUiInteract(bool isInteractable)
+    {
+        buildingShopButton.interactable = isInteractable;
+    }
+    
 }

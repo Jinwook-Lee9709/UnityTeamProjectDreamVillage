@@ -21,7 +21,7 @@ public enum InteractionState
 public class Farm : MonoBehaviour, IBuilding
 {
     private static readonly string sicklePath = "Sprites/Icons/Harvest_Icon_Sickle";
-    private static readonly string iconPath = "Sprites/Icons/Crop_Icon_{0}";
+    private static readonly string iconPath = "Sprites/Icons/Item_Icon_{0}";
     private static readonly string growPrefabPath = "Prefabs/Crops/Crop_Prefab_{0}_Grow";
     private static readonly string completePrefabPath = "Prefabs/Crops/Crop_Prefab_{0}_Complete";
     
@@ -35,6 +35,7 @@ public class Farm : MonoBehaviour, IBuilding
     
     //References
     private GameManager gameManager;
+    private UiManager uiManager;
     private GameObject panel;
     private GameObject uiContent;
     private FarmingUI farmingUI;
@@ -46,10 +47,10 @@ public class Farm : MonoBehaviour, IBuilding
     
     //ForPlantUI
     private int currentCursorCropId = -1;
-    private bool IsTouching = false;
+    private bool isTouching = false;
     private int fingerId = -1;
     private Vector3Int prevCursorPosition = Vector3Int.zero;
-    private bool IsEverPlanted = false;
+    private bool isEverPlanted = false;
     
     //ForHarvest
     private DateTime? plantedTime = null;
@@ -84,6 +85,7 @@ public class Farm : MonoBehaviour, IBuilding
                 rectTransform = panel.transform.GetComponentsInChildren<RectTransform>().FirstOrDefault(t => t.name == "Viewport");     
             }
             gameManager.PlacementSystem.IsTouchable = false;
+            uiManager.SetDefaultUiInteract(false);
             interactionState = InteractionState.Planting;
         }
     }
@@ -98,12 +100,14 @@ public class Farm : MonoBehaviour, IBuilding
                 rectTransform = panel.transform.GetComponentsInChildren<RectTransform>().FirstOrDefault(t => t.name == "Viewport");     
             }
             gameManager.PlacementSystem.IsTouchable = false;
+            uiManager.SetDefaultUiInteract(false);
             interactionState = InteractionState.Harvesting;
         }
     }
 
     public void Init(GameManager gameManager, UiManager uiManager)
     {
+        this.uiManager = uiManager;
         panel = uiManager.GetPanel(MainSceneUiIds.Farming);
         farmingUI = panel.GetComponent<FarmingUI>();
         uiContent = panel.transform.GetComponentsInChildren<Transform>().FirstOrDefault(t => t.name == "Content").gameObject;
@@ -120,7 +124,7 @@ public class Farm : MonoBehaviour, IBuilding
         {
             currentCursorCropId = id;
             fingerId = Input.GetTouch(0).fingerId;
-            IsTouching = true;
+            isTouching = true;
             cursor = Instantiate(imagePrefab, panel.transform.parent);
             cursor.GetComponent<Image>().sprite = Resources.Load<Sprite>(string.Format(iconPath, currentCursorCropId));
         }
@@ -131,7 +135,7 @@ public class Farm : MonoBehaviour, IBuilding
         if (Input.touches.Length == 1)
         {
             fingerId = Input.GetTouch(0).fingerId;
-            IsTouching = true;
+            isTouching = true;
             cursor = Instantiate(imagePrefab, panel.transform.parent);
             cursor.GetComponent<Image>().sprite = Resources.Load<Sprite>(sicklePath);
         }
@@ -190,20 +194,20 @@ public class Farm : MonoBehaviour, IBuilding
                 if (currentTouch.phase == TouchPhase.Canceled || currentTouch.phase == TouchPhase.Ended)
                 {
                     Destroy(cursor);
-                    IsTouching = false;
+                    isTouching = false;
                     fingerId = -1;
                     currentCursorCropId = -1;
-                    if (IsEverPlanted)
+                    if (isEverPlanted)
                     {
                         EndPlantState();
                     }
                 }
-                if (IsTouching)
+                if (isTouching)
                 {
                     cursor.transform.position = currentTouch.position;
                     if (panel.activeSelf == true &&
                         RectTransformUtility.RectangleContainsScreenPoint(rectTransform, currentTouch.position)
-                        && IsEverPlanted)
+                        && isEverPlanted)
                     {
                         panel.SetActive(false);
                     }
@@ -220,8 +224,13 @@ public class Farm : MonoBehaviour, IBuilding
                                 Farm farm = buildings[guid].GetComponent<Farm>();
                                 if (farm != null && farm.farmState == FarmState.None)
                                 {
-                                    IsEverPlanted = true;
-                                    farm.Plant(currentCursorCropId);
+                                    int cost = cropRecipeDatabase.Get(currentCursorCropId).necessaryCost;
+                                    if ( cost <= SaveLoadManager.Data.Gold)
+                                    {
+                                        SaveLoadManager.Data.Gold -= cost;
+                                        isEverPlanted = true;
+                                        farm.Plant(currentCursorCropId);
+                                    }
                                 }
                             }
                         }
@@ -249,19 +258,19 @@ public class Farm : MonoBehaviour, IBuilding
                 if (currentTouch.phase == TouchPhase.Canceled || currentTouch.phase == TouchPhase.Ended)
                 {
                     Destroy(cursor);
-                    IsTouching = false;
+                    isTouching = false;
                     fingerId = -1;
-                    if (IsEverPlanted)
+                    if (isEverPlanted)
                     {
                         EndHarvestState();
                     }
                 }
-                if (IsTouching)
+                if (isTouching)
                 {
                     cursor.transform.position = currentTouch.position;
                     if (panel.activeSelf == true &&
                         RectTransformUtility.RectangleContainsScreenPoint(rectTransform, currentTouch.position)
-                        && IsEverPlanted)
+                        && isEverPlanted)
                     {
                         panel.SetActive(false);
                     }
@@ -309,15 +318,7 @@ public class Farm : MonoBehaviour, IBuilding
         farmState = FarmState.None;
         plantedTime = null;
         finishTime = null;
-        if (SaveLoadManager.Data.inventory.ContainsKey(plantedCropId))
-        {
-            SaveLoadManager.Data.inventory[plantedCropId] += cropRecipeDatabase.Get(plantedCropId).productCount;
-        }
-        else
-        {
-            SaveLoadManager.Data.inventory.Add(plantedCropId, cropRecipeDatabase.Get(plantedCropId).productCount);
-        }
-
+        SaveLoadManager.Data.inventory.AddItem(plantedCropId, cropRecipeDatabase.Get(plantedCropId).productCount);
         SaveLoadManager.Save();
         plantedCropId = -1;
         foreach (GameObject crop in cropsPivot)
@@ -328,7 +329,9 @@ public class Farm : MonoBehaviour, IBuilding
     }
     private void EndState()
     {
+        Destroy(cursor);
         gameManager.PlacementSystem.IsTouchable = true;
+        uiManager.SetDefaultUiInteract(true);
         farmingUI.StopFarmingUI();
         panel.SetActive(false);
         interactionState = InteractionState.None;
@@ -336,7 +339,7 @@ public class Farm : MonoBehaviour, IBuilding
 
     private void EndPlantState()
     {
-        IsEverPlanted = false;
+        isEverPlanted = false;
         currentCursorCropId = -1;
         EndState();
     }

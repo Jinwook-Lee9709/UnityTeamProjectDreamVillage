@@ -6,7 +6,7 @@ public class ObjectPlacer : MonoBehaviour
     public GameObject parents;
     public GameManager gameManager;
     public UiManager uiManaqger;
-    private Dictionary<int, GameObject> Objects = new Dictionary<int, GameObject>();
+    private Dictionary<int, GameObject> Objects = new();
 
     public Dictionary<int, GameObject> ObjectDictionary { get => Objects; }
     

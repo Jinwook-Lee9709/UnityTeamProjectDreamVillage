@@ -20,8 +20,6 @@ public static class DataTableIds
     };
 }
 
-
-
 [Serializable]
 public enum MainSceneUiIds
 {
@@ -29,6 +27,21 @@ public enum MainSceneUiIds
     Building,
     Farming,
     Inventory,
+    Factory,
+    BuildingShop,
+}
+
+[Serializable]
+public enum BuildingTypes
+{
+    Farm,
+    Factory,
+    Decoration,
+}
+
+public static class CustomString
+{
+    public static readonly string nullString = "NULL";
 }
 
 public static class Variables

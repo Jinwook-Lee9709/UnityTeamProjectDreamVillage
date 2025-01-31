@@ -9,7 +9,7 @@ public static class BuildingDataConverter
     private static readonly string PATH = "tables/{0}";
     private static readonly string PrefabPath = "Prefabs/Buildings/Building_Prefab_{0}";
     
-    static Dictionary<int, BuildingData> dict = new Dictionary<int, BuildingData>();
+    static Dictionary<int, BuildingData> dict = new();
     
     public static Dictionary<int, BuildingData> GetTable  { get { return dict; } }
     private class Data

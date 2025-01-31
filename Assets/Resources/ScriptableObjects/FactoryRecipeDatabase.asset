@@ -1,0 +1,302 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5063abf4b8d65457ca7e00dc91789d7f, type: 3}
+  m_Name: FactoryRecipeDatabase
+  m_EditorClassIdentifier: 
+  dictionary:
+    _serializedList:
+    - Key: 2001
+      Value:
+        level: 1
+        exp: 5
+        productionTime: 210
+        productCount: 3
+        materialID1: 1001
+        requiredCount1: 2
+        materialID2: 1002
+        requiredCount2: 1
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3003
+    - Key: 2002
+      Value:
+        level: 2
+        exp: 7
+        productionTime: 420
+        productCount: 3
+        materialID1: 1001
+        requiredCount1: 2
+        materialID2: 1003
+        requiredCount2: 1
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3004
+    - Key: 2003
+      Value:
+        level: 7
+        exp: 12
+        productionTime: 840
+        productCount: 3
+        materialID1: 1002
+        requiredCount1: 2
+        materialID2: 1003
+        requiredCount2: 2
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3005
+    - Key: 2004
+      Value:
+        level: 13
+        exp: 20
+        productionTime: 1260
+        productCount: 3
+        materialID1: 1001
+        requiredCount1: 3
+        materialID2: 1004
+        requiredCount2: 1
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3006
+    - Key: 2005
+      Value:
+        level: 16
+        exp: 25
+        productionTime: 1680
+        productCount: 3
+        materialID1: 1001
+        requiredCount1: 2
+        materialID2: 1002
+        requiredCount2: 2
+        materialID3: 1003
+        requiredCount3: 1
+        placeID: 3007
+    - Key: 2006
+      Value:
+        level: 1
+        exp: 5
+        productionTime: 1140
+        productCount: 1
+        materialID1: 2001
+        requiredCount1: 1
+        materialID2: 0
+        requiredCount2: 0
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3008
+    - Key: 2007
+      Value:
+        level: 3
+        exp: 7
+        productionTime: 2100
+        productCount: 1
+        materialID1: 2002
+        requiredCount1: 1
+        materialID2: 0
+        requiredCount2: 0
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3009
+    - Key: 2008
+      Value:
+        level: 5
+        exp: 12
+        productionTime: 2220
+        productCount: 1
+        materialID1: 2003
+        requiredCount1: 1
+        materialID2: 0
+        requiredCount2: 0
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3010
+    - Key: 2009
+      Value:
+        level: 18
+        exp: 20
+        productionTime: 2400
+        productCount: 1
+        materialID1: 2004
+        requiredCount1: 1
+        materialID2: 0
+        requiredCount2: 0
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3011
+    - Key: 2010
+      Value:
+        level: 20
+        exp: 25
+        productionTime: 2500
+        productCount: 1
+        materialID1: 2005
+        requiredCount1: 1
+        materialID2: 0
+        requiredCount2: 0
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3012
+    - Key: 2011
+      Value:
+        level: 1
+        exp: 7
+        productionTime: 270
+        productCount: 1
+        materialID1: 1001
+        requiredCount1: 2
+        materialID2: 0
+        requiredCount2: 0
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3013
+    - Key: 2012
+      Value:
+        level: 3
+        exp: 12
+        productionTime: 780
+        productCount: 1
+        materialID1: 1001
+        requiredCount1: 2
+        materialID2: 2007
+        requiredCount2: 2
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3013
+    - Key: 2013
+      Value:
+        level: 8
+        exp: 20
+        productionTime: 1620
+        productCount: 1
+        materialID1: 1001
+        requiredCount1: 2
+        materialID2: 2007
+        requiredCount2: 3
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3013
+    - Key: 2014
+      Value:
+        level: 15
+        exp: 25
+        productionTime: 3240
+        productCount: 1
+        materialID1: 1001
+        requiredCount1: 2
+        materialID2: 1009
+        requiredCount2: 2
+        materialID3: 2007
+        requiredCount3: 4
+        placeID: 3013
+    - Key: 2015
+      Value:
+        level: 1
+        exp: 7
+        productionTime: 720
+        productCount: 1
+        materialID1: 2006
+        requiredCount1: 1
+        materialID2: 0
+        requiredCount2: 0
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3014
+    - Key: 2016
+      Value:
+        level: 4
+        exp: 12
+        productionTime: 1500
+        productCount: 1
+        materialID1: 2006
+        requiredCount1: 2
+        materialID2: 0
+        requiredCount2: 0
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3014
+    - Key: 2017
+      Value:
+        level: 9
+        exp: 20
+        productionTime: 2400
+        productCount: 1
+        materialID1: 2006
+        requiredCount1: 3
+        materialID2: 0
+        requiredCount2: 0
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3014
+    - Key: 2018
+      Value:
+        level: 14
+        exp: 25
+        productionTime: 2700
+        productCount: 1
+        materialID1: 2006
+        requiredCount1: 4
+        materialID2: 0
+        requiredCount2: 0
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3014
+    - Key: 2019
+      Value:
+        level: 7
+        exp: 7
+        productionTime: 1620
+        productCount: 1
+        materialID1: 2008
+        requiredCount1: 2
+        materialID2: 0
+        requiredCount2: 0
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3015
+    - Key: 2020
+      Value:
+        level: 10
+        exp: 12
+        productionTime: 2160
+        productCount: 1
+        materialID1: 1005
+        requiredCount1: 3
+        materialID2: 0
+        requiredCount2: 0
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3015
+    - Key: 2021
+      Value:
+        level: 15
+        exp: 20
+        productionTime: 2500
+        productCount: 1
+        materialID1: 2008
+        requiredCount1: 2
+        materialID2: 1005
+        requiredCount2: 3
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3015
+    - Key: 2022
+      Value:
+        level: 17
+        exp: 25
+        productionTime: 3000
+        productCount: 1
+        materialID1: 2008
+        requiredCount1: 3
+        materialID2: 1005
+        requiredCount2: 3
+        materialID3: 0
+        requiredCount3: 0
+        placeID: 3015

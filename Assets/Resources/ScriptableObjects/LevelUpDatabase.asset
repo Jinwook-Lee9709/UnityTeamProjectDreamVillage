@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d22dcba0a1e864a7186944c41b8d6cd2, type: 3}
+  m_Name: LevelUpDatabase
+  m_EditorClassIdentifier: 
+  dictionary:
+    _serializedList:
+    - Key: 1
+      Value:
+        maxExp: 100
+        openPlace: 0
+    - Key: 2
+      Value:
+        maxExp: 200
+        openPlace: 0
+    - Key: 3
+      Value:
+        maxExp: 300
+        openPlace: 1
+    - Key: 4
+      Value:
+        maxExp: 400
+        openPlace: 1
+    - Key: 5
+      Value:
+        maxExp: 500
+        openPlace: 1
+    - Key: 6
+      Value:
+        maxExp: 600
+        openPlace: 1
+    - Key: 7
+      Value:
+        maxExp: 700
+        openPlace: 1
+    - Key: 8
+      Value:
+        maxExp: 800
+        openPlace: 2
+    - Key: 9
+      Value:
+        maxExp: 900
+        openPlace: 2
+    - Key: 10
+      Value:
+        maxExp: 1000
+        openPlace: 2
+    - Key: 11
+      Value:
+        maxExp: 1100
+        openPlace: 2
+    - Key: 12
+      Value:
+        maxExp: 1200
+        openPlace: 2
+    - Key: 13
+      Value:
+        maxExp: 1300
+        openPlace: 2
+    - Key: 14
+      Value:
+        maxExp: 1400
+        openPlace: 2
+    - Key: 15
+      Value:
+        maxExp: 1500
+        openPlace: 2
+    - Key: 16
+      Value:
+        maxExp: 1600
+        openPlace: 3
+    - Key: 17
+      Value:
+        maxExp: 1700
+        openPlace: 3
+    - Key: 18
+      Value:
+        maxExp: 1800
+        openPlace: 3
+    - Key: 19
+      Value:
+        maxExp: 1900
+        openPlace: 3
+    - Key: 20
+      Value:
+        maxExp: 2000
+        openPlace: 3

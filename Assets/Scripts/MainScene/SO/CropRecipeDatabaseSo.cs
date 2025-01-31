@@ -6,7 +6,7 @@ public class CropRecipeDatabaseSo : ScriptableObject
 {
     [SerializedDictionary, SerializeField] private SerializedDictionary<int, CropRecipeData> dictionary;
     public SerializedDictionary<int, CropRecipeData> Dictionary => dictionary;
-    
+
 
     public void Load()
     {
@@ -19,12 +19,11 @@ public class CropRecipeDatabaseSo : ScriptableObject
         }
     }
 
-    public CropRecipeData Get(int key)
+    public CropRecipeData Get(int id)
     {
-        if (dictionary.ContainsKey(key))
-            return dictionary[key];
+        if (dictionary.ContainsKey(id))
+            return dictionary[id];
         else
             return null;
     }
-    
 }

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -9,11 +11,35 @@ using SaveDataVC = SaveDataV1;
 public class SaveLoadManager : MonoBehaviour
 {
     private static string SaveDirectory = $"{Application.persistentDataPath}/Save";
-    
+
     public static int SaveDataVersion { get; private set; } = 1;
-    
-    public static SaveDataVC Data { get; set; }
-    
+
+    private static SaveDataVC data;
+
+    public static SaveDataVC Data
+    {
+        get => data;
+        set
+        {
+            if (data != value)
+            { 
+                if (data != null)
+                {
+                    data.PropertyChanged -= HandlePropertyChanged;
+                    OnDataChanged?.Invoke();
+                }
+                data = value;
+                if (data != null)
+                {
+                    data.PropertyChanged += HandlePropertyChanged;
+                }
+                OnDataChanged?.Invoke();
+            }
+
+           
+        }
+    }
+
     public static readonly string[] SaveFileName =
     {
         "AutoSave",
@@ -21,6 +47,13 @@ public class SaveLoadManager : MonoBehaviour
         "SaveFile2",
         "SaveFile3"
     };
+
+    public static event Action OnDataChanged;
+    
+    private static void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        OnDataChanged?.Invoke();
+    }
 
     private static JsonSerializerSettings settings = new JsonSerializerSettings()
     {
@@ -31,45 +64,44 @@ public class SaveLoadManager : MonoBehaviour
     static SaveLoadManager()
     {
         if (!Load())
-        { 
+        {
             Data = new SaveDataVC();
             Save();
         }
     }
-    
+
     public static bool Save(int slot = 0)
     {
         if (Data == null || slot < 0 || slot >= SaveFileName.Length)
             return false;
-        if(!Directory.Exists(SaveDirectory))
+        if (!Directory.Exists(SaveDirectory))
         {
             Directory.CreateDirectory(SaveDirectory);
         }
-        
+
         var path = Path.Combine(SaveDirectory, SaveFileName[slot]);
         var json = JsonConvert.SerializeObject(Data, settings);
         File.WriteAllText(path, json);
         return true;
     }
-    
+
     public static bool Load(int slot = 0)
     {
         if (slot < 0 || slot >= SaveFileName.Length)
             return false;
-        
+
         var path = Path.Combine(SaveDirectory, SaveFileName[slot]);
         if (!Directory.Exists(SaveDirectory))
             return false;
-        
+
         var json = File.ReadAllText(path);
         var saveData = JsonConvert.DeserializeObject<SaveData>(json, settings);
         while (saveData.Version < SaveDataVersion)
         {
             saveData = saveData.VersionUp();
         }
+
         Data = saveData as SaveDataVC;
-        ;       return true;
+        return true;
     }
-
-
 }
