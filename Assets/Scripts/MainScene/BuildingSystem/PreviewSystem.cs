@@ -16,10 +16,11 @@ public class PreviewSystem : MonoBehaviour
 
     private float previewYOffset = 0.1f;
 
-    public void ShowPlacementPreview(GameObject prefab, Vector3 position)
+    public void ShowPlacementPreview(GameObject prefab, Vector3 position, bool isValid)
     {
         previewObject = Instantiate(prefab, previewParent.transform);
         previewObject.transform.position = new Vector3(position.x, previewYOffset, position.z);
+        UpdatePreview(isValid);
     }
 
     public void RotatePreview()

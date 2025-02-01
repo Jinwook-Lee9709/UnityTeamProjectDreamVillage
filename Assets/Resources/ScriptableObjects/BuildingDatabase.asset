@@ -57,7 +57,7 @@ MonoBehaviour:
         exp: 10
         productionTime: 120
         cost: 1000
-        size: {x: 0, y: 0}
+        size: {x: 1, y: 1}
         prefab: {fileID: 2533845934863396869, guid: c2206672412f74d5eae3f3d4b2de025b, type: 3}
     - Key: 3005
       Value:
@@ -66,8 +66,8 @@ MonoBehaviour:
         exp: 15
         productionTime: 240
         cost: 3000
-        size: {x: 0, y: 0}
-        prefab: {fileID: 0}
+        size: {x: 1, y: 1}
+        prefab: {fileID: 2533845934863396869, guid: 908ac9d5302224634a2e297d0645fbef, type: 3}
     - Key: 3006
       Value:
         buildingType: 2
@@ -75,8 +75,8 @@ MonoBehaviour:
         exp: 20
         productionTime: 1800
         cost: 5000
-        size: {x: 0, y: 0}
-        prefab: {fileID: 0}
+        size: {x: 1, y: 1}
+        prefab: {fileID: 2533845934863396869, guid: fa3787ad529bb4f26ba9971934bbb06c, type: 3}
     - Key: 3007
       Value:
         buildingType: 2
@@ -84,8 +84,8 @@ MonoBehaviour:
         exp: 25
         productionTime: 240
         cost: 7000
-        size: {x: 0, y: 0}
-        prefab: {fileID: 0}
+        size: {x: 1, y: 1}
+        prefab: {fileID: 2533845934863396869, guid: 5b56085474ca448428d07ae103a9bf76, type: 3}
     - Key: 3008
       Value:
         buildingType: 2
@@ -93,8 +93,8 @@ MonoBehaviour:
         exp: 30
         productionTime: 240
         cost: 9000
-        size: {x: 0, y: 0}
-        prefab: {fileID: 0}
+        size: {x: 1, y: 1}
+        prefab: {fileID: 2533845934863396869, guid: e04465a85813f484485966116aead793, type: 3}
     - Key: 3009
       Value:
         buildingType: 2
@@ -102,8 +102,8 @@ MonoBehaviour:
         exp: 10
         productionTime: 60
         cost: 800
-        size: {x: 0, y: 0}
-        prefab: {fileID: 0}
+        size: {x: 1, y: 1}
+        prefab: {fileID: 2533845934863396869, guid: 35b017afb7061417f891eadf2a8c0cfc, type: 3}
     - Key: 3010
       Value:
         buildingType: 2
@@ -111,8 +111,8 @@ MonoBehaviour:
         exp: 10
         productionTime: 180
         cost: 1300
-        size: {x: 0, y: 0}
-        prefab: {fileID: 0}
+        size: {x: 1, y: 1}
+        prefab: {fileID: 2533845934863396869, guid: 43da532b0c9ec4162a1571fdc864a9c7, type: 3}
     - Key: 3011
       Value:
         buildingType: 2
@@ -120,8 +120,8 @@ MonoBehaviour:
         exp: 30
         productionTime: 1800
         cost: 1500
-        size: {x: 0, y: 0}
-        prefab: {fileID: 0}
+        size: {x: 1, y: 1}
+        prefab: {fileID: 2533845934863396869, guid: c69971a174c594e0696309079ca4779c, type: 3}
     - Key: 3012
       Value:
         buildingType: 3
@@ -129,8 +129,8 @@ MonoBehaviour:
         exp: 15
         productionTime: 0
         cost: 500
-        size: {x: 0, y: 0}
-        prefab: {fileID: 0}
+        size: {x: 1, y: 1}
+        prefab: {fileID: 2533845934863396869, guid: 192927160fa9646368c6dfb71ebaf2ac, type: 3}
     - Key: 3013
       Value:
         buildingType: 3
@@ -138,8 +138,8 @@ MonoBehaviour:
         exp: 15
         productionTime: 0
         cost: 1000
-        size: {x: 0, y: 0}
-        prefab: {fileID: 0}
+        size: {x: 1, y: 1}
+        prefab: {fileID: 2533845934863396869, guid: 68f2cffeca8944b6b939bfa9e829a867, type: 3}
     - Key: 3014
       Value:
         buildingType: 3
@@ -147,5 +147,5 @@ MonoBehaviour:
         exp: 15
         productionTime: 0
         cost: 1200
-        size: {x: 0, y: 0}
-        prefab: {fileID: 0}
+        size: {x: 1, y: 1}
+        prefab: {fileID: 2533845934863396869, guid: a46a4d3c89c844184b26e166e9af1f49, type: 3}

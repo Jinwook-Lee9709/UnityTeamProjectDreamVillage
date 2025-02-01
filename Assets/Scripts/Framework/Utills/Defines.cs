@@ -46,7 +46,7 @@ public enum BuildingTypes
     Construction = 0,
     Farm,
     Factory,
-    Decoration,
+    Residential,
 }
 
 public static class StringFormat

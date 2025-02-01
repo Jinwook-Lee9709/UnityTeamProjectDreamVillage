@@ -57,7 +57,8 @@ public class BuildingShopUI : MonoBehaviour
             button.GetComponent<Button>().onClick.AddListener(
                 () => OnBudilngPanelTouched(building.Key)
             );
-            bool isAuthorized = SaveLoadManager.Data.Gold >= building.Value.cost;
+            bool isAuthorized = SaveLoadManager.Data.Gold >= building.Value.cost &&
+                                SaveLoadManager.Data.level >= building.Value.level;
             button.GetComponent<Button>().interactable = isAuthorized;
             button.Init(building.Key, building.Value);
             button.transform.SetParent(contents);

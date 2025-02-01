@@ -105,7 +105,7 @@ public class Farm : MonoBehaviour, IBuilding
         }
     }
 
-    public void Init(GameManager gameManager, UiManager uiManager)
+    public void Init(GameManager gameManager, UiManager uiManager, bool isFirst)
     {
         this.uiManager = uiManager;
         panel = uiManager.GetPanel(MainSceneUiIds.Farming);

@@ -59,7 +59,7 @@ public class Construction : MonoBehaviour, IBuilding
         OnComplete();
     }
     
-    public void Init(GameManager gameManager, UiManager uiManager)
+    public void Init(GameManager gameManager, UiManager uiManager, bool isFirst)
     {
         this.gameManager = gameManager;
         this.uiManager = uiManager;

@@ -46,7 +46,8 @@ public class FarmingUI : MonoBehaviour
                 }
                 OnItemTouch(data.Key, image);
             };
-            bool isAuthorized = SaveLoadManager.Data.gold >= data.Value.necessaryCost;
+            bool isAuthorized = SaveLoadManager.Data.gold >= data.Value.necessaryCost
+                && SaveLoadManager.Data.Level >= data.Value.level;
             imgTouchHandler.Interactable = isAuthorized;
             
             images.Add(image);

@@ -34,7 +34,8 @@ public class ModifyState : IBuildingState
         buildingDataId = gridData.GetBuildingDataId(guid);
         currentBuildingData = buildingDatabase.Get(buildingDataId);
         previewSystem.enabled = true;
-        previewSystem.ShowPlacementPreview(currentBuildingData.prefab, originalObject.transform.position);
+        bool isValid = gridData.IsValid(originalObject.transform.position.ToVector3Int(), currentBuildingData.size);
+        previewSystem.ShowPlacementPreview(currentBuildingData.prefab, originalObject.transform.position, isValid);
         if (gridData.GetIsFliped(guid))
         {
             OnRotation();

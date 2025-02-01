@@ -10383,6 +10383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ddefe133b43a41998f385197614fe0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingDatabase: {fileID: 11400000, guid: e427f4b0e3c6c4ffba5132a7860318ac, type: 2}
   parents: {fileID: 1157671343}
   gameManager: {fileID: 1442154624}
   uiManaqger: {fileID: 1803376105}

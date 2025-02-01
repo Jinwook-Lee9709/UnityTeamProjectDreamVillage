@@ -39,7 +39,7 @@ MonoBehaviour:
         requiredCount2: 1
         materialID3: 0
         requiredCount3: 0
-        placeID: 3004
+        placeID: 3003
     - Key: 2003
       Value:
         level: 7
@@ -52,7 +52,7 @@ MonoBehaviour:
         requiredCount2: 2
         materialID3: 0
         requiredCount3: 0
-        placeID: 3005
+        placeID: 3003
     - Key: 2004
       Value:
         level: 13
@@ -65,7 +65,7 @@ MonoBehaviour:
         requiredCount2: 1
         materialID3: 0
         requiredCount3: 0
-        placeID: 3006
+        placeID: 3003
     - Key: 2005
       Value:
         level: 16
@@ -78,7 +78,7 @@ MonoBehaviour:
         requiredCount2: 2
         materialID3: 1003
         requiredCount3: 1
-        placeID: 3007
+        placeID: 3003
     - Key: 2006
       Value:
         level: 1
@@ -91,7 +91,7 @@ MonoBehaviour:
         requiredCount2: 0
         materialID3: 0
         requiredCount3: 0
-        placeID: 3008
+        placeID: 3004
     - Key: 2007
       Value:
         level: 3
@@ -104,7 +104,7 @@ MonoBehaviour:
         requiredCount2: 0
         materialID3: 0
         requiredCount3: 0
-        placeID: 3009
+        placeID: 3005
     - Key: 2008
       Value:
         level: 5
@@ -117,7 +117,7 @@ MonoBehaviour:
         requiredCount2: 0
         materialID3: 0
         requiredCount3: 0
-        placeID: 3010
+        placeID: 3006
     - Key: 2009
       Value:
         level: 18
@@ -130,7 +130,7 @@ MonoBehaviour:
         requiredCount2: 0
         materialID3: 0
         requiredCount3: 0
-        placeID: 3011
+        placeID: 3007
     - Key: 2010
       Value:
         level: 20
@@ -143,7 +143,7 @@ MonoBehaviour:
         requiredCount2: 0
         materialID3: 0
         requiredCount3: 0
-        placeID: 3012
+        placeID: 3008
     - Key: 2011
       Value:
         level: 1
@@ -156,7 +156,7 @@ MonoBehaviour:
         requiredCount2: 0
         materialID3: 0
         requiredCount3: 0
-        placeID: 3013
+        placeID: 3009
     - Key: 2012
       Value:
         level: 3
@@ -169,7 +169,7 @@ MonoBehaviour:
         requiredCount2: 2
         materialID3: 0
         requiredCount3: 0
-        placeID: 3013
+        placeID: 3009
     - Key: 2013
       Value:
         level: 8
@@ -182,7 +182,7 @@ MonoBehaviour:
         requiredCount2: 3
         materialID3: 0
         requiredCount3: 0
-        placeID: 3013
+        placeID: 3009
     - Key: 2014
       Value:
         level: 15
@@ -195,7 +195,7 @@ MonoBehaviour:
         requiredCount2: 2
         materialID3: 2007
         requiredCount3: 4
-        placeID: 3013
+        placeID: 3009
     - Key: 2015
       Value:
         level: 1
@@ -208,7 +208,7 @@ MonoBehaviour:
         requiredCount2: 0
         materialID3: 0
         requiredCount3: 0
-        placeID: 3014
+        placeID: 3010
     - Key: 2016
       Value:
         level: 4
@@ -221,7 +221,7 @@ MonoBehaviour:
         requiredCount2: 0
         materialID3: 0
         requiredCount3: 0
-        placeID: 3014
+        placeID: 3010
     - Key: 2017
       Value:
         level: 9
@@ -234,7 +234,7 @@ MonoBehaviour:
         requiredCount2: 0
         materialID3: 0
         requiredCount3: 0
-        placeID: 3014
+        placeID: 3010
     - Key: 2018
       Value:
         level: 14
@@ -247,7 +247,7 @@ MonoBehaviour:
         requiredCount2: 0
         materialID3: 0
         requiredCount3: 0
-        placeID: 3014
+        placeID: 3010
     - Key: 2019
       Value:
         level: 7
@@ -260,7 +260,7 @@ MonoBehaviour:
         requiredCount2: 0
         materialID3: 0
         requiredCount3: 0
-        placeID: 3015
+        placeID: 3011
     - Key: 2020
       Value:
         level: 10
@@ -273,7 +273,7 @@ MonoBehaviour:
         requiredCount2: 0
         materialID3: 0
         requiredCount3: 0
-        placeID: 3015
+        placeID: 3011
     - Key: 2021
       Value:
         level: 15
@@ -286,7 +286,7 @@ MonoBehaviour:
         requiredCount2: 3
         materialID3: 0
         requiredCount3: 0
-        placeID: 3015
+        placeID: 3011
     - Key: 2022
       Value:
         level: 17
@@ -299,4 +299,4 @@ MonoBehaviour:
         requiredCount2: 3
         materialID3: 0
         requiredCount3: 0
-        placeID: 3015
+        placeID: 3011

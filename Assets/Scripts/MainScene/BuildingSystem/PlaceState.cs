@@ -29,8 +29,9 @@ public class PlaceState : IBuildingState
         this.previewSystem = previewSystem;
         currentBuildingData = buildingDatabase.Get(id);
         previewSystem.enabled = true;
-        previewSystem.ShowPlacementPreview(currentBuildingData.prefab,
-        grid.WorldToCell(InputManager.Instance.CenterPositionToPlane()));
+        var startPos = grid.WorldToCell(InputManager.Instance.CenterPositionToPlane());
+        bool isValid = gridData.IsValid(startPos, currentBuildingData.size);
+        previewSystem.ShowPlacementPreview(currentBuildingData.prefab, startPos, isValid);
     }
 
     public bool OnAction()
