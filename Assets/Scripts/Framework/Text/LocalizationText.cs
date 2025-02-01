@@ -22,7 +22,9 @@ public class LocalizationText : MonoBehaviour
         }
         else
         {
+#if UNITY_EDITOR
             OnChangeLanguage(editorLang);
+#endif    
         }
     }
 

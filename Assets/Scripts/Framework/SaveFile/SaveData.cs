@@ -31,12 +31,12 @@ public class SaveDataV1 : SaveData, INotifyPropertyChanged
 
     public int Exp
     {
-        get => gold;
+        get => exp;
         set
         {
-            if (gold != value)
+            if (exp != value)
             {
-                gold = value;
+                exp = value;
                 OnPropertyChanged();
             }
         }

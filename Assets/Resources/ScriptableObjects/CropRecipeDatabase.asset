@@ -18,7 +18,7 @@ MonoBehaviour:
       Value:
         name: "\uBC00"
         level: 1
-        exp: 3
+        exp: 100
         productionTime: 5
         productCount: 1
         necessaryCost: 0

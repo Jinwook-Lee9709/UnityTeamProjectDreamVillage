@@ -33,8 +33,8 @@ public class GameManager : MonoBehaviour
                 currentExp -= maxExp;
                 level++;
             }
-            SaveLoadManager.Data.exp = currentExp;
-            SaveLoadManager.Data.level = level;
+            SaveLoadManager.Data.Exp = currentExp;
+            SaveLoadManager.Data.Level = level;
         }
     }
 }
