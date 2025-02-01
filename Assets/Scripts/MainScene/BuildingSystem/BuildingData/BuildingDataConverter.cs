@@ -15,7 +15,7 @@ public static class BuildingDataConverter
     private class Data
     {
         public int ID { get; set; }
-        public string Name { get; set; }
+        public int type { get; set; }
         public int Lv { get; set; }
         public int exp { get; set; }
         public float productionTime { get; set; }
@@ -30,7 +30,7 @@ public static class BuildingDataConverter
         foreach (var data in list)
         {
             var building = new BuildingData();
-            building.name = data.Name;
+            building.buildingType = (BuildingTypes)data.type;
             building.level = data.Lv;
             building.exp = data.exp;
             building.productionTime = data.productionTime;

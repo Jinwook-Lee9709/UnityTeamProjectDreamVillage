@@ -42,7 +42,7 @@ public class SaveDataV1 : SaveData, INotifyPropertyChanged
         }
     }
     
-    public int gold = 500;
+    public int gold = 5000;
 
     public int Gold
     {

@@ -82,7 +82,7 @@ public class FactoryUI : MonoBehaviour
         OnClaimItem += onClaim;
         OnQuitFactory += onQuit;
 
-        nameText.text = buildingDatabase.Get(placeId).name;
+        nameText.text = DataTableManager.StringTable.Get(String.Format(StringFormat.buildingName, placeId));
 
         InitBottmUI();
         UpdateUI();
@@ -170,7 +170,7 @@ public class FactoryUI : MonoBehaviour
             cursor = Instantiate(cursorPrefab, transform.parent);
             Image img = cursor.GetComponent<Image>();
             cursor.GetComponent<Image>().sprite =
-                Resources.Load<Sprite>(string.Format(iconPath, CustomString.nullString));
+                Resources.Load<Sprite>(string.Format(iconPath, id));
             availableSlotIndex = productQueue.Count + completeQueue.Count;
             scrollRect.enabled = true;
         }

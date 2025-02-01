@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ObjectPlacer : MonoBehaviour
 {
+    [SerializeField] private BuildingDatabaseSO buildingDatabase;
+    
     public GameObject parents;
     public GameManager gameManager;
     public UiManager uiManaqger;
@@ -11,15 +13,43 @@ public class ObjectPlacer : MonoBehaviour
     public Dictionary<int, GameObject> ObjectDictionary { get => Objects; }
     
     
-    public void PlaceObject(int guid, GameObject prefab, Vector3 position, bool isFlip)
+    public void PlaceObject(int guid, int buildingId, Vector3 position, bool isFlip)
     {
-        GameObject obj = Instantiate(prefab, position, Quaternion.identity);
+        var buildingData = buildingDatabase.Get(buildingId);
+        bool isNeedTime = buildingData.productionTime != 0;
+        GameObject prefab = null;
+        GameObject obj = null;
+        if (isNeedTime)
+        {
+            prefab = buildingDatabase.Get(Variables.constructionBuildingId).prefab;
+            obj = Instantiate(prefab , position, Quaternion.identity);
+            var construction = obj.GetComponent<Construction>();
+            construction.SetBuildingInfo(buildingId);
+        }
+        else
+        {
+            prefab = buildingDatabase.Get(buildingId).prefab;
+            obj = Instantiate(prefab , position, Quaternion.identity);
+        }
         obj.transform.parent = parents.transform;
         obj.GetComponent<IBuilding>().Init(gameManager, uiManaqger);
         if (isFlip)
         {
             obj.transform.GetChild(0).transform.Rotate(Vector3.up, 90f);
         }
+        Objects.Add(guid, obj);
+       
+    }
+
+    public void ChangeObject(int guid, GameObject prefab)
+    {
+        var oldObj = Objects[guid];
+        GameObject obj = Instantiate(prefab, oldObj.transform.position, oldObj.transform.rotation);
+        obj.transform.parent = parents.transform;
+        obj.GetComponent<IBuilding>().Init(gameManager, uiManaqger);
+        
+        Objects.Remove(guid);
+        Destroy(oldObj);
         Objects.Add(guid, obj);
     }
 

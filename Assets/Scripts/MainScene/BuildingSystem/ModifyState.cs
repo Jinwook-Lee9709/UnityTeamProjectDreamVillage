@@ -51,7 +51,7 @@ public class ModifyState : IBuildingState
         objectPlacer.MoveObject(guid, gridPosition, previewSystem.IsFlip);
         int buildingDataId = gridData.GetBuildingDataId(guid);
         gridData.RemoveObject(guid);
-        gridData.AddObject(buildingDataId, guid, gridPosition, currentBuildingData, previewSystem.IsFlip);
+        gridData.AddObject(guid, buildingDataId, gridPosition, currentBuildingData, previewSystem.IsFlip);
         return true;
     }
 

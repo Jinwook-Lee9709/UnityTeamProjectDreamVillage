@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class BuildingData
 {
-    public string name = "Test";
+    public BuildingTypes buildingType;
     public int level = 0;
     public int exp = 0;
     public float productionTime = 0f;

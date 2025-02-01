@@ -50,6 +50,8 @@ public class BuildingShopUI : MonoBehaviour
 
         foreach (var building in buildingDatabase.Dictionary)
         {
+            if (building.Value.buildingType == BuildingTypes.Construction)
+                continue;
             var button = buttonPool.GetFromPool();
             button.gameObject.SetActive(true);
             button.GetComponent<Button>().onClick.AddListener(

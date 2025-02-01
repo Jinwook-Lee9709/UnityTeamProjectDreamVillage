@@ -9,6 +9,15 @@ public enum Languages
     English,
 }
 
+public enum SoIds
+{
+    BuildingDatabase,
+    CropRecipeDatabase,
+    FactoryRecipeDatabase,
+    ItemDatabase,
+    LevelUpDatabase
+}
+
 public static class DataTableIds
 {
     public static readonly string Item = "ItemTable";
@@ -34,6 +43,7 @@ public enum MainSceneUiIds
 [Serializable]
 public enum BuildingTypes
 {
+    Construction = 0,
     Farm,
     Factory,
     Decoration,
@@ -47,6 +57,11 @@ public static class StringFormat
     public const string buildingDesc = "BUILDING_DESC_{0}";
 }
 
+public static class PathFormat
+{
+    public const string soPath = "ScriptableObjects/{0}";
+}
+
 public static class CustomString
 {
     public static readonly string nullString = "NULL";
@@ -55,5 +70,6 @@ public static class CustomString
 public static class Variables
 {
     public static Languages currentLanguage = Languages.Korean;
+    public static int constructionBuildingId = 3000;
 }
 

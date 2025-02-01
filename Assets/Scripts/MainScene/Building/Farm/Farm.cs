@@ -217,24 +217,30 @@ public class Farm : MonoBehaviour, IBuilding
                     if (prevCursorPosition != touchedTilePos)
                     {
                         prevCursorPosition = touchedTilePos;
-                        int guid = gridInfo.GetGuid(touchedTilePos);
-                        if (guid != -1)
-                        {
-                            if (buildings.ContainsKey(guid))
-                            {
-                                Farm farm = buildings[guid].GetComponent<Farm>();
-                                if (farm != null && farm.farmState == FarmState.None)
-                                {
-                                    int cost = cropRecipeDatabase.Get(currentCursorCropId).necessaryCost;
-                                    if ( cost <= SaveLoadManager.Data.Gold)
-                                    {
-                                        SaveLoadManager.Data.Gold -= cost;
-                                        isEverPlanted = true;
-                                        farm.Plant(currentCursorCropId);
-                                    }
-                                }
-                            }
-                        }
+                        PlantCrop(touchedTilePos);
+                    }
+                }
+            }
+        }
+    }
+
+    private void PlantCrop(Vector3Int touchedTilePos)
+    {
+        int guid = gridInfo.GetGuid(touchedTilePos);
+        if (guid != -1)
+        {
+            if (buildings.ContainsKey(guid))
+            {
+                Farm farm = buildings[guid].GetComponent<Farm>();
+                if (farm != null && farm.farmState == FarmState.None)
+                {
+                    var cropData = cropRecipeDatabase.Get(currentCursorCropId);
+                    int cost = cropData.necessaryCost;
+                    if ( cost <= SaveLoadManager.Data.Gold)
+                    {
+                        SaveLoadManager.Data.Gold -= cost;
+                        isEverPlanted = true;
+                        farm.Plant(currentCursorCropId);
                     }
                 }
             }
@@ -280,25 +286,30 @@ public class Farm : MonoBehaviour, IBuilding
                     if (prevCursorPosition != touchedTilePos)
                     {
                         prevCursorPosition = touchedTilePos;
-                        int guid = gridInfo.GetGuid(touchedTilePos);
-                        if (guid != -1)
-                        {
-                            if (buildings.ContainsKey(guid))
-                            {
-                                Farm farm = buildings[guid].GetComponent<Farm>();
-                                if (farm != null && farm.farmState == FarmState.Completed)
-                                {
-                                    farm.Harvest();
-                                }
-                            }
-                        }
+                        HarvestCrop(touchedTilePos);
                     }
                 }
             }
         }
     }
-    
-    
+
+    private void HarvestCrop(Vector3Int touchedTilePos)
+    {
+        int guid = gridInfo.GetGuid(touchedTilePos);
+        if (guid != -1)
+        {
+            if (buildings.ContainsKey(guid))
+            {
+                Farm farm = buildings[guid].GetComponent<Farm>();
+                if (farm != null && farm.farmState == FarmState.Completed)
+                {
+                    farm.Harvest();
+                }
+            }
+        }
+    }
+
+
     public void Plant(int id)
     {
         if (plantedTime == null)
@@ -319,14 +330,15 @@ public class Farm : MonoBehaviour, IBuilding
         farmState = FarmState.None;
         plantedTime = null;
         finishTime = null;
-        SaveLoadManager.Data.inventory.AddItem(plantedCropId, cropRecipeDatabase.Get(plantedCropId).productCount);
+        var cropData = cropRecipeDatabase.Get(plantedCropId);
+        SaveLoadManager.Data.inventory.AddItem(plantedCropId, cropData.productCount);
+        SaveLoadManager.Data.Exp += cropData.exp;
         SaveLoadManager.Save();
         plantedCropId = -1;
         foreach (GameObject crop in cropsPivot)
         {
             Destroy(crop.transform.GetChild(0).gameObject);
         }
-        
     }
     private void EndState()
     {

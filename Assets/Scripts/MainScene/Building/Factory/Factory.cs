@@ -87,8 +87,12 @@ public class Factory : MonoBehaviour, IBuilding
         var inventory = SaveLoadManager.Data.inventory;
         foreach (int item in completedProducts)
         {
-            int productAmount = recipeDatabase.Get(item).productCount;
+            var itemData = recipeDatabase.Get(item);
+            int productAmount = itemData.productCount;
+            int earnExp = itemData.exp;
+            
             SaveLoadManager.Data.inventory.AddItem(item, productAmount);
+            SaveLoadManager.Data.Exp += earnExp;
         }
         completedProducts.Clear();
         panel.UpdateUI();

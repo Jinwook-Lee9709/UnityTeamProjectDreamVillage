@@ -20,6 +20,8 @@ public class PlacementSystem : MonoBehaviour
 
     public Grid Grid => grid;
     public GridData GridInfo => gridData;
+    
+    public ObjectPlacer ObjectPlacer => objectPlacer;
 
     public bool IsTouchable { get; set; } = true;
 

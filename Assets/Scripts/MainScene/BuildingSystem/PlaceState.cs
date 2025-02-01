@@ -40,8 +40,9 @@ public class PlaceState : IBuildingState
             return false;
         SaveLoadManager.Data.Gold -= buildingDatabase.Get(id).cost;
         int guid = Guid.NewGuid().GetHashCode();
-        gridData.AddObject(id, guid, gridPosition, currentBuildingData, previewSystem.IsFlip);
-        objectPlacer.PlaceObject(guid, currentBuildingData.prefab, gridPosition, previewSystem.IsFlip);
+        gridData.AddObject(guid, id, gridPosition, currentBuildingData, previewSystem.IsFlip);
+        objectPlacer.PlaceObject(guid, id, gridPosition, previewSystem.IsFlip);
+        
         return true;
     }
 

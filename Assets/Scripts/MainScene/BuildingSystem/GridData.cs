@@ -1,15 +1,27 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class GridData
 {
+    private const int constructionId = 3000;
+    
+    BuildingDatabaseSO buildingDatabase;
     Dictionary<Vector3Int, PlacementData> placedObects = new ();
 
-    public void AddObject(int buildingDataId, int guid, Vector3Int position, BuildingData buildingData, bool isFlip)
+    private GameObject constructionPrefab;
+
+    public GridData()
+    {
+        string soPath = String.Format(PathFormat.soPath, SoIds.BuildingDatabase.ToString());
+        buildingDatabase = Resources.Load<BuildingDatabaseSO>(soPath);
+        constructionPrefab = buildingDatabase.Get(constructionId).prefab;
+    }
+
+    public void AddObject(int guid, int buildingDataId, Vector3Int position, BuildingData buildingData, bool isFlip)
     {
         PlacementData data = new();
-        data.buildingDataID = buildingDataId;
         data.guid = guid;
         Vector2 size = isFlip
             ? new Vector2(buildingData.size.y, buildingData.size.x)
@@ -22,7 +34,17 @@ public class GridData
             }
         }
 
-        data.prefab = buildingData.prefab;
+        if (buildingData.productionTime != 0)
+        {
+            data.buildingDataID = constructionId;
+            data.prefab = constructionPrefab;
+        }
+        else
+        {
+            data.buildingDataID = buildingDataId;
+            data.prefab = buildingData.prefab;
+        }
+        
         data.isFlip = isFlip;
         foreach (var pos in data.occupiedTiles)
         {
@@ -43,6 +65,18 @@ public class GridData
         }
     }
 
+    public void ChangeObject(int guid, int buildingDataId)
+    {
+        var query = placedObects
+            .Where(x => x.Value.guid == guid);
+
+        foreach (var data in query)
+        {
+            data.Value.buildingDataID = buildingDataId;
+            data.Value.prefab = buildingDatabase.Get(buildingDataId).prefab;
+        }
+    }
+
     public int GetGuid(Vector3Int position)
     {
         placedObects.TryGetValue(position, out var data);
@@ -50,7 +84,6 @@ public class GridData
         {
             return -1;
         }
-
         return data.guid;
     }
 
@@ -74,7 +107,6 @@ public class GridData
                     return false;
             }
         }
-
         return true;
     }
 }
