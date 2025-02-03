@@ -45,7 +45,7 @@ public class FactoryUI : MonoBehaviour
     private bool timerRunning = false;
     private UniTask timerTask;
     private Factory factory;
-    private CancellationTokenSource cancelToken = new();
+    private CancellationTokenSource cancelToken;
 
     //For Touch Event
     private bool isTouching;
@@ -131,9 +131,9 @@ public class FactoryUI : MonoBehaviour
 
         if (!timerRunning && productQueue.Count > 0)
         {
+            cancelToken = new();
             timerTask = TimerUpdateTask();
             timerRunning = true;
-            ;
         }
         else if (productQueue.Count == 0)
         {
