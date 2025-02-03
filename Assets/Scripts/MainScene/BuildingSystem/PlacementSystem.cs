@@ -129,9 +129,6 @@ public class PlacementSystem : MonoBehaviour
 
     private void Update()
     {
-        if (buildingState == null)
-            return;
-        buildingState.UpdateState();
         if (MultiTouchManager.Instance.LongPress && buildingState == null && IsTouchable &&
             !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
         {
@@ -141,6 +138,9 @@ public class PlacementSystem : MonoBehaviour
                 StartModify(gridData.GetGuid(touchedTilePos));
             }
         }
+        if (buildingState == null)
+            return;
+        buildingState.UpdateState();
     }
     
     public async UniTask DelayedActivate(float duration = 0.01f)

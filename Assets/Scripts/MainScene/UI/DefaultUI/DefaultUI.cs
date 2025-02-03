@@ -18,6 +18,7 @@ public class DefaultUI : MonoBehaviour
         goldText.text = SaveLoadManager.Data.Gold.ToString();
         SaveLoadManager.OnDataChanged -= OnDataChanged;
         SaveLoadManager.OnDataChanged += OnDataChanged;
+        OnDataChanged();
     }
 
     private void OnDataChanged()

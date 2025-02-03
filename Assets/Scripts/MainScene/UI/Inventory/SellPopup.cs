@@ -113,7 +113,7 @@ public class SellPopup : MonoBehaviour
         priceText.text = totalPrice.ToString();
     }
 
-    private void ClosePopupUI()
+    public void ClosePopupUI()
     {
         increaseButton.onClick.RemoveAllListeners();
         decreaseButton.onClick.RemoveAllListeners();

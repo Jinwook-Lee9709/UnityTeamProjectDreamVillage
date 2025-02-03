@@ -8,7 +8,7 @@ using UnityEngine.Timeline;
 public class MultiTouchManager : Singleton<MultiTouchManager>
 {
     private float tapInterval = 0.2f;
-    private float doubleTapInterval = 0.2f;
+    private float doubleTapInterval = 0f;
     private float longPressTime = 0.6f;
     private float touchedTime = -1;
     private float doubleTapTime = -1;

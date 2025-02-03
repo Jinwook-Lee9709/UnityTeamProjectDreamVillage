@@ -53,7 +53,8 @@ public class InventoryUI : MonoBehaviour
 
         gameManager.PlacementSystem.IsTouchable = true;
         closeButton.onClick.RemoveListener(ClosePanel);
-
+        sellPopup.ClosePopupUI();
+        
         gameObject.SetActive(false);
     }
 }
