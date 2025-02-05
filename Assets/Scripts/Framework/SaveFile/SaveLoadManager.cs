@@ -8,13 +8,14 @@ using UnityEngine;
 using Directory = System.IO.Directory;
 using SaveDataVC = SaveDataV1;
 
-public class SaveLoadManager : MonoBehaviour
+public class SaveLoadManager
 {
     private static string SaveDirectory = $"{Application.persistentDataPath}/Save";
-
     public static int SaveDataVersion { get; private set; } = 1;
 
     private static SaveDataVC data;
+
+    public static event Action OnBeforeSave;
 
     public static SaveDataVC Data
     {
@@ -78,7 +79,7 @@ public class SaveLoadManager : MonoBehaviour
         {
             Directory.CreateDirectory(SaveDirectory);
         }
-
+        OnBeforeSave?.Invoke();
         var path = Path.Combine(SaveDirectory, SaveFileName[slot]);
         var json = JsonConvert.SerializeObject(Data, settings);
         File.WriteAllText(path, json);

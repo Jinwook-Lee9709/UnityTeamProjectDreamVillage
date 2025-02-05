@@ -2,7 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class Construction : MonoBehaviour, IBuilding
+public class Construction : MonoBehaviour, IBuilding, ILoadableBuilding
 {
     [SerializeField] private BuildingDatabaseSO buildingDatabase;
     
@@ -20,6 +20,9 @@ public class Construction : MonoBehaviour, IBuilding
 
     private bool isCompleted;
 
+    public DateTime StartTime => startTime;
+    public int BuildingDataId => buildingDataId;
+
     private void Start()
     {
         if (DateTime.Now > finishTime)
@@ -30,6 +33,14 @@ public class Construction : MonoBehaviour, IBuilding
         {
             checkCompleteTask();
         }
+    }
+    
+    public void Load(BuildingTaskData buildingTaskData)
+    {
+        var data = buildingTaskData as ConstructionTaskData;
+        buildingDataId = data.buildingDataId;
+        startTime = data.startTime;
+        finishTime = startTime + TimeSpan.FromSeconds(buildingDatabase.Get(buildingDataId).productionTime);
     }
     
     public void Init(GameManager gameManager, UiManager uiManager, bool isFirst)
@@ -51,6 +62,7 @@ public class Construction : MonoBehaviour, IBuilding
     
     public void OnTouch()
     {
+        Debug.Log(isCompleted);
         if (isCompleted)
         {
             int guid = gridData.GetGuid(transform.position.ToVector3Int());
@@ -74,6 +86,7 @@ public class Construction : MonoBehaviour, IBuilding
         await UniTask.WaitUntil(()=> DateTime.Now > finishTime);
         OnComplete();
     }
-    
- 
+
+
+
 }

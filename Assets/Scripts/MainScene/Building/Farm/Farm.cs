@@ -18,7 +18,7 @@ public enum InteractionState
     Harvesting,
 }
 
-public class Farm : MonoBehaviour, IBuilding
+public class Farm : MonoBehaviour, IBuilding, ILoadableBuilding
 {
     private static readonly string sicklePath = "Sprites/Icons/Harvest_Icon_Sickle";
     private static readonly string iconPath = "Sprites/Icons/Item_Icon_{0}";
@@ -54,9 +54,26 @@ public class Farm : MonoBehaviour, IBuilding
     private bool isEverPlanted = false;
     
     //ForHarvest
-    private DateTime? plantedTime = null;
-    private DateTime? finishTime = null;
+    private DateTime? plantedTime;
+    private DateTime? finishTime;
     private int plantedCropId = -1;
+    
+    public DateTime? PlantedTime { get { return plantedTime; } }
+    public DateTime? FinishTime { get { return finishTime; } }
+    public int PlantedCropId { get { return plantedCropId; } }
+    
+    public void Load(BuildingTaskData buildingTaskData)
+    {
+        FarmTaskData farmTaskData = buildingTaskData as FarmTaskData;
+        if (farmTaskData.plantedCropId != -1)
+        {
+            farmState = FarmState.None;
+            Plant(farmTaskData.plantedCropId, farmTaskData.plantedTime);
+            return;
+        }
+        plantedTime = farmTaskData.plantedTime;
+        plantedCropId = farmTaskData.plantedCropId;
+    }
     
     public void OnTouch()
     {
@@ -155,7 +172,6 @@ public class Farm : MonoBehaviour, IBuilding
 
     private void Update()
     {
-
         if (panel is null)
             return;
         switch (interactionState)
@@ -176,9 +192,8 @@ public class Farm : MonoBehaviour, IBuilding
 
     private void CheckCompleteTime()
     {
-        if (finishTime != null && finishTime < DateTime.Now)
+        if (farmState == FarmState.Growing && finishTime < DateTime.Now)
         {
-            finishTime = null;
             farmState = FarmState.Completed;
             foreach (GameObject crop in cropsPivot)
             {
@@ -252,7 +267,7 @@ public class Farm : MonoBehaviour, IBuilding
                     {
                         SaveLoadManager.Data.Gold -= cost;
                         isEverPlanted = true;
-                        farm.Plant(currentCursorCropId);
+                        farm.Plant(currentCursorCropId, DateTime.Now);
                     }
                 }
             }
@@ -320,20 +335,19 @@ public class Farm : MonoBehaviour, IBuilding
             }
         }
     }
-
-
-    public void Plant(int id)
+    
+    public void Plant(int id, DateTime? plantTime)
     {
-        if (plantedTime == null)
+        if (farmState == FarmState.None)
         {
             for (int i = 0; i < cropsPivot.Length; i++)
             {
-                var crop = Instantiate(Resources.Load<GameObject>(String.Format(growPrefabPath, id)), cropsPivot[i].transform);
-                plantedTime = DateTime.Now;
-                finishTime = plantedTime + TimeSpan.FromSeconds(cropRecipeDatabase.Get(id).productionTime);
-                plantedCropId = id;
-                farmState = FarmState.Growing;
+                Instantiate(Resources.Load<GameObject>(String.Format(growPrefabPath, id)), cropsPivot[i].transform);
             }
+            plantedTime = plantTime;
+            finishTime = plantTime + TimeSpan.FromSeconds(cropRecipeDatabase.Get(id).productionTime);
+            plantedCropId = id;
+            farmState = FarmState.Growing;
         }
     }
 
@@ -343,10 +357,11 @@ public class Farm : MonoBehaviour, IBuilding
         plantedTime = null;
         finishTime = null;
         var cropData = cropRecipeDatabase.Get(plantedCropId);
+
         SaveLoadManager.Data.inventory.AddItem(plantedCropId, cropData.productCount);
         SaveLoadManager.Data.Exp += cropData.exp;
-        SaveLoadManager.Save();
         plantedCropId = -1;
+        SaveLoadManager.Save();
         foreach (GameObject crop in cropsPivot)
         {
             Destroy(crop.transform.GetChild(0).gameObject);
@@ -374,4 +389,6 @@ public class Farm : MonoBehaviour, IBuilding
     {
         EndState();
     }
+
+
 }

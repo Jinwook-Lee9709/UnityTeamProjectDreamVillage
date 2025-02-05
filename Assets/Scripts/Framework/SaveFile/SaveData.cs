@@ -76,6 +76,8 @@ public class SaveDataV1 : SaveData, INotifyPropertyChanged
 
     public Dictionary<int, bool> AreaAuthority = new ();
 
+    public List<BuildingSaveData> buildings = new();
+    
     public SaveDataV1()
     {
         Version = 1;

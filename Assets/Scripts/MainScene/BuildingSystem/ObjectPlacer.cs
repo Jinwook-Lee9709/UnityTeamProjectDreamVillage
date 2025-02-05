@@ -13,7 +13,7 @@ public class ObjectPlacer : MonoBehaviour
     public Dictionary<int, GameObject> ObjectDictionary { get => Objects; }
     
     
-    public void PlaceObject(int guid, int buildingId, Vector3 position, bool isFlip)
+    public GameObject PlaceObject(int guid, int buildingId, Vector3 position, bool isFlip)
     {
         var buildingData = buildingDatabase.Get(buildingId);
         bool isNeedTime = buildingData.productionTime != 0;
@@ -38,7 +38,7 @@ public class ObjectPlacer : MonoBehaviour
             obj.transform.GetChild(0).transform.Rotate(Vector3.up, 90f);
         }
         Objects.Add(guid, obj);
-       
+        return obj;
     }
 
     public void ChangeObject(int guid, GameObject prefab)

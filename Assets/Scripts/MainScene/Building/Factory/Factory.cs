@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Factory : MonoBehaviour, IBuilding
+public class Factory : MonoBehaviour, IBuilding, ILoadableBuilding
 {
     [SerializeField] private int placeID;
 
@@ -21,6 +21,10 @@ public class Factory : MonoBehaviour, IBuilding
     private DateTime productionStartTime;
     
     //Properties
+    public Queue<int> ProductQueue => productQueue;
+    public Queue<int> CompletedProducts => completedProducts;
+    public DateTime ProductionStartTime => productionStartTime;
+    
     public  TimeSpan remainTime
     {
         get
@@ -31,7 +35,34 @@ public class Factory : MonoBehaviour, IBuilding
             return productionStartTime.AddSeconds(productionTime.Value) - DateTime.Now;
         }
     }
+    
+    public void Load(BuildingTaskData buildingTaskData)
+    {
+        var taskData = buildingTaskData as FactoryTaskData;
+        foreach (var item in taskData.completedProductQueue)
+        {
+            completedProducts.Enqueue(item);
+        }
+        foreach (var item in taskData.productQueue)
+        {
+            productQueue.Enqueue(item);
+        }
+        if(productQueue.Count > 0)
+            ResolveProductQueueOnLoad(taskData.productionStartTime);
+    }
 
+    private void ResolveProductQueueOnLoad(DateTime productionStartTime)
+    {
+        float productionTime = recipeDatabase.Dictionary[productQueue.Peek()].productionTime;
+        while (productionStartTime.AddSeconds(productionTime) < DateTime.Now)
+        {
+            if (productQueue.Count == 0)
+                return;
+            productionStartTime = productionStartTime.AddSeconds(productionTime);
+            int completedProductId = productQueue.Dequeue();
+            completedProducts.Enqueue(completedProductId);
+        }
+    }
 
     public void OnTouch()
     {
@@ -103,4 +134,6 @@ public class Factory : MonoBehaviour, IBuilding
         panel.gameObject.SetActive(false);
         gameManager.PlacementSystem.IsTouchable = true;
     }
+
+
 }

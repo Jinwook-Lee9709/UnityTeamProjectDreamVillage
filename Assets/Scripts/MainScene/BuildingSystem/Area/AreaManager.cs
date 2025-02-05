@@ -5,13 +5,13 @@ using UnityEngine;
 public class AreaManager : MonoBehaviour
 {
     [SerializeField] PlacementSystem placementSystem;
-
+    [SerializeField] List<ParticleSystem> fogParticles;
+    
     private GridData gridData;
 
     private void Start()
     {
         gridData = placementSystem.GridInfo;
-        Debug.Log(gridData);
     }
 
     private void Update()

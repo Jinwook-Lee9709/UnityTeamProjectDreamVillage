@@ -41,6 +41,7 @@ public class BuildingShopUI : MonoBehaviour
         placementSystem.IsTouchable = false;
         SetBuildingPanel(BuildingTypes.Farm);
         Debug.Log(buildingDatabase);
+        SaveLoadManager.Save();
     }
 
     private void OnCategoryButtonTouched(BuildingTypes type)

@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
+using System.IO.Pipes;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -32,8 +35,15 @@ public class PlacementSystem : MonoBehaviour
 
     private void Awake()
     {
-        gridData = new GridData();
+        if(gridData == null)
+            gridData = new GridData();
         panel.SetActive(false);
+    }
+
+    private void Start()
+    {
+        SaveLoadManager.OnBeforeSave += SaveBuildings;
+        LoadBuildings();
     }
 
     public void StartPlacement(int id)
@@ -152,5 +162,35 @@ public class PlacementSystem : MonoBehaviour
     public Dictionary<int, GameObject> GetBuildingList()
     {
         return objectPlacer.ObjectDictionary;
+    }
+
+    private void SaveBuildings()
+    {
+        SaveLoadManager.Data.buildings.Clear();
+        foreach (var pair in objectPlacer.ObjectDictionary)
+        {
+            BuildingSaveData saveData = new();
+            PlacementData placementData = gridData.GetPlacementData(pair.Key);
+            saveData.position = placementData.pivotPoint;
+            saveData.buildingId = placementData.buildingDataId;
+            saveData.isFlip = placementData.isFlip;
+            saveData.task = BuildingSaveDataManager.MakeTaskData(pair.Value.GetComponent<IBuilding>());
+            SaveLoadManager.Data.buildings.Add(saveData);
+        }
+    }
+
+    private void LoadBuildings()
+    {
+        foreach (var data in SaveLoadManager.Data.buildings)
+        {
+            int guid = Guid.NewGuid().GetHashCode();
+            gridData.AddObject(guid, data.buildingId, data.position,
+                buildingDatabase.Get(data.buildingId), data.isFlip);
+            GameObject obj = objectPlacer.PlaceObject(guid, data.buildingId, data.position, data.isFlip);
+            if (data.task != null)
+            {
+                obj.GetComponent<ILoadableBuilding>().Load(data.task);
+            }
+        }
     }
 }

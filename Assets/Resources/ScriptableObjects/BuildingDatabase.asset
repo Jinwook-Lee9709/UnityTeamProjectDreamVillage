@@ -21,7 +21,7 @@ MonoBehaviour:
         exp: 0
         productionTime: 0
         cost: 0
-        size: {x: 0, y: 0}
+        size: {x: 1, y: 1}
         prefab: {fileID: 8042699192853034371, guid: 548d444345efc4ec08f9ee2471b8304d, type: 3}
     - Key: 3001
       Value:
@@ -46,7 +46,7 @@ MonoBehaviour:
         buildingType: 2
         level: 1
         exp: 10
-        productionTime: 0
+        productionTime: 300
         cost: 700
         size: {x: 1, y: 1}
         prefab: {fileID: 4971272445067573415, guid: c04c6ff8e38b847bd8c25ea0a3e1f2df, type: 3}
