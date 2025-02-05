@@ -24,8 +24,8 @@ public class GameManager : MonoBehaviour
     {
         if (e.PropertyName == expString)
         {
-            int currentExp = SaveLoadManager.Data.exp;
-            int level = SaveLoadManager.Data.level;
+            int currentExp = SaveLoadManager.Data.Exp;
+            int level = SaveLoadManager.Data.Level;
             while (true)
             {
                 if(levelUpDatabase.Dictionary.ContainsKey(level + 1) == false)

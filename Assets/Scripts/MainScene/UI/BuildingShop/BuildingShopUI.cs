@@ -9,7 +9,7 @@ public class BuildingShopUI : MonoBehaviour
 {
     //References
     [SerializeField] private PlacementSystem placementSystem;
-    
+
     //Database
     [SerializeField] private BuildingDatabaseSO buildingDatabase;
 
@@ -36,12 +36,13 @@ public class BuildingShopUI : MonoBehaviour
     }
 
     public void OnButtonClicked()
-    {   
+    {
         gameObject.SetActive(true);
         placementSystem.IsTouchable = false;
         SetBuildingPanel(BuildingTypes.Farm);
         Debug.Log(buildingDatabase);
     }
+
     private void OnCategoryButtonTouched(BuildingTypes type)
     {
         SetBuildingPanel(type);
@@ -60,9 +61,9 @@ public class BuildingShopUI : MonoBehaviour
                 () => OnBudilngPanelTouched(building.Key)
             );
             bool isAuthorized = SaveLoadManager.Data.Gold >= building.Value.cost &&
-                                SaveLoadManager.Data.level >= building.Value.level;
+                                SaveLoadManager.Data.Level >= building.Value.level;
             button.GetComponent<Button>().interactable = isAuthorized;
-            button.Init(building.Key, building.Value);
+            button.Init(building.Key, building.Value, isAuthorized);
             button.transform.SetParent(contents);
         }
     }
@@ -82,6 +83,12 @@ public class BuildingShopUI : MonoBehaviour
         }
     }
 
+    public void OnCloseButtonTouched()
+    {
+        placementSystem.IsTouchable = true;
+        StopUI();
+    }
+    
     private void StopUI()
     {
         ClearBuildingPanel();

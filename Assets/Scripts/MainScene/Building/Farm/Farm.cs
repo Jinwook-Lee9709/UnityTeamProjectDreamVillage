@@ -43,6 +43,7 @@ public class Farm : MonoBehaviour, IBuilding
     private GameObject cursor;
     private Grid grid;
     private GridData gridInfo;
+    private TimerBarUI timerBar;
     private Dictionary<int, GameObject> buildings;
     
     //ForPlantUI
@@ -65,6 +66,7 @@ public class Farm : MonoBehaviour, IBuilding
                 StartPlantMode();
                 break;
             case FarmState.Growing:
+                ShowRemainTime();
                 break;
             case FarmState.Completed:
                 StartHarvestMode();
@@ -74,7 +76,7 @@ public class Farm : MonoBehaviour, IBuilding
         }
         
     }
-
+    
     private void StartPlantMode()
     {
         if (panel.activeSelf == false)
@@ -89,6 +91,13 @@ public class Farm : MonoBehaviour, IBuilding
             interactionState = InteractionState.Planting;
         }
     }
+    private void ShowRemainTime()
+    {
+        timerBar.gameObject.SetActive(true);
+        if(plantedTime is not null && finishTime is not null)
+            timerBar.SetInfo(plantedTime.Value, finishTime.Value, transform.position);
+    }
+
 
     private void StartHarvestMode()
     {
@@ -109,6 +118,9 @@ public class Farm : MonoBehaviour, IBuilding
     {
         this.uiManager = uiManager;
         panel = uiManager.GetPanel(MainSceneUiIds.Farming);
+        WorldUI worldUI = uiManager.GetPanel(MainSceneUiIds.World).GetComponent<WorldUI>();
+        timerBar = worldUI.timerBar;
+        
         farmingUI = panel.GetComponent<FarmingUI>();
         uiContent = panel.transform.GetComponentsInChildren<Transform>().FirstOrDefault(t => t.name == "Content").gameObject;
         rectTransform = panel.transform.GetComponentsInChildren<RectTransform>().FirstOrDefault(t => t.name == "Viewport");
@@ -144,7 +156,7 @@ public class Farm : MonoBehaviour, IBuilding
     private void Update()
     {
 
-        if (panel == null)
+        if (panel is null)
             return;
         switch (interactionState)
         {

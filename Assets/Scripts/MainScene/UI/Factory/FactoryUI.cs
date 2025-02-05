@@ -18,22 +18,29 @@ public class FactoryUI : MonoBehaviour
     [SerializeField] private Sprite closedBoxSprite;
 
     //Data
+    [Header("Data Containers")]
     [SerializeField] private BuildingDatabaseSO buildingDatabase;
     [SerializeField] private FactoryRecipeDatabaseSO recipeDatabase;
 
     //Transform References
+    [Header("Trnasfrom References")]
     [SerializeField] private Transform poolParent;
     [SerializeField] private Transform content;
-
+    [SerializeField] private RectTransform frameBoundary;
+    
     //Caching Elements
+    [Header("Caching Elements")]
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI claimCountText;
     [SerializeField] private Button claimButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private FactoryImageHandler[] boxImages;
     [SerializeField] private ScrollRect scrollRect;
-
+    [SerializeField] private FactoryPopup popup;
+    
     //Prefabs
+    [Header("Prefabs")]
     [SerializeField] private Image bottomSlotPrefab;
     [SerializeField] private Image cursorPrefab;
 
@@ -99,7 +106,8 @@ public class FactoryUI : MonoBehaviour
             image.sprite = Resources.Load<Sprite>(string.Format(iconPath, data.Key));
             images.Add(data.Key, image);
             ImageTouchHandler imgTouchHandler = image.gameObject.GetComponent<ImageTouchHandler>();
-            imgTouchHandler.OnTouch += (Image image, bool interactable) => OnBottomItemTouched(data.Key, interactable);
+            imgTouchHandler.OnTouch += (Image image, bool interactable) =>
+                OnBottomItemTouched(data.Key, image, interactable);
             imgTouchHandler.Interactable = recipeDatabase.IsProductable(data.Key);
         }
     }
@@ -111,16 +119,12 @@ public class FactoryUI : MonoBehaviour
         {
             SetBoxImage(index, product, closedBoxSprite);
             index++;
-            if (index == boxImages.Length)
-                return;
         }
 
         foreach (var product in productQueue)
         {
             SetBoxImage(index, product, opendBoxSprite);
             index++;
-            if (index == boxImages.Length)
-                return;
         }
 
         while (index != boxImages.Length)
@@ -150,6 +154,11 @@ public class FactoryUI : MonoBehaviour
             image.Value.GetComponent<ImageTouchHandler>().Interactable = 
                 recipeDatabase.IsProductable(image.Key);
         }
+
+        bool isCliamable = completeQueue.Count > 0;
+        claimButton.interactable = isCliamable;
+        String countFormat = DataTableManager.StringTable.Get("FACTORY_CLAIM_COUNT_TEXT");
+        claimCountText.text = String.Format(countFormat, completeQueue.Count);
     }
 
     private void SetBoxImage(int index, int productId, Sprite boxSprite)
@@ -160,19 +169,34 @@ public class FactoryUI : MonoBehaviour
         boxImages[index].SetImage(boxSprite, sprite);
     }
 
-    private void OnBottomItemTouched(int id, bool interactable)
+    private void OnBottomItemTouched(int itemId, Image image, bool interactable)
     {
-        if (Input.touches.Length == 1 && interactable)
+        if (Input.touches.Length == 1)
         {
-            currentCursorItemId = id;
+            var itemInfo = recipeDatabase.Get(itemId);
+            var imageRect = image.rectTransform;
+            var frameTopPoint = frameBoundary.GetMiddleTopPosition();
+            var popupRect = popup.GetComponent<RectTransform>();
+            Vector3 popupPosition = new Vector3(imageRect.position.x, frameTopPoint.y + popupRect.rect.height / 2, 0);
+            
+            popup.gameObject.SetActive(true);
+            popup.SetInfo(itemId, itemInfo);
+            scrollRect.enabled = false;
+            popup.transform.position = popupPosition;
+            
             fingerId = Input.GetTouch(0).fingerId;
-            isTouching = true;
-            cursor = Instantiate(cursorPrefab, transform.parent);
-            Image img = cursor.GetComponent<Image>();
-            cursor.GetComponent<Image>().sprite =
-                Resources.Load<Sprite>(string.Format(iconPath, id));
-            availableSlotIndex = productQueue.Count + completeQueue.Count;
-            scrollRect.enabled = true;
+            
+            if(interactable)
+            {
+                currentCursorItemId = itemId;
+                isTouching = true;
+                cursor = Instantiate(cursorPrefab, transform.parent);
+                Image img = cursor.GetComponent<Image>();
+                cursor.GetComponent<Image>().sprite =
+                    Resources.Load<Sprite>(string.Format(iconPath, itemId));
+                availableSlotIndex = productQueue.Count + completeQueue.Count;
+                scrollRect.enabled = false;
+            }
         }
     }
 
@@ -195,11 +219,13 @@ public class FactoryUI : MonoBehaviour
                 var currentTouch = touch;
                 if (currentTouch.phase == TouchPhase.Canceled || currentTouch.phase == TouchPhase.Ended)
                 {
-                    Destroy(cursor.gameObject);
+                    if(cursor != null)
+                        Destroy(cursor.gameObject);
                     isTouching = false;
                     fingerId = -1;
                     currentCursorItemId = -1;
                     scrollRect.enabled = true;
+                    popup.gameObject.SetActive(false);
                 }
 
                 if (isTouching)

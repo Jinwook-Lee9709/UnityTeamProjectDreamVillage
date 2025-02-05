@@ -12,13 +12,17 @@ public class Construction : MonoBehaviour, IBuilding
     private ObjectPlacer objectPlacer;
 
     private int buildingDataId;
-    private DateTime endTime;
+    
+    private DateTime startTime;
+    private DateTime finishTime;
+
+    private TimerBarUI timerBar;
 
     private bool isCompleted;
 
     private void Start()
     {
-        if (DateTime.Now > endTime)
+        if (DateTime.Now > finishTime)
         {
             OnComplete();
         }
@@ -27,11 +31,22 @@ public class Construction : MonoBehaviour, IBuilding
             checkCompleteTask();
         }
     }
+    
+    public void Init(GameManager gameManager, UiManager uiManager, bool isFirst)
+    {
+        this.gameManager = gameManager;
+        this.uiManager = uiManager;
+        WorldUI worldUI = uiManager.GetPanel(MainSceneUiIds.World).GetComponent<WorldUI>();
+        timerBar = worldUI.timerBar;
+        gridData = gameManager.PlacementSystem.GridInfo;
+        objectPlacer = gameManager.PlacementSystem.ObjectPlacer;
+    }
 
     public void SetBuildingInfo(int buildingDataId)
     {
         this.buildingDataId = buildingDataId;
-        // endTime = DateTime.Now + TimeSpan.FromSeconds(buildingDatabase.Get(buildingDataId).productionTime); 
+        startTime = DateTime.Now;
+        finishTime = DateTime.Now + TimeSpan.FromSeconds(buildingDatabase.Get(buildingDataId).productionTime); 
     }
     
     public void OnTouch()
@@ -44,7 +59,8 @@ public class Construction : MonoBehaviour, IBuilding
         }
         else
         {
-            
+            timerBar.gameObject.SetActive(true);
+            timerBar.SetInfo(startTime, finishTime, gameObject.transform.position);
         }
     }
 
@@ -55,15 +71,9 @@ public class Construction : MonoBehaviour, IBuilding
 
     private async UniTask checkCompleteTask()
     {
-        await UniTask.WaitUntil(()=> DateTime.Now > endTime);
+        await UniTask.WaitUntil(()=> DateTime.Now > finishTime);
         OnComplete();
     }
     
-    public void Init(GameManager gameManager, UiManager uiManager, bool isFirst)
-    {
-        this.gameManager = gameManager;
-        this.uiManager = uiManager;
-        gridData = gameManager.PlacementSystem.GridInfo;
-        objectPlacer = gameManager.PlacementSystem.ObjectPlacer;
-    }
+ 
 }

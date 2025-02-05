@@ -12,7 +12,7 @@ public abstract class SaveData
 
 public class SaveDataV1 : SaveData, INotifyPropertyChanged
 {
-    public int level = 1;
+    private int level = 1;
 
     public int Level
     {
@@ -27,7 +27,7 @@ public class SaveDataV1 : SaveData, INotifyPropertyChanged
         }
     }
 
-    public int exp = 0;
+    private int exp = 0;
 
     public int Exp
     {
@@ -42,7 +42,7 @@ public class SaveDataV1 : SaveData, INotifyPropertyChanged
         }
     }
     
-    public int gold = 5000;
+    private int gold = 5000;
 
     public int Gold
     {
@@ -57,7 +57,7 @@ public class SaveDataV1 : SaveData, INotifyPropertyChanged
         }
     }
 
-    public int population = 1;
+    private int population = 1;
 
     public int Population
     {
@@ -74,10 +74,18 @@ public class SaveDataV1 : SaveData, INotifyPropertyChanged
 
     public Inventory inventory = new();
 
+    public Dictionary<int, bool> AreaAuthority = new ();
 
     public SaveDataV1()
     {
         Version = 1;
+
+        for (int i = 1; i <= Consts.AreaCount; i++)
+        {
+            AreaAuthority.Add(i, false);
+        }
+
+        AreaAuthority[Consts.StartingArea] = true;
     }
 
     public override SaveData VersionUp()

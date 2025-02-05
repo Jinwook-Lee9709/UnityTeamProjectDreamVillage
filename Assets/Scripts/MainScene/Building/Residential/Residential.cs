@@ -21,7 +21,6 @@ public class Residential : MonoBehaviour, IBuilding
        this.uiManager = uiManager;
        if (IsFirst)
        {
-           
        }
     }
 }

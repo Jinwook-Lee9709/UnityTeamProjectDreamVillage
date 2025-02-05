@@ -26,9 +26,9 @@ public class GridData
         Vector2 size = isFlip
             ? new Vector2(buildingData.size.y, buildingData.size.x)
             : new Vector2(buildingData.size.x, buildingData.size.y);
-        for (int i = 0; i < buildingData.size.x; i++)
+        for (int i = 0; i < size.x; i++)
         {
-            for (int j = 0; j < buildingData.size.y; j++)
+            for (int j = 0; j < size.y; j++)
             {
                 data.occupiedTiles.Add(new Vector2Int(position.x + i, position.z + j));
             }
@@ -107,6 +107,23 @@ public class GridData
                     return false;
             }
         }
+        int areaNumber = position.x / Consts.AreaLength * Consts.zAxisAreaCount + position.z / Consts.AreaLength + 1;
+        bool isValidNumber = SaveLoadManager.Data.AreaAuthority.ContainsKey(areaNumber);
+        if (isValidNumber)
+        {
+            return SaveLoadManager.Data.AreaAuthority[areaNumber];
+        }
         return true;
+    }
+
+    public bool HasAuthority(Vector3Int position)
+    {
+        int areaNumber = position.x / Consts.AreaLength * Consts.zAxisAreaCount + position.z / Consts.AreaLength + 1;
+        bool isValidNumber = SaveLoadManager.Data.AreaAuthority.ContainsKey(areaNumber);
+        if (isValidNumber)
+        {
+            return SaveLoadManager.Data.AreaAuthority[areaNumber];
+        }
+        return false;
     }
 }

@@ -7,12 +7,14 @@ using UnityEngine.Timeline;
 
 public class MultiTouchManager : Singleton<MultiTouchManager>
 {
-    private float tapInterval = 0.2f;
+    private float tapInterval = 0.4f;
     private float doubleTapInterval = 0f;
     private float longPressTime = 0.6f;
     private float touchedTime = -1;
     private float doubleTapTime = -1;
-
+    private float tapDistanceThreshold = 30f;
+    private Vector2 touchedPosition;
+    
     private int fingerId = -1;   
     private int fingerIdFirst = -1;
     private int fingerIdSecond = -1;
@@ -155,6 +157,7 @@ public class MultiTouchManager : Singleton<MultiTouchManager>
             {
                 case TouchPhase.Began:
                     fingerId = Input.touches[0].fingerId;
+                    touchedPosition = touch.position;
                     touchedTime = Time.time;
                     break;
                 case TouchPhase.Moved:
@@ -175,8 +178,11 @@ public class MultiTouchManager : Singleton<MultiTouchManager>
                     }
                     else if (touchedTime + tapInterval > Time.time)
                     {
-                        tapPosition = touch.position;
-                        doubleTapTime = Time.time + doubleTapInterval;
+                        if (Vector3.Magnitude(touchedPosition - touch.position) < tapDistanceThreshold)
+                        {
+                            tapPosition = touch.position;
+                            doubleTapTime = Time.time + doubleTapInterval;
+                        }
                     }
 
                     touchedTime = -1;

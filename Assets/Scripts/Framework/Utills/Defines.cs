@@ -33,6 +33,7 @@ public static class DataTableIds
 public enum MainSceneUiIds
 {
     Default,
+    World,
     Building,
     Farming,
     Inventory,
@@ -60,6 +61,8 @@ public static class StringFormat
 public static class PathFormat
 {
     public const string soPath = "ScriptableObjects/{0}";
+    public const string iconPath = "Sprites/Icons/{0}";
+    public const string iconPathWithName = "Sprites/Icons/Item_Icon_{0}";
 }
 
 public static class CustomString
@@ -71,5 +74,30 @@ public static class Variables
 {
     public static Languages currentLanguage = Languages.Korean;
     public static int constructionBuildingId = 3000;
+}
+
+public static class StringKeys
+{
+    public static readonly string notEnough = "NOT_ENOUGH";
+    public static readonly string gold = "GOLD";
+    public static readonly string exp = "EXP";
+    public static readonly string level = "LEVEL";
+    public static readonly string population = "POPULATION";
+    public static readonly string required = "REQUIRED";
+}
+public enum ItemType
+{
+    All,
+    Crop,
+    Product,
+}
+
+public static class Consts
+{
+    public const int xAxisAreaCount = 6;
+    public const int zAxisAreaCount = 6;
+    public const int AreaLength = 10;
+    public const int StartingArea = 8;
+    public const int AreaCount = 32;
 }
 

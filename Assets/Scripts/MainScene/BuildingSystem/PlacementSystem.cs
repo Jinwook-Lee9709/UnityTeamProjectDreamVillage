@@ -30,7 +30,7 @@ public class PlacementSystem : MonoBehaviour
 
     private Vector3Int lastDetectedPosition = Vector3Int.zero;
 
-    private void Start()
+    private void Awake()
     {
         gridData = new GridData();
         panel.SetActive(false);

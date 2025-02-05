@@ -1,16 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public static class Extension
 {
     public static Vector3 GetMiddleTopPosition(this RectTransform rectTransform)
     {
-        float topY = rectTransform.position.y + 
-            (rectTransform.rect.height * (1 - rectTransform.pivot.y) * rectTransform.lossyScale.y);
+        float topY = rectTransform.position.y +
+                     (rectTransform.rect.height * (1 - rectTransform.pivot.y) * rectTransform.lossyScale.y);
         return new Vector3(rectTransform.position.x, topY, rectTransform.position.z);
     }
-    
+
     public static Vector3Int ToVector3Int(this Vector3 vector3)
     {
         return new Vector3Int(
@@ -18,5 +20,40 @@ public static class Extension
             Mathf.RoundToInt(vector3.y),
             Mathf.RoundToInt(vector3.z)
         );
+    }
+
+    public static void AppendWithBlank(this StringBuilder sb, string text)
+    {
+        if (sb.Length > 0)
+        {
+            sb.Append(" ");
+        }
+        sb.Append(text);
+    }
+
+    public static void AppendSecondsByTimeString(this StringBuilder sb, int seconds)
+    {
+        sb.Clear();
+        int hour = seconds / 3600;
+        int minute = seconds % 3600 / 60;
+        int second = seconds % 3600 % 60;
+
+        if (hour != 0)
+        {
+            sb.Append(hour);
+            sb.Append(DataTableManager.StringTable.Get("TIME_HOUR"));
+        }
+
+        if (minute != 0)
+        {
+            sb.AppendWithBlank(minute.ToString());
+            sb.Append(DataTableManager.StringTable.Get("TIME_MINUTE"));
+        }
+
+        if (seconds != 0)
+        {
+            sb.AppendWithBlank(second.ToString());
+            sb.Append(DataTableManager.StringTable.Get("TIME_SECOND"));
+        }
     }
 }
