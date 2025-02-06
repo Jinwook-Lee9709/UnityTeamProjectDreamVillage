@@ -114,7 +114,8 @@ public class GridData
                     return false;
             }
         }
-        int areaNumber = position.x / Consts.AreaLength * Consts.zAxisAreaCount + position.z / Consts.AreaLength + 1;
+
+        int areaNumber = position.GetAreaNumber();
         bool isValidNumber = SaveLoadManager.Data.AreaAuthority.ContainsKey(areaNumber);
         if (isValidNumber)
         {
@@ -125,7 +126,7 @@ public class GridData
 
     public bool HasAuthority(Vector3Int position)
     {
-        int areaNumber = position.x / Consts.AreaLength * Consts.zAxisAreaCount + position.z / Consts.AreaLength + 1;
+        int areaNumber = position.GetAreaNumber();
         bool isValidNumber = SaveLoadManager.Data.AreaAuthority.ContainsKey(areaNumber);
         if (isValidNumber)
         {

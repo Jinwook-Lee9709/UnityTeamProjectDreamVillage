@@ -28,7 +28,7 @@ public class FactoryRecipeDataConverter
 
     public static Dictionary<int, FactoryRecipeData> GetTable => dict;
 
-    public class Data
+    private class Data
     {
         public int ID { get; set; }
         public int Lv { get; set; }

@@ -5740,6 +5740,7 @@ MonoBehaviour:
   objectPlacer: {fileID: 2018597823}
   buildingDatabase: {fileID: 11400000, guid: e427f4b0e3c6c4ffba5132a7860318ac, type: 2}
   previewSystem: {fileID: 30639577}
+  cameraManager: {fileID: 2026535350}
 --- !u!198 &883845122 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3891380058253900926, guid: f0c05c52f9d6a4a47bb70837928f4264, type: 3}
@@ -13285,6 +13286,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2026535349}
+  - component: {fileID: 2026535350}
   m_Layer: 0
   m_Name: CameraManager
   m_TagString: Untagged
@@ -13307,6 +13309,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 896069151}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2026535350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026535348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbcbd432cadec4109a58f23b25e211a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minimumSize: 1.5
+  maximumSize: 5
+  pinchSensi: 1
+  dragSensi: 0.01
+  edgeMoveSensi: 0.1
+  edgeRatio: 0.2
+  placementSystem: {fileID: 865917810}
 --- !u!1001 &2037343113
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class AreaManager : MonoBehaviour
 {
     [SerializeField] PlacementSystem placementSystem;
     [SerializeField] List<ParticleSystem> fogParticles;
+    [SerializeField] LevelUpDatabaseSO levelUpDatabase;
     
     private GridData gridData;
 
@@ -19,14 +20,27 @@ public class AreaManager : MonoBehaviour
         if (MultiTouchManager.Instance.Tap)
         {
             var touchedPos = MultiTouchManager.Instance.lastTapPosition;
-            if (gridData.HasAuthority(InputManager.Instance.Vector2PositionToPlane(touchedPos).ToVector3Int()))
+            var gridPos = InputManager.Instance.Vector2PositionToPlane(touchedPos).ToVector3Int();
+            if (gridData.HasAuthority(gridPos))
             {
             }
             else
             {
-
+                ShowUnlockRequirementsUI(gridPos.GetAreaNumber());
             }
         }
     }
 
+    private void UnLockArea(int areaId)
+    {
+        SaveLoadManager.Data.AreaAuthority[areaId] = true;
+        fogParticles[areaId].Stop();
+    }
+
+    private void ShowUnlockRequirementsUI(int areaId)
+    {
+        
+    }
+    
+    
 }

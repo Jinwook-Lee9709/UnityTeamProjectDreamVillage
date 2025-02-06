@@ -36,6 +36,8 @@ public class MultiTouchManager : Singleton<MultiTouchManager>
     public float Pinch { get; private set; }
     
     public float Rotate { get; private set; }
+    
+    public Vector2 Drag { get; private set; }
 
     private Vector2 tapPosition = Vector2.zero;
     public Vector2 lastTapPosition { get; private set; } = Vector2.zero;
@@ -49,8 +51,102 @@ public class MultiTouchManager : Singleton<MultiTouchManager>
         UpdateTap();
         UpdateSwipe();
         UpdatePinchAndRotate();
+        UpdateDrag();
     }
-    
+
+    private void UpdateTap()
+    {
+        if (doubleTapTime < Time.time && doubleTapTime > 0)
+        {
+            Tap = true;
+            lastTapPosition = tapPosition;
+            doubleTapTime = -1;
+        }
+
+        if (Input.touchCount == 1)
+        {
+            Touch touch = Input.GetTouch(0);
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    fingerId = Input.touches[0].fingerId;
+                    touchedPosition = touch.position;
+                    touchedTime = Time.time;
+                    break;
+                case TouchPhase.Moved:
+                case TouchPhase.Stationary:
+                    if (touchedTime + longPressTime < Time.time && touchedTime > 0 &&
+                        Vector3.Magnitude(touchedPosition - touch.position) < tapDistanceThreshold)
+                    {
+                        LongPress = true;
+                        touchedTime = -1;
+                    }
+
+                    break;
+                case TouchPhase.Ended:
+                case TouchPhase.Canceled:
+                    if (doubleTapTime > Time.time)
+                    {
+                        DoubleTap = true;
+                        doubleTapTime = -1;
+                    }
+                    else if (touchedTime + tapInterval > Time.time)
+                    {
+                        if (Vector3.Magnitude(touchedPosition - touch.position) < tapDistanceThreshold)
+                        {
+                            tapPosition = touch.position;
+                            doubleTapTime = Time.time + doubleTapInterval;
+                        }
+                    }
+
+                    touchedTime = -1;
+                    fingerId = -1;
+                    break;
+            }
+        }
+    }
+
+    private void UpdateSwipe()
+    {
+        foreach (Touch touch in Input.touches)
+        {
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    if (fingerId == -1)
+                    {
+                        fingerId = touch.fingerId;
+                        fingerTouchStartPos = touch.position;
+                        fingerTouchStartTime = Time.time;
+                    }
+
+                    break;
+                case TouchPhase.Moved:
+                case TouchPhase.Stationary:
+                    break;
+                case TouchPhase.Ended:
+                case TouchPhase.Canceled:
+                    if (fingerId == touch.fingerId)
+                    {
+                        fingerId = -1;
+                        var dir = touch.position - fingerTouchStartPos;
+                        var distance = dir.magnitude;
+                        var direction = (touch.position - fingerTouchStartPos).normalized;
+                        if (Time.time - fingerTouchStartTime < maxSwipeTime &&
+                            Mathf.Abs(distance) > minSwipeDistancePixels)
+                        {
+                            Swipe = dir.normalized;
+                        }
+
+                        fingerTouchStartPos = Vector2.zero;
+                    }
+
+                    break;
+            }
+        }
+    }
+
+        
     private void UpdatePinchAndRotate()
     {
         foreach (Touch touch in Input.touches)
@@ -101,93 +197,15 @@ public class MultiTouchManager : Singleton<MultiTouchManager>
         }
     }
 
-    private void UpdateSwipe()
+
+    private void UpdateDrag()
     {
-        foreach (Touch touch in Input.touches)
-        {
-            switch (touch.phase)
-            {
-                case TouchPhase.Began:
-                    if (fingerId == -1)
-                    {
-                        fingerId = touch.fingerId;
-                        fingerTouchStartPos = touch.position;
-                        fingerTouchStartTime = Time.time;
-                    }
-
-                    break;
-                case TouchPhase.Moved:
-                case TouchPhase.Stationary:
-                    break;
-                case TouchPhase.Ended:
-                case TouchPhase.Canceled:
-                    if (fingerId == touch.fingerId)
-                    {
-                        fingerId = -1;
-                        var dir = touch.position - fingerTouchStartPos;
-                        var distance = dir.magnitude;
-                        var direction = (touch.position - fingerTouchStartPos).normalized;
-                        if (Time.time - fingerTouchStartTime < maxSwipeTime &&
-                            Mathf.Abs(distance) > minSwipeDistancePixels)
-                        {
-                            Swipe = dir.normalized;
-                        }
-
-                        fingerTouchStartPos = Vector2.zero;
-                    }
-
-                    break;
-            }
-        }
-    }
-
-    private void UpdateTap()
-    {
-        if (doubleTapTime < Time.time && doubleTapTime > 0)
-        {
-            Tap = true;
-            lastTapPosition = tapPosition;
-            doubleTapTime = -1;
-        }
-
         if (Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
-            switch (touch.phase)
+            if (touch.phase == TouchPhase.Moved)
             {
-                case TouchPhase.Began:
-                    fingerId = Input.touches[0].fingerId;
-                    touchedPosition = touch.position;
-                    touchedTime = Time.time;
-                    break;
-                case TouchPhase.Moved:
-                case TouchPhase.Stationary:
-                    if (touchedTime + longPressTime < Time.time && touchedTime > 0)
-                    {
-                        LongPress = true;
-                        touchedTime = -1;
-                    }
-
-                    break;
-                case TouchPhase.Ended:
-                case TouchPhase.Canceled:
-                    if (doubleTapTime > Time.time)
-                    {
-                        DoubleTap = true;
-                        doubleTapTime = -1;
-                    }
-                    else if (touchedTime + tapInterval > Time.time)
-                    {
-                        if (Vector3.Magnitude(touchedPosition - touch.position) < tapDistanceThreshold)
-                        {
-                            tapPosition = touch.position;
-                            doubleTapTime = Time.time + doubleTapInterval;
-                        }
-                    }
-
-                    touchedTime = -1;
-                    fingerId = -1;
-                    break;
+                Drag = touch.deltaPosition;
             }
         }
     }
@@ -199,6 +217,7 @@ public class MultiTouchManager : Singleton<MultiTouchManager>
         LongPress = false;
 
         Swipe = Vector2.zero;
+        Drag = Vector2.zero;
         if (lastTapPosition != Vector2.zero)
         {
             lastTapPosition = Vector2.zero;

@@ -11,6 +11,7 @@ public class ModifyState : IBuildingState
     private BuildingData currentBuildingData;
     private PreviewSystem previewSystem;
     private GameObject originalObject;
+    private CameraManager cameraManager;
     
 
     private float fingerId = -1;
@@ -22,7 +23,8 @@ public class ModifyState : IBuildingState
         ObjectPlacer objectPlacer,
         BuildingDatabaseSO buildingDatabase,
         GridData gridData,
-        PreviewSystem previewSystem)
+        PreviewSystem previewSystem,
+        CameraManager cameraManager)
     {
         this.guid = guid;
         this.grid = grid;
@@ -30,6 +32,7 @@ public class ModifyState : IBuildingState
         this.buildingDatabase = buildingDatabase;
         this.gridData = gridData;
         this.previewSystem = previewSystem;
+        this.cameraManager = cameraManager;
         originalObject = objectPlacer.GetObject(guid);
         buildingDataId = gridData.GetBuildingDataId(guid);
         currentBuildingData = buildingDatabase.Get(buildingDataId);
@@ -105,6 +108,8 @@ public class ModifyState : IBuildingState
             if (fingerId != -1 && (touch.phase == TouchPhase.Canceled || touch.phase == TouchPhase.Ended))
             {
                 fingerId = -1;
+                cameraManager.ScreenEdgeMove = false;
+                cameraManager.DragMove = true;
             }
         }
     }
@@ -121,6 +126,8 @@ public class ModifyState : IBuildingState
                     touchPos.z == previewSystem.currentPreviewPosition.z)
                 {
                     fingerId = touch.fingerId;
+                    cameraManager.ScreenEdgeMove = true;
+                    cameraManager.DragMove = false;
                 }
             }
         }
