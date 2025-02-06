@@ -179,8 +179,8 @@ public class FactoryUI : MonoBehaviour
             var popupRect = popup.GetComponent<RectTransform>();
             Vector3 popupPosition = new Vector3(imageRect.position.x, frameTopPoint.y + popupRect.rect.height / 2, 0);
             
-            popup.gameObject.SetActive(true);
             popup.SetInfo(itemId, itemInfo);
+            popup.gameObject.SetActive(true);
             scrollRect.enabled = false;
             popup.transform.position = popupPosition;
             

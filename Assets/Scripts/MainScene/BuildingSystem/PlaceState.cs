@@ -10,6 +10,7 @@ public class PlaceState : IBuildingState
     private GridData gridData;
     private BuildingData currentBuildingData;
     private PreviewSystem previewSystem;
+    private CameraManager cameraManager;
 
     private float fingerId = -1;
     private Vector3 prevTouchPos;
@@ -19,7 +20,8 @@ public class PlaceState : IBuildingState
         ObjectPlacer objectPlacer,
         BuildingDatabaseSO buildingDatabase,
         GridData gridData,
-        PreviewSystem previewSystem)
+        PreviewSystem previewSystem,
+        CameraManager cameraManager)
     {
         this.id = id;
         this.grid = grid;
@@ -27,6 +29,7 @@ public class PlaceState : IBuildingState
         this.buildingDatabase = buildingDatabase;
         this.gridData = gridData;
         this.previewSystem = previewSystem;
+        this.cameraManager = cameraManager;
         currentBuildingData = buildingDatabase.Get(id);
         previewSystem.enabled = true;
         var startPos = grid.WorldToCell(InputManager.Instance.CenterPositionToPlane());
@@ -94,6 +97,8 @@ public class PlaceState : IBuildingState
             if (fingerId != -1 && (touch.phase == TouchPhase.Canceled || touch.phase == TouchPhase.Ended))
             {
                 fingerId = -1;
+                cameraManager.ScreenEdgeMove = false;
+                cameraManager.DragMove = true;
             }
         }
     }
@@ -110,6 +115,8 @@ public class PlaceState : IBuildingState
                     touchPos.z == previewSystem.currentPreviewPosition.z)
                 {
                     fingerId = touch.fingerId;
+                    cameraManager.ScreenEdgeMove = true;
+                    cameraManager.DragMove = false;
                 }
             }
         }

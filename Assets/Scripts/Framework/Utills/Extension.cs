@@ -22,6 +22,18 @@ public static class Extension
         );
     }
 
+    public static int GetAreaNumber(this Vector3Int position)
+    {
+        return position.x / Consts.AreaLength * Consts.zAxisAreaCount + position.z / Consts.AreaLength + 1;
+    }
+
+    public static Vector3 ScreenVectorToWorldVector(this Vector2 vector2)
+    {
+        return new Vector3(vector2.x * 0.5f + vector2.y * 0.5f, 0, -vector2.x * 0.5f + vector2.y * 0.5f);
+    }
+    
+
+
     public static void AppendWithBlank(this StringBuilder sb, string text)
     {
         if (sb.Length > 0)

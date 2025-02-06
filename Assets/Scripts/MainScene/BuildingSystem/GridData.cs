@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 
 public class GridData
 {
@@ -23,6 +24,7 @@ public class GridData
     {
         PlacementData data = new();
         data.guid = guid;
+        data.pivotPoint = position;
         Vector2 size = isFlip
             ? new Vector2(buildingData.size.y, buildingData.size.x)
             : new Vector2(buildingData.size.x, buildingData.size.y);
@@ -36,12 +38,12 @@ public class GridData
 
         if (buildingData.productionTime != 0)
         {
-            data.buildingDataID = constructionId;
+            data.buildingDataId = constructionId;
             data.prefab = constructionPrefab;
         }
         else
         {
-            data.buildingDataID = buildingDataId;
+            data.buildingDataId = buildingDataId;
             data.prefab = buildingData.prefab;
         }
         
@@ -72,7 +74,7 @@ public class GridData
 
         foreach (var data in query)
         {
-            data.Value.buildingDataID = buildingDataId;
+            data.Value.buildingDataId = buildingDataId;
             data.Value.prefab = buildingDatabase.Get(buildingDataId).prefab;
         }
     }
@@ -89,12 +91,17 @@ public class GridData
 
     public int GetBuildingDataId(int guid)
     {
-        return placedObects.Where(x => x.Value.guid == guid).First().Value.buildingDataID;
+        return placedObects.Where(x => x.Value.guid == guid).First().Value.buildingDataId;
     }
 
     public bool GetIsFliped(int guid)
     {
         return placedObects.Where(x => x.Value.guid == guid).First().Value.isFlip;
+    }
+
+    public PlacementData GetPlacementData(int guid)
+    {
+        return placedObects.Where(x => x.Value.guid == guid).First().Value;
     }
 
     public bool IsValid(Vector3Int position, Vector2Int size)
@@ -107,7 +114,8 @@ public class GridData
                     return false;
             }
         }
-        int areaNumber = position.x / Consts.AreaLength * Consts.zAxisAreaCount + position.z / Consts.AreaLength + 1;
+
+        int areaNumber = position.GetAreaNumber();
         bool isValidNumber = SaveLoadManager.Data.AreaAuthority.ContainsKey(areaNumber);
         if (isValidNumber)
         {
@@ -118,7 +126,7 @@ public class GridData
 
     public bool HasAuthority(Vector3Int position)
     {
-        int areaNumber = position.x / Consts.AreaLength * Consts.zAxisAreaCount + position.z / Consts.AreaLength + 1;
+        int areaNumber = position.GetAreaNumber();
         bool isValidNumber = SaveLoadManager.Data.AreaAuthority.ContainsKey(areaNumber);
         if (isValidNumber)
         {

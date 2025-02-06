@@ -1,39 +1,71 @@
+using System;
 using System.Collections.Generic;
+using System.IO.Pipes;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PlacementSystem : MonoBehaviour
 {
+    //UI References
     [SerializeField] private UiManager uiManager;
     [SerializeField] private GameObject panel;
     [SerializeField] private Button checkButton;
     [SerializeField] private Button rotateButton;
     [SerializeField] private Button removeButton;
     [SerializeField] private Button cancelButton;
+    //PlacementSystemElements
     [SerializeField] private Grid grid;
     [SerializeField] private ObjectPlacer objectPlacer;
     [SerializeField] private BuildingDatabaseSO buildingDatabase;
     [SerializeField] private PreviewSystem previewSystem;
+    //References
+    [SerializeField] private CameraManager cameraManager;
 
     public Grid Grid => grid;
     public GridData GridInfo => gridData;
     
     public ObjectPlacer ObjectPlacer => objectPlacer;
 
-    public bool IsTouchable { get; set; } = true;
+    private bool isTouchable = true;
+
+    public bool IsTouchable
+    {
+        get
+        {
+            return isTouchable;
+        }
+        set
+        {
+            if (isTouchable != value)
+            {
+                isTouchable = value;
+                OnTouchableChanged?.Invoke(isTouchable);
+            }
+        }
+    } 
 
     private GridData gridData;
     private IBuildingState buildingState;
 
     private Vector3Int lastDetectedPosition = Vector3Int.zero;
 
+    public event Action<bool> OnTouchableChanged;
+    
     private void Awake()
     {
-        gridData = new GridData();
+        if(gridData == null)
+            gridData = new GridData();
         panel.SetActive(false);
+    }
+
+    private void Start()
+    {
+        SaveLoadManager.OnBeforeSave += SaveBuildings;
+        LoadBuildings();
     }
 
     public void StartPlacement(int id)
@@ -49,7 +81,8 @@ public class PlacementSystem : MonoBehaviour
             objectPlacer,
             buildingDatabase,
             gridData,
-            previewSystem
+            previewSystem,
+            cameraManager
         );
         checkButton.onClick.AddListener(() =>
         {
@@ -60,6 +93,8 @@ public class PlacementSystem : MonoBehaviour
         });
         rotateButton.onClick.AddListener(OnRotation);
         cancelButton.onClick.AddListener(StopPlacement);
+        
+        cameraManager.ScreenEdgeMove = true;
     }
 
     public void StartModify(int guid)
@@ -75,7 +110,8 @@ public class PlacementSystem : MonoBehaviour
             objectPlacer,
             buildingDatabase,
             gridData,
-            previewSystem
+            previewSystem,
+            cameraManager
         );
         checkButton.onClick.AddListener(() =>
         {
@@ -91,6 +127,8 @@ public class PlacementSystem : MonoBehaviour
             StopPlacement();
         });
         cancelButton.onClick.AddListener(StopPlacement);
+        
+        cameraManager.ScreenEdgeMove = true;
     }
 
 
@@ -105,6 +143,8 @@ public class PlacementSystem : MonoBehaviour
         cancelButton.onClick.RemoveAllListeners();
         IsTouchable = true;
         panel.SetActive(false);
+
+        cameraManager.ScreenEdgeMove = false;
     }
 
     public bool OnAction()
@@ -133,7 +173,8 @@ public class PlacementSystem : MonoBehaviour
             !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
         {
             var touchedTilePos = grid.WorldToCell(InputManager.Instance.TouchPositionToPlane());
-            if (!gridData.IsValid(touchedTilePos, new Vector2Int(1, 1)))
+            if (!gridData.IsValid(touchedTilePos, new Vector2Int(1, 1)) &&
+                gridData.HasAuthority(touchedTilePos))
             {
                 StartModify(gridData.GetGuid(touchedTilePos));
             }
@@ -152,5 +193,35 @@ public class PlacementSystem : MonoBehaviour
     public Dictionary<int, GameObject> GetBuildingList()
     {
         return objectPlacer.ObjectDictionary;
+    }
+
+    private void SaveBuildings()
+    {
+        SaveLoadManager.Data.buildings.Clear();
+        foreach (var pair in objectPlacer.ObjectDictionary)
+        {
+            BuildingSaveData saveData = new();
+            PlacementData placementData = gridData.GetPlacementData(pair.Key);
+            saveData.position = placementData.pivotPoint;
+            saveData.buildingId = placementData.buildingDataId;
+            saveData.isFlip = placementData.isFlip;
+            saveData.task = BuildingSaveDataManager.MakeTaskData(pair.Value.GetComponent<IBuilding>());
+            SaveLoadManager.Data.buildings.Add(saveData);
+        }
+    }
+
+    private void LoadBuildings()
+    {
+        foreach (var data in SaveLoadManager.Data.buildings)
+        {
+            int guid = Guid.NewGuid().GetHashCode();
+            gridData.AddObject(guid, data.buildingId, data.position,
+                buildingDatabase.Get(data.buildingId), data.isFlip);
+            GameObject obj = objectPlacer.PlaceObject(guid, data.buildingId, data.position, data.isFlip);
+            if (data.task != null)
+            {
+                obj.GetComponent<ILoadableBuilding>().Load(data.task);
+            }
+        }
     }
 }
