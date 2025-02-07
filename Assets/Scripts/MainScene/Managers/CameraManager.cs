@@ -11,6 +11,7 @@ public class CameraManager : MonoBehaviour
     [Flags]
     public enum CameraInput
     {
+        None,
         DragMove,
         ScreenEdgeMove,
     }
@@ -24,7 +25,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private PlacementSystem placementSystem;
     private Camera mainCamera;
 
-    private CameraInput currentCameraInput = 0;
+    [SerializeField] private CameraInput currentCameraInput = 0;
 
     private int screenWidth = 0;
     private int screenHeight = 0;

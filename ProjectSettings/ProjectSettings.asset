@@ -163,6 +163,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.Kyungil.Unity_TeamProject_DreamVillage
+    Standalone: com.Kyungil.Unity-TeamProject-DreamVillage
   buildNumber:
     Standalone: 0
     VisionOS: 0

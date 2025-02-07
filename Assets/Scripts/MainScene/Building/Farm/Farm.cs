@@ -156,6 +156,7 @@ public class Farm : MonoBehaviour, IBuilding, ILoadableBuilding
             isTouching = true;
             cursor = Instantiate(imagePrefab, panel.transform.parent);
             cursor.GetComponent<Image>().sprite = Resources.Load<Sprite>(string.Format(iconPath, currentCursorCropId));
+            gameManager.cameraManager.DragMove = false;
         }
     }
 
@@ -167,6 +168,7 @@ public class Farm : MonoBehaviour, IBuilding, ILoadableBuilding
             isTouching = true;
             cursor = Instantiate(imagePrefab, panel.transform.parent);
             cursor.GetComponent<Image>().sprite = Resources.Load<Sprite>(sicklePath);
+            gameManager.cameraManager.DragMove = false;
         }
     }
 
@@ -223,6 +225,7 @@ public class Farm : MonoBehaviour, IBuilding, ILoadableBuilding
                     Destroy(cursor);
                     isTouching = false;
                     fingerId = -1;
+                    gameManager.cameraManager.DragMove = true;
                     currentCursorCropId = -1;
                     farmingUI.SetScrollRectActivation(true);
                     if (isEverPlanted)
@@ -293,6 +296,7 @@ public class Farm : MonoBehaviour, IBuilding, ILoadableBuilding
                 {
                     Destroy(cursor);
                     isTouching = false;
+                    gameManager.cameraManager.DragMove = true;
                     fingerId = -1;
                     if (isEverPlanted)
                     {
