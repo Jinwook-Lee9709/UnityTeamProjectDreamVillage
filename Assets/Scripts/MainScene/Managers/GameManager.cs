@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static string expString = "Exp";
+    [SerializeField] public CameraManager cameraManager;
     [SerializeField] private PlacementSystem placementSystem;
     [SerializeField] private LevelUpDatabaseSO levelUpDatabase;
     public void Start()

@@ -64,12 +64,18 @@ public class PreviewSystem : MonoBehaviour
     {
         if (isValid)
         {
-            previewObject.GetComponentInChildren<Renderer>().material.color = Color.green;
+            foreach (var renderer in previewObject.GetComponentsInChildren<Renderer>())
+            {
+                renderer.material.color = Color.green;
+            }
             cellIndicatorRenderer.material.color = Color.green;
         }
         else
         {
-            previewObject.GetComponentInChildren<Renderer>().material.color = Color.red;
+            foreach (var renderer in previewObject.GetComponentsInChildren<Renderer>())
+            {
+                renderer.material.color = Color.red;
+            }
             cellIndicatorRenderer.material.color = Color.red;
         }
     }

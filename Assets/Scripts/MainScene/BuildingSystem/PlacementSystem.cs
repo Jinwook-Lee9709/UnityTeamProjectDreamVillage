@@ -24,6 +24,7 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private PreviewSystem previewSystem;
     //References
     [SerializeField] private CameraManager cameraManager;
+    [SerializeField] private AreaManager areaManager;
 
     public Grid Grid => grid;
     public GridData GridInfo => gridData;
@@ -93,8 +94,6 @@ public class PlacementSystem : MonoBehaviour
         });
         rotateButton.onClick.AddListener(OnRotation);
         cancelButton.onClick.AddListener(StopPlacement);
-        
-        cameraManager.ScreenEdgeMove = true;
     }
 
     public void StartModify(int guid)
@@ -127,8 +126,6 @@ public class PlacementSystem : MonoBehaviour
             StopPlacement();
         });
         cancelButton.onClick.AddListener(StopPlacement);
-        
-        cameraManager.ScreenEdgeMove = true;
     }
 
 
@@ -177,6 +174,11 @@ public class PlacementSystem : MonoBehaviour
                 gridData.HasAuthority(touchedTilePos))
             {
                 StartModify(gridData.GetGuid(touchedTilePos));
+            }
+            else if (!gridData.HasAuthority(touchedTilePos))
+            {
+                areaManager.OnTilePressed(touchedTilePos);
+                
             }
         }
         if (buildingState == null)

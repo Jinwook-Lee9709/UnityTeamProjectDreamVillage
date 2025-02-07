@@ -24,7 +24,7 @@ public static class Extension
 
     public static int GetAreaNumber(this Vector3Int position)
     {
-        return position.x / Consts.AreaLength * Consts.zAxisAreaCount + position.z / Consts.AreaLength + 1;
+        return position.z / Consts.AreaLength * Consts.xAxisAreaCount + position.x / Consts.AreaLength + 1;
     }
 
     public static Vector3 ScreenVectorToWorldVector(this Vector2 vector2)

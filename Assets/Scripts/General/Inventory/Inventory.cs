@@ -37,4 +37,12 @@ public class Inventory
             }
         }
     }
+
+    public bool IsEnough(int item, int amount)
+    {
+        if (!dict.ContainsKey(item))
+            return false;
+        
+        return dict[item] >= amount;
+    }
 }
