@@ -1631,6 +1631,7 @@ MonoBehaviour:
   objectPlacer: {fileID: 0}
   buildingDatabase: {fileID: 0}
   previewSystem: {fileID: 0}
+  cameraManager: {fileID: 0}
 --- !u!1 &968899480
 GameObject:
   m_ObjectHideFlags: 0
