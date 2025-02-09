@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -29,7 +31,10 @@ public class FactoryUI : MonoBehaviour
     [SerializeField] private RectTransform frameBoundary;
     
     //Caching Elements
-    [Header("Caching Elements")]
+    [Header("Caching Elements")] 
+    [SerializeField] private GameObject mainPanel;
+    [SerializeField] private GameObject bottomPanel;
+    [SerializeField] private Image backgroundImage;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI claimCountText;
@@ -72,7 +77,7 @@ public class FactoryUI : MonoBehaviour
         claimButton.onClick.AddListener(OnClaimButtonClicked);
         quitButton.onClick.AddListener(StopUI);
     }
-
+    
     public void InitUI(int placeId,
         Queue<int> productQueue,
         Queue<int> completeQueue,
@@ -90,14 +95,19 @@ public class FactoryUI : MonoBehaviour
         OnQuitFactory += onQuit;
 
         nameText.text = DataTableManager.StringTable.Get(String.Format(StringFormat.buildingName, placeId));
-
+        
         InitBottmUI();
         UpdateUI();
+        
+        DotAnimator.DissolveInAnimation(backgroundImage, alpha:0.7f);
+        DotAnimator.PopupAnimation(mainPanel);
+        DotAnimator.PopupAnimation(bottomPanel);
     }
 
 
     private void InitBottmUI()
     {
+        bottomPanel.transform.localScale = Vector3.one;
         var query = recipeDatabase.Dictionary.Where(x => x.Value.placeID == placeId);
         foreach (var data in query)
         {
@@ -280,6 +290,10 @@ public class FactoryUI : MonoBehaviour
             cancelToken?.Cancel();
             timerRunning = false;
         }
+        
+        DotAnimator.DissolveOutAnimation(backgroundImage, onComplete:() => gameObject.SetActive(false));
+        DotAnimator.CloseAnimation(mainPanel);
+        DotAnimator.CloseAnimation(bottomPanel);
 
         scrollRect.enabled = true;
 

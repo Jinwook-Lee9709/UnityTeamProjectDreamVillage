@@ -20,7 +20,7 @@ public class GridData
         constructionPrefab = buildingDatabase.Get(constructionId).prefab;
     }
 
-    public void AddObject(int guid, int buildingDataId, Vector3Int position, BuildingData buildingData, bool isFlip)
+    public void AddObject(int guid, int buildingDataId, Vector3Int position, BuildingData buildingData, bool isFlip, bool isFirst = true)
     {
         PlacementData data = new();
         data.guid = guid;
@@ -36,7 +36,7 @@ public class GridData
             }
         }
 
-        if (buildingData.productionTime != 0)
+        if (buildingData.productionTime != 0 && isFirst)
         {
             data.buildingDataId = constructionId;
             data.prefab = constructionPrefab;

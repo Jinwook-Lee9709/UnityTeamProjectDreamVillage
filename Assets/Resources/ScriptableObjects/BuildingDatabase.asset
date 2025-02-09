@@ -46,7 +46,7 @@ MonoBehaviour:
         buildingType: 2
         level: 1
         exp: 10
-        productionTime: 300
+        productionTime: 10
         cost: 700
         size: {x: 1, y: 1}
         prefab: {fileID: 4971272445067573415, guid: c04c6ff8e38b847bd8c25ea0a3e1f2df, type: 3}
@@ -55,7 +55,7 @@ MonoBehaviour:
         buildingType: 2
         level: 1
         exp: 10
-        productionTime: 120
+        productionTime: 10
         cost: 1000
         size: {x: 1, y: 1}
         prefab: {fileID: 2533845934863396869, guid: c2206672412f74d5eae3f3d4b2de025b, type: 3}
@@ -64,7 +64,7 @@ MonoBehaviour:
         buildingType: 2
         level: 3
         exp: 15
-        productionTime: 240
+        productionTime: 10
         cost: 3000
         size: {x: 1, y: 1}
         prefab: {fileID: 2533845934863396869, guid: 74a37e39962d146c49837498751de6cb, type: 3}
@@ -120,8 +120,8 @@ MonoBehaviour:
         exp: 30
         productionTime: 1800
         cost: 1500
-        size: {x: 1, y: 1}
-        prefab: {fileID: 2533845934863396869, guid: c69971a174c594e0696309079ca4779c, type: 3}
+        size: {x: 1, y: 2}
+        prefab: {fileID: 2533845934863396869, guid: f11de790f767640f98cd62131e84349e, type: 3}
     - Key: 3012
       Value:
         buildingType: 3
@@ -149,3 +149,12 @@ MonoBehaviour:
         cost: 1200
         size: {x: 1, y: 1}
         prefab: {fileID: 2533845934863396869, guid: a46a4d3c89c844184b26e166e9af1f49, type: 3}
+    - Key: 3015
+      Value:
+        buildingType: 0
+        level: 0
+        exp: 0
+        productionTime: 0
+        cost: 0
+        size: {x: 1, y: 1}
+        prefab: {fileID: 2533845934863396869, guid: 2e9c6536c3d744d18a0210241373d8de, type: 3}

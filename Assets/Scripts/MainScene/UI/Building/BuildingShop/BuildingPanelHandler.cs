@@ -23,7 +23,7 @@ public class BuildingPanelHandler : MonoBehaviour
     public void Init(int id, BuildingData data, bool isAuthorized)
     {
         SetBuildingName(id);
-        SetButtonUI(data, isAuthorized);
+        SetButtonUI(id, data, isAuthorized);
     }
 
     private void SetBuildingName(int id)
@@ -31,10 +31,13 @@ public class BuildingPanelHandler : MonoBehaviour
         buildingNameText.text = DataTableManager.StringTable.Get(String.Format(StringFormat.buildingName, id));
     }
 
-    private void SetButtonUI(BuildingData data, bool isAuthorized)
+    private void SetButtonUI(int id, BuildingData data, bool isAuthorized)
     {
         sb.Clear();
         ResetPlate();
+        var iconPath = String.Format(PathFormat.buildingIconPathWithName, id);
+        buildingIcon.sprite = Resources.Load<Sprite>(iconPath);
+        
         if (isAuthorized)
         {
             SetAuthorizedUI(data);

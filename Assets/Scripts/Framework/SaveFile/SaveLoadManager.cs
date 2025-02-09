@@ -67,6 +67,7 @@ public class SaveLoadManager
         if (!Load())
         {
             Data = new SaveDataVC();
+            Data.OnFirstCreation();
             Save();
         }
     }

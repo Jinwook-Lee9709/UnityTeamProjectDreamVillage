@@ -7,6 +7,7 @@ public class UiManager : MonoBehaviour
 {
     [SerializedDictionary, SerializeField] private SerializedDictionary<MainSceneUiIds, GameObject> UiObjects;
     [SerializeField] private Button buildingShopButton;
+    [SerializeField] public IconAnimator iconAnimator;
     
     public GameObject GetPanel(MainSceneUiIds id)
     {

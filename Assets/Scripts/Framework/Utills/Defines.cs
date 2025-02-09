@@ -18,6 +18,12 @@ public enum SoIds
     LevelUpDatabase
 }
 
+public enum UniqueBuildingId
+{
+    Construction = 3000,
+    HeliPad = 3015,
+}
+
 public static class DataTableIds
 {
     public static readonly string Item = "ItemTable";
@@ -39,6 +45,7 @@ public enum MainSceneUiIds
     Inventory,
     Factory,
     BuildingShop,
+    Delivery,
 }
 
 [Serializable]
@@ -62,7 +69,8 @@ public static class PathFormat
 {
     public const string soPath = "ScriptableObjects/{0}";
     public const string iconPath = "Sprites/Icons/{0}";
-    public const string iconPathWithName = "Sprites/Icons/Item_Icon_{0}";
+    public const string itemIconPathWithName = "Sprites/Icons/Item_Icon_{0}";
+    public const string buildingIconPathWithName = "Sprites/Icons/Building_Icon_{0}";
 }
 
 public static class CustomString

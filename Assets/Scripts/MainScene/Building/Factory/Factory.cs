@@ -131,7 +131,6 @@ public class Factory : MonoBehaviour, IBuilding, ILoadableBuilding
 
     private void OnQuit()
     {
-        panel.gameObject.SetActive(false);
         gameManager.PlacementSystem.IsTouchable = true;
     }
 

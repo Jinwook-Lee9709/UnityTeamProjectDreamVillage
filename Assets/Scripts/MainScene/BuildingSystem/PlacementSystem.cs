@@ -218,8 +218,8 @@ public class PlacementSystem : MonoBehaviour
         {
             int guid = Guid.NewGuid().GetHashCode();
             gridData.AddObject(guid, data.buildingId, data.position,
-                buildingDatabase.Get(data.buildingId), data.isFlip);
-            GameObject obj = objectPlacer.PlaceObject(guid, data.buildingId, data.position, data.isFlip);
+                buildingDatabase.Get(data.buildingId), data.isFlip, false);
+            GameObject obj = objectPlacer.PlaceObject(guid, data.buildingId, data.position, data.isFlip, false);
             if (data.task != null)
             {
                 obj.GetComponent<ILoadableBuilding>().Load(data.task);

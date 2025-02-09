@@ -14,7 +14,7 @@ public class FactoryResourceInfoHandler : MonoBehaviour
     
     public void Init(int itemId, int currentAmount, int needAmount)
     {
-        String iconPath = String.Format(PathFormat.iconPathWithName, itemId);
+        String iconPath = String.Format(PathFormat.itemIconPathWithName, itemId);
         image.sprite = Resources.Load<Sprite>(iconPath);
         text.text = $"{currentAmount} / {needAmount}";
         text.color = currentAmount > needAmount ? validColor : invalidColor; 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +25,7 @@ public class Farm : MonoBehaviour, IBuilding, ILoadableBuilding
     private static readonly string iconPath = "Sprites/Icons/Item_Icon_{0}";
     private static readonly string growPrefabPath = "Prefabs/Crops/Crop_Prefab_{0}_Grow";
     private static readonly string completePrefabPath = "Prefabs/Crops/Crop_Prefab_{0}_Complete";
+    private static readonly string expIconPath = "Sprites/Icons/Icon_Level";
     
     [SerializeField] private GameObject[] cropsPivot;
     [SerializeField] private int selectedCropIndex;
@@ -364,12 +366,24 @@ public class Farm : MonoBehaviour, IBuilding, ILoadableBuilding
 
         SaveLoadManager.Data.inventory.AddItem(plantedCropId, cropData.productCount);
         SaveLoadManager.Data.Exp += cropData.exp;
+        
+        //Play Icon Animation
+        DefaultUI defaultUI = uiManager.GetPanel(MainSceneUiIds.Default).GetComponent<DefaultUI>();
+        var itemEndPosition = defaultUI.goldImage.position;
+        var expEndPosition = defaultUI.levelImage.position;
+        Sprite itemSprite = Resources.Load<Sprite>(String.Format(PathFormat.itemIconPathWithName, plantedCropId));
+        Sprite expSprite = Resources.Load<Sprite>(expIconPath);
+        uiManager.iconAnimator.MoveFromWorldToUI(transform.position + Vector3.up, itemEndPosition, itemSprite, 0.3f);
+        uiManager.iconAnimator.MoveFromWorldToUI(transform.position + Vector3.up, expEndPosition, expSprite, 0.3f);
+        
         plantedCropId = -1;
         SaveLoadManager.Save();
         foreach (GameObject crop in cropsPivot)
         {
             Destroy(crop.transform.GetChild(0).gameObject);
         }
+        
+        
     }
     private void EndState()
     {

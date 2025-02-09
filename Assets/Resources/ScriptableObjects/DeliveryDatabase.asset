@@ -1,0 +1,388 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b76cb348ef8f432ba66d83e4546289d, type: 3}
+  m_Name: DeliveryDatabase
+  m_EditorClassIdentifier: 
+  dictionary:
+    _serializedList:
+    - Key: 6001
+      Value:
+        level: 4
+        orderItemID1: 1001
+        requiredCount1: 3
+        orderItemID2: 0
+        requiredCount2: 0
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 150
+        compensationExp: 30
+        compensationItem: 0
+    - Key: 6002
+      Value:
+        level: 4
+        orderItemID1: 1001
+        requiredCount1: 2
+        orderItemID2: 1002
+        requiredCount2: 4
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 200
+        compensationExp: 30
+        compensationItem: 0
+    - Key: 6003
+      Value:
+        level: 4
+        orderItemID1: 1002
+        requiredCount1: 2
+        orderItemID2: 2011
+        requiredCount2: 2
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 300
+        compensationExp: 30
+        compensationItem: 8033
+    - Key: 6004
+      Value:
+        level: 4
+        orderItemID1: 1001
+        requiredCount1: 1
+        orderItemID2: 1002
+        requiredCount2: 3
+        orderItemID3: 1003
+        requiredCount3: 2
+        compensationGold: 350
+        compensationExp: 30
+        compensationItem: 8034
+    - Key: 6005
+      Value:
+        level: 4
+        orderItemID1: 2006
+        requiredCount1: 2
+        orderItemID2: 2007
+        requiredCount2: 2
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 180
+        compensationExp: 30
+        compensationItem: 0
+    - Key: 6006
+      Value:
+        level: 4
+        orderItemID1: 2016
+        requiredCount1: 2
+        orderItemID2: 0
+        requiredCount2: 0
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 130
+        compensationExp: 30
+        compensationItem: 0
+    - Key: 6007
+      Value:
+        level: 4
+        orderItemID1: 2006
+        requiredCount1: 4
+        orderItemID2: 2016
+        requiredCount2: 1
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 250
+        compensationExp: 30
+        compensationItem: 8035
+    - Key: 6008
+      Value:
+        level: 4
+        orderItemID1: 1003
+        requiredCount1: 3
+        orderItemID2: 2012
+        requiredCount2: 2
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 250
+        compensationExp: 30
+        compensationItem: 0
+    - Key: 6009
+      Value:
+        level: 7
+        orderItemID1: 1004
+        requiredCount1: 2
+        orderItemID2: 0
+        requiredCount2: 0
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 130
+        compensationExp: 50
+        compensationItem: 0
+    - Key: 6010
+      Value:
+        level: 7
+        orderItemID1: 2007
+        requiredCount1: 1
+        orderItemID2: 2016
+        requiredCount2: 4
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 200
+        compensationExp: 50
+        compensationItem: 8033
+    - Key: 6011
+      Value:
+        level: 7
+        orderItemID1: 2011
+        requiredCount1: 3
+        orderItemID2: 2012
+        requiredCount2: 1
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 170
+        compensationExp: 50
+        compensationItem: 0
+    - Key: 6012
+      Value:
+        level: 7
+        orderItemID1: 2015
+        requiredCount1: 4
+        orderItemID2: 0
+        requiredCount2: 0
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 170
+        compensationExp: 50
+        compensationItem: 0
+    - Key: 6013
+      Value:
+        level: 7
+        orderItemID1: 1001
+        requiredCount1: 2
+        orderItemID2: 1002
+        requiredCount2: 3
+        orderItemID3: 1004
+        requiredCount3: 1
+        compensationGold: 300
+        compensationExp: 50
+        compensationItem: 8034
+    - Key: 6014
+      Value:
+        level: 7
+        orderItemID1: 1003
+        requiredCount1: 2
+        orderItemID2: 2011
+        requiredCount2: 2
+        orderItemID3: 2016
+        requiredCount3: 2
+        compensationGold: 300
+        compensationExp: 50
+        compensationItem: 8035
+    - Key: 6015
+      Value:
+        level: 7
+        orderItemID1: 2008
+        requiredCount1: 2
+        orderItemID2: 2019
+        requiredCount2: 1
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 280
+        compensationExp: 50
+        compensationItem: 8033
+    - Key: 6016
+      Value:
+        level: 9
+        orderItemID1: 2017
+        requiredCount1: 4
+        orderItemID2: 0
+        requiredCount2: 0
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 300
+        compensationExp: 60
+        compensationItem: 0
+    - Key: 6017
+      Value:
+        level: 9
+        orderItemID1: 2011
+        requiredCount1: 2
+        orderItemID2: 2013
+        requiredCount2: 3
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 350
+        compensationExp: 60
+        compensationItem: 0
+    - Key: 6018
+      Value:
+        level: 9
+        orderItemID1: 2015
+        requiredCount1: 2
+        orderItemID2: 2016
+        requiredCount2: 2
+        orderItemID3: 2017
+        requiredCount3: 1
+        compensationGold: 380
+        compensationExp: 60
+        compensationItem: 8034
+    - Key: 6019
+      Value:
+        level: 9
+        orderItemID1: 1005
+        requiredCount1: 4
+        orderItemID2: 2008
+        requiredCount2: 3
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 400
+        compensationExp: 60
+        compensationItem: 8034
+    - Key: 6020
+      Value:
+        level: 9
+        orderItemID1: 2013
+        requiredCount1: 3
+        orderItemID2: 2017
+        requiredCount2: 3
+        orderItemID3: 2019
+        requiredCount3: 1
+        compensationGold: 500
+        compensationExp: 60
+        compensationItem: 8035
+    - Key: 6021
+      Value:
+        level: 9
+        orderItemID1: 1002
+        requiredCount1: 4
+        orderItemID2: 2006
+        requiredCount2: 4
+        orderItemID3: 2007
+        requiredCount3: 4
+        compensationGold: 510
+        compensationExp: 60
+        compensationItem: 8033
+    - Key: 6022
+      Value:
+        level: 9
+        orderItemID1: 1004
+        requiredCount1: 4
+        orderItemID2: 2008
+        requiredCount2: 4
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 400
+        compensationExp: 60
+        compensationItem: 0
+    - Key: 6023
+      Value:
+        level: 13
+        orderItemID1: 1002
+        requiredCount1: 4
+        orderItemID2: 1006
+        requiredCount2: 2
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 320
+        compensationExp: 70
+        compensationItem: 0
+    - Key: 6024
+      Value:
+        level: 13
+        orderItemID1: 1001
+        requiredCount1: 4
+        orderItemID2: 1006
+        requiredCount2: 2
+        orderItemID3: 1007
+        requiredCount3: 3
+        compensationGold: 510
+        compensationExp: 70
+        compensationItem: 8035
+    - Key: 6025
+      Value:
+        level: 13
+        orderItemID1: 2020
+        requiredCount1: 1
+        orderItemID2: 2021
+        requiredCount2: 3
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 300
+        compensationExp: 70
+        compensationItem: 0
+    - Key: 6026
+      Value:
+        level: 13
+        orderItemID1: 2013
+        requiredCount1: 2
+        orderItemID2: 2015
+        requiredCount2: 4
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 430
+        compensationExp: 70
+        compensationItem: 8034
+    - Key: 6027
+      Value:
+        level: 13
+        orderItemID1: 2006
+        requiredCount1: 3
+        orderItemID2: 2014
+        requiredCount2: 3
+        orderItemID3: 2015
+        requiredCount3: 3
+        compensationGold: 540
+        compensationExp: 70
+        compensationItem: 8033
+    - Key: 6028
+      Value:
+        level: 13
+        orderItemID1: 2011
+        requiredCount1: 2
+        orderItemID2: 2012
+        requiredCount2: 2
+        orderItemID3: 2013
+        requiredCount3: 2
+        compensationGold: 430
+        compensationExp: 70
+        compensationItem: 0
+    - Key: 6029
+      Value:
+        level: 13
+        orderItemID1: 2014
+        requiredCount1: 4
+        orderItemID2: 2018
+        requiredCount2: 3
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 350
+        compensationExp: 70
+        compensationItem: 0
+    - Key: 6030
+      Value:
+        level: 13
+        orderItemID1: 1007
+        requiredCount1: 3
+        orderItemID2: 1009
+        requiredCount2: 1
+        orderItemID3: 0
+        requiredCount3: 0
+        compensationGold: 350
+        compensationExp: 70
+        compensationItem: 0
+    - Key: 6031
+      Value:
+        level: 13
+        orderItemID1: 1010
+        requiredCount1: 4
+        orderItemID2: 2014
+        requiredCount2: 4
+        orderItemID3: 2018
+        requiredCount3: 4
+        compensationGold: 540
+        compensationExp: 70
+        compensationItem: 8035

@@ -14,6 +14,8 @@ public class BuildingShopUI : MonoBehaviour
     [SerializeField] private BuildingDatabaseSO buildingDatabase;
 
     //UiObjects
+    [SerializeField] private Image backgroundImage;
+    [SerializeField] private GameObject mainPanel;
     [SerializeField] private GameObject buildingPanel;
     [SerializeField] private SerializedDictionary<BuildingTypes, Button> categoryButtons;
 
@@ -39,7 +41,10 @@ public class BuildingShopUI : MonoBehaviour
     {
         gameObject.SetActive(true);
         placementSystem.IsTouchable = false;
+        mainPanel.transform.localScale = Vector3.one;
         SetBuildingPanel(BuildingTypes.Farm);
+        DotAnimator.DissolveInAnimation(backgroundImage, alpha:0.7f);
+        DotAnimator.PopupAnimation(mainPanel);
         SaveLoadManager.Save();
     }
 
@@ -56,6 +61,7 @@ public class BuildingShopUI : MonoBehaviour
             if (building.Value.buildingType != type)
                 continue;
             var button = buttonPool.GetFromPool();
+            button.transform.localScale = Vector3.one;
             button.gameObject.SetActive(true);
             button.GetComponent<Button>().onClick.AddListener(
                 () => OnBudilngPanelTouched(building.Key)
@@ -91,7 +97,11 @@ public class BuildingShopUI : MonoBehaviour
     
     private void StopUI()
     {
-        ClearBuildingPanel();
-        gameObject.SetActive(false);
+        DotAnimator.DissolveOutAnimation(backgroundImage, onComplete:() => gameObject.SetActive(false));
+        DotAnimator.CloseAnimation(mainPanel, onComplete: () =>
+        {
+            ClearBuildingPanel();
+            gameObject.SetActive(false);
+        });
     }
 }

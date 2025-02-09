@@ -13,13 +13,13 @@ public class ObjectPlacer : MonoBehaviour
     public Dictionary<int, GameObject> ObjectDictionary { get => Objects; }
     
     
-    public GameObject PlaceObject(int guid, int buildingId, Vector3 position, bool isFlip)
+    public GameObject PlaceObject(int guid, int buildingId, Vector3 position, bool isFlip, bool isFirst = true)
     {
         var buildingData = buildingDatabase.Get(buildingId);
         bool isNeedTime = buildingData.productionTime != 0;
         GameObject prefab = null;
         GameObject obj = null;
-        if (isNeedTime)
+        if (isNeedTime && isFirst)
         {
             prefab = buildingDatabase.Get(Variables.constructionBuildingId).prefab;
             obj = Instantiate(prefab , position, Quaternion.identity);

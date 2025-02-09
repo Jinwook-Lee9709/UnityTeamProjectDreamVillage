@@ -6,7 +6,6 @@ public class ItemData
 {
     public int type;
     public int price;
-    public string imageID;
 }
 
 public class ItemDataConverter
@@ -26,7 +25,6 @@ public class ItemDataConverter
         public int ID { get; set; }
         public int type { get; set; }
         public int price { get; set; }
-        public string imageID { get; set; }
     }
 
     public static void Load()
@@ -39,7 +37,6 @@ public class ItemDataConverter
             var item = new ItemData();
             item.type = data.type;
             item.price = data.price;
-            item.imageID = data.imageID;
             dict.Add(data.ID, item);
         }
     }

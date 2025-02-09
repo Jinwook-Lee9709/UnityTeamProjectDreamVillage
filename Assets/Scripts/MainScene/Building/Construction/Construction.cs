@@ -62,7 +62,6 @@ public class Construction : MonoBehaviour, IBuilding, ILoadableBuilding
     
     public void OnTouch()
     {
-        Debug.Log(isCompleted);
         if (isCompleted)
         {
             int guid = gridData.GetGuid(transform.position.ToVector3Int());

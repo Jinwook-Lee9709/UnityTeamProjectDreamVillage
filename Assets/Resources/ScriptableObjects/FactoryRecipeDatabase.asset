@@ -18,7 +18,7 @@ MonoBehaviour:
       Value:
         level: 1
         exp: 5
-        productionTime: 210
+        productionTime: 10
         productCount: 3
         materialID1: 1001
         requiredCount1: 2
@@ -31,7 +31,7 @@ MonoBehaviour:
       Value:
         level: 2
         exp: 7
-        productionTime: 420
+        productionTime: 10
         productCount: 3
         materialID1: 1001
         requiredCount1: 2
@@ -44,7 +44,7 @@ MonoBehaviour:
       Value:
         level: 7
         exp: 12
-        productionTime: 840
+        productionTime: 10
         productCount: 3
         materialID1: 1002
         requiredCount1: 2
@@ -57,7 +57,7 @@ MonoBehaviour:
       Value:
         level: 13
         exp: 20
-        productionTime: 1260
+        productionTime: 10
         productCount: 3
         materialID1: 1001
         requiredCount1: 3
@@ -70,7 +70,7 @@ MonoBehaviour:
       Value:
         level: 16
         exp: 25
-        productionTime: 1680
+        productionTime: 10
         productCount: 3
         materialID1: 1001
         requiredCount1: 2
@@ -83,7 +83,7 @@ MonoBehaviour:
       Value:
         level: 1
         exp: 5
-        productionTime: 1140
+        productionTime: 10
         productCount: 1
         materialID1: 2001
         requiredCount1: 1
@@ -96,7 +96,7 @@ MonoBehaviour:
       Value:
         level: 3
         exp: 7
-        productionTime: 2100
+        productionTime: 10
         productCount: 1
         materialID1: 2002
         requiredCount1: 1
@@ -109,7 +109,7 @@ MonoBehaviour:
       Value:
         level: 5
         exp: 12
-        productionTime: 2220
+        productionTime: 10
         productCount: 1
         materialID1: 2003
         requiredCount1: 1

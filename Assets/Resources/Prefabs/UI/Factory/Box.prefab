@@ -166,3 +166,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxImage: {fileID: 3981248092025558126}
   itemImage: {fileID: 8003424707411538572}
+  animator: {fileID: 0}
+  animationTime: 0.3

@@ -12,7 +12,9 @@ public abstract class SaveData
 
 public class SaveDataV1 : SaveData, INotifyPropertyChanged
 {
-    private int level = 1;
+    #region Properties
+
+    private int level = 10;
 
     public int Level
     {
@@ -41,8 +43,8 @@ public class SaveDataV1 : SaveData, INotifyPropertyChanged
             }
         }
     }
-    
-    private int gold = 5000;
+
+    private int gold = 100000;
 
     public int Gold
     {
@@ -72,22 +74,34 @@ public class SaveDataV1 : SaveData, INotifyPropertyChanged
         }
     }
 
+    #endregion
+
+    public DeliverySaveData deliverySaveData = new();
+    
     public Inventory inventory = new();
 
-    public Dictionary<int, bool> AreaAuthority = new ();
+    public Dictionary<int, bool> AreaAuthority = new();
 
     public List<BuildingSaveData> buildings = new();
     
     public SaveDataV1()
     {
         Version = 1;
-
+        
         for (int i = 1; i <= Consts.AreaCount; i++)
         {
             AreaAuthority.Add(i, false);
         }
 
         AreaAuthority[Consts.StartingArea] = true;
+    }
+
+    public void OnFirstCreation()
+    {
+        BuildingSaveData heliPad = new();
+        heliPad.buildingId = (int)UniqueBuildingId.HeliPad;
+        heliPad.position = new Vector3Int(16, 0 ,18);
+        buildings.Add(heliPad);
     }
 
     public override SaveData VersionUp()
