@@ -28,7 +28,7 @@ public class OrderPanel : MonoBehaviour
         bool flag1 = SetText(0, data.orderItemID1, data.requiredCount1);
         bool flag2 = SetText(1, data.orderItemID2, data.requiredCount2);
         bool flag3 = SetText(2, data.orderItemID3, data.requiredCount3);
-
+        
         sendButton.interactable = flag1 && flag2 && flag3 && !isCleared;
         
         sendButton.onClick.AddListener(() => onButtonClicked(deliveryId));
@@ -39,7 +39,7 @@ public class OrderPanel : MonoBehaviour
         if (amount == 0)
         {
             itemImages[textNum].gameObject.SetActive(false);
-            return false;
+            return true;
         }
         bool isEnough = SaveLoadManager.Data.inventory.IsEnough(itemId, amount);
         int stock = SaveLoadManager.Data.inventory.Get(itemId);
@@ -54,7 +54,6 @@ public class OrderPanel : MonoBehaviour
     private Sprite GetItemIcon(int oriderItemId)
     {
         String path = String.Format(PathFormat.itemIconPathWithName, oriderItemId);
-        Debug.Log(path);
         return Resources.Load<Sprite>(path);
     }
     

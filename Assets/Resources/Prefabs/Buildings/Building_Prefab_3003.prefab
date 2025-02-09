@@ -888,6 +888,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7302729754358153218, guid: 615cc8b7b491748b3b786c14391e8f9b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7261958964908372536}
+    - targetCorrespondingSourceObject: {fileID: 7302729754358153218, guid: 615cc8b7b491748b3b786c14391e8f9b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4940716427028775052}
   m_SourcePrefab: {fileID: 100100000, guid: 615cc8b7b491748b3b786c14391e8f9b, type: 3}
 --- !u!4 &1292306806194410202 stripped
 Transform:
@@ -917,7 +920,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placeID: 3003
+  buildingAnimation: {fileID: 4940716427028775052}
   recipeDatabase: {fileID: 11400000, guid: 82cdb92a4000c4774b4aa74d698fca62, type: 2}
+--- !u!114 &4940716427028775052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4971272445067573415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9af7b2cdb0074e81a6d5d8dd962f925, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  millFan: {fileID: 2404860188846241933}
 --- !u!1001 &3336259917767691855
 PrefabInstance:
   m_ObjectHideFlags: 0

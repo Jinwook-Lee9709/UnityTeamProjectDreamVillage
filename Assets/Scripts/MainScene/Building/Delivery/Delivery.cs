@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 public class Delivery : MonoBehaviour, IBuilding, ILoadableBuilding
 {
     private static readonly int maxTaskCount = 4;
+    private static readonly int minimumLevel = 4;
     
     [SerializeField] DeliveryDatabaseSO deliveryDatabase;
     
@@ -23,6 +24,8 @@ public class Delivery : MonoBehaviour, IBuilding, ILoadableBuilding
     }
     public void OnTouch()
     {
+        if (SaveLoadManager.Data.Level < minimumLevel)
+            return;
         gameManager.PlacementSystem.IsTouchable = false;
         UpdateDeiliveryData();
         panel.Init(OnUIClosed);
@@ -34,7 +37,9 @@ public class Delivery : MonoBehaviour, IBuilding, ILoadableBuilding
         DateTime lastUpdateTime = SaveLoadManager.Data.deliverySaveData.lastUpdateTime;
         DateTime now = DateTime.Now;
         DateTime today6AM = new DateTime(now.Year, now.Month, now.Day, 6, 0, 0);
-        if (lastUpdateTime <= today6AM || 
+        Debug.Log($"{lastUpdateTime <= today6AM}, {SaveLoadManager.Data.deliverySaveData.deliveryList.Count}");
+        bool timeChanged = lastUpdateTime <= today6AM && today6AM < now;
+        if (timeChanged || 
             SaveLoadManager.Data.deliverySaveData.deliveryList.Count == 0)
         {
             SaveLoadManager.Data.deliverySaveData.deliveryList.Clear();

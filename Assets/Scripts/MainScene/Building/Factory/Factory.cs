@@ -6,11 +6,12 @@ using UnityEngine;
 public class Factory : MonoBehaviour, IBuilding, ILoadableBuilding
 {
     [SerializeField] private int placeID;
-
+    [SerializeField] private Component buildingAnimation;
     //Data
     [SerializeField] private FactoryRecipeDatabaseSO recipeDatabase;
 
     //References
+    private IBuildingAnimation animation;
     private GameManager gameManager;
     private UiManager uiManager;
     private FactoryUI panel;
@@ -35,6 +36,12 @@ public class Factory : MonoBehaviour, IBuilding, ILoadableBuilding
             return productionStartTime.AddSeconds(productionTime.Value) - DateTime.Now;
         }
     }
+
+    private void Awake()
+    {
+        animation = buildingAnimation.GetComponent<IBuildingAnimation>();
+        animation.OnIdle();
+    }
     
     public void Load(BuildingTaskData buildingTaskData)
     {
@@ -57,10 +64,14 @@ public class Factory : MonoBehaviour, IBuilding, ILoadableBuilding
         while (productionStartTime.AddSeconds(productionTime) < DateTime.Now)
         {
             if (productQueue.Count == 0)
+            {
+                animation.OnIdle();
                 return;
+            }
             productionStartTime = productionStartTime.AddSeconds(productionTime);
             int completedProductId = productQueue.Dequeue();
             completedProducts.Enqueue(completedProductId);
+            animation.OnWorking();
         }
     }
 
@@ -94,6 +105,10 @@ public class Factory : MonoBehaviour, IBuilding, ILoadableBuilding
             int completedProductId = productQueue.Dequeue();
             completedProducts.Enqueue(completedProductId);
             productionStartTime = DateTime.Now;
+            if (productQueue.Count == 0)
+            {
+                animation.OnIdle();
+            }
             if (panel.gameObject.activeSelf)
             {
                 panel.UpdateUI();
@@ -110,6 +125,7 @@ public class Factory : MonoBehaviour, IBuilding, ILoadableBuilding
             if (productQueue.Count == 1)
                 productionStartTime = DateTime.Now;
             recipeDatabase.CreateMaterial(id);
+            animation.OnWorking();
         }
     }
 
