@@ -31,12 +31,10 @@ public class FarmingUI : MonoBehaviour
         int i = 0;
         foreach (var data in cropRecipe.Dictionary)
         {
-            if (i == 3)
-                break;
             var image = imagePool.GetFromPool();
             image.transform.SetParent(content.transform);
             image.sprite = Resources.Load<Sprite>(string.Format(iconPath, data.Key));
-            
+
             ImageTouchHandler imgTouchHandler = image.gameObject.GetComponent<ImageTouchHandler>();
             imgTouchHandler.OnTouch += (Image image, bool interactable) =>
             {
@@ -44,15 +42,20 @@ public class FarmingUI : MonoBehaviour
                 {
                     callback(data.Key);
                 }
+
                 OnItemTouch(data.Key, image);
             };
             bool isAuthorized = SaveLoadManager.Data.Gold >= data.Value.necessaryCost
-                && SaveLoadManager.Data.Level >= data.Value.level;
+                                && SaveLoadManager.Data.Level >= data.Value.level;
             imgTouchHandler.Interactable = isAuthorized;
-            
+
             images.Add(image);
             i++;
         }
+        RectTransform contentRect = content.GetComponent<RectTransform>();
+        contentRect.pivot = new Vector2(0, 0.5f); // 좌측 정렬
+        contentRect.anchoredPosition = new Vector2(0, 0);
+        scrollRect.enabled = true;
     }
 
     private void OnItemTouch(int itemId, Image image)
@@ -68,7 +71,7 @@ public class FarmingUI : MonoBehaviour
             String itemName = DataTableManager.StringTable.Get(string.Format(StringFormat.itemName, itemId));
             popup.gameObject.SetActive(true);
             popup.SetInfo(itemName, cropInfo.productionTime, cropInfo.necessaryCost);
-            scrollRect.enabled = false;
+            // scrollRect.enabled = false;
             popup.transform.position = popupPosition;
         }
     }
@@ -101,6 +104,10 @@ public class FarmingUI : MonoBehaviour
         imgTouchHandler.OnTouch += (Image image, bool interactable) => { if(interactable) callback(); };
         imgTouchHandler.Interactable = true;
 
+        RectTransform contentRect = content.GetComponent<RectTransform>();
+        contentRect.pivot = new Vector2(0.5f, 0.5f); // 좌측 정렬
+        contentRect.anchoredPosition = new Vector2(0, 0);
+        scrollRect.enabled = false;
     }
 
     public void SetScrollRectActivation(bool isEnable)
@@ -119,5 +126,15 @@ public class FarmingUI : MonoBehaviour
         }
         images.Clear();
         gameObject.SetActive(false);
+    }
+    
+    private void SetPivot(RectTransform rectTransform, Vector2 newPivot)
+    {
+        Vector2 size = rectTransform.rect.size;
+        Vector2 deltaPivot = newPivot - rectTransform.pivot;
+        Vector2 deltaPosition = new Vector2(deltaPivot.x * size.x, deltaPivot.y * size.y);
+
+        rectTransform.pivot = newPivot;
+        rectTransform.anchoredPosition -= deltaPosition;
     }
 }

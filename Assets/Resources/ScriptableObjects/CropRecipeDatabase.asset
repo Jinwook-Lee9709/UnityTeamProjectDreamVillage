@@ -35,7 +35,7 @@ MonoBehaviour:
         name: "\uB2F9\uADFC"
         level: 4
         exp: 7
-        productionTime: 180
+        productionTime: 5
         productCount: 1
         necessaryCost: 2
     - Key: 1004
@@ -43,7 +43,7 @@ MonoBehaviour:
         name: "\uC0AC\uD0D5\uC218\uC218"
         level: 7
         exp: 10
-        productionTime: 360
+        productionTime: 5
         productCount: 1
         necessaryCost: 3
     - Key: 1005
@@ -51,7 +51,7 @@ MonoBehaviour:
         name: "\uBA74"
         level: 10
         exp: 13
-        productionTime: 720
+        productionTime: 5
         productCount: 1
         necessaryCost: 4
     - Key: 1006
@@ -59,7 +59,7 @@ MonoBehaviour:
         name: "\uB538\uAE30"
         level: 12
         exp: 15
-        productionTime: 1440
+        productionTime: 5
         productCount: 1
         necessaryCost: 5
     - Key: 1007
@@ -67,7 +67,7 @@ MonoBehaviour:
         name: "\uD1A0\uB9C8\uD1A0"
         level: 14
         exp: 17
-        productionTime: 1800
+        productionTime: 5
         productCount: 1
         necessaryCost: 6
     - Key: 1008
@@ -75,7 +75,7 @@ MonoBehaviour:
         name: "\uC18C\uB098\uBB34"
         level: 16
         exp: 20
-        productionTime: 2100
+        productionTime: 5
         productCount: 1
         necessaryCost: 7
     - Key: 1009
@@ -83,7 +83,7 @@ MonoBehaviour:
         name: "\uAC10\uC790"
         level: 18
         exp: 22
-        productionTime: 1800
+        productionTime: 5
         productCount: 1
         necessaryCost: 8
     - Key: 1010
@@ -91,6 +91,6 @@ MonoBehaviour:
         name: "\uCE74\uCE74\uC624"
         level: 20
         exp: 25
-        productionTime: 2100
+        productionTime: 5
         productCount: 1
         necessaryCost: 9

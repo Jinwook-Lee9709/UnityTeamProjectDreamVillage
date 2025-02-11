@@ -19,6 +19,10 @@ public class FactoryUI : MonoBehaviour
     [SerializeField] private Sprite opendBoxSprite;
     [SerializeField] private Sprite closedBoxSprite;
 
+    //References
+    [Header("References")]
+    [SerializeField] private PlacementSystem placementSystem;
+    
     //Data
     [Header("Data Containers")]
     [SerializeField] private BuildingDatabaseSO buildingDatabase;
@@ -290,8 +294,13 @@ public class FactoryUI : MonoBehaviour
             cancelToken?.Cancel();
             timerRunning = false;
         }
-        
-        DotAnimator.DissolveOutAnimation(backgroundImage, onComplete:() => gameObject.SetActive(false));
+
+        placementSystem.IsTouchable = false;
+        DotAnimator.DissolveOutAnimation(backgroundImage, onComplete:() =>
+        {
+            gameObject.SetActive(false);
+            placementSystem.IsTouchable = true;
+        });
         DotAnimator.CloseAnimation(mainPanel);
         DotAnimator.CloseAnimation(bottomPanel);
 

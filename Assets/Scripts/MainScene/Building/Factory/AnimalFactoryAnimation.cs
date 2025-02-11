@@ -12,13 +12,11 @@ public class AnimalFactoryAnimation : MonoBehaviour, IBuildingAnimation
     {
         foreach (Animator animator in animator)
             animator.Play(WorkingAnimation);
-        Debug.Log(WorkingAnimation);
     }
 
     public void OnIdle()
     {
         foreach (Animator animator in animator)
             animator.Play(IdleAnimation);
-        Debug.Log(IdleAnimation);
     }
 }

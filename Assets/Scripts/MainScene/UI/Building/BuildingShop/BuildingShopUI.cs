@@ -2,14 +2,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using AYellowpaper.SerializedCollections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BuildingShopUI : MonoBehaviour
 {
+    private static readonly int FreezeScrollCount = 3;
     //References
     [SerializeField] private PlacementSystem placementSystem;
-
+    
     //Database
     [SerializeField] private BuildingDatabaseSO buildingDatabase;
 
@@ -17,6 +19,7 @@ public class BuildingShopUI : MonoBehaviour
     [SerializeField] private Image backgroundImage;
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private GameObject buildingPanel;
+    [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private SerializedDictionary<BuildingTypes, Button> categoryButtons;
 
     //Transform
@@ -72,6 +75,21 @@ public class BuildingShopUI : MonoBehaviour
             button.Init(building.Key, building.Value, isAuthorized);
             button.transform.SetParent(contents);
         }
+
+        scrollRect.enabled = contents.childCount > FreezeScrollCount;
+        RectTransform contentRect = contents.GetComponent<RectTransform>();
+        contentRect.anchoredPosition = new Vector2(0, contentRect.anchoredPosition.y);
+        
+        foreach (var pair in categoryButtons)
+        {
+            Color originalColor = pair.Value.GetComponent<Image>().color;
+            Color.RGBToHSV(originalColor, out float h, out float s, out float v);
+            v = pair.Key == type ? 1f : 0.6f; 
+            
+            Color newColor = Color.HSVToRGB(h, s, v);
+            pair.Value.GetComponent<Image>().color = newColor;
+
+        }
     }
 
     private void OnBudilngPanelTouched(int id)
@@ -98,10 +116,12 @@ public class BuildingShopUI : MonoBehaviour
     private void StopUI()
     {
         DotAnimator.DissolveOutAnimation(backgroundImage, onComplete:() => gameObject.SetActive(false));
+        placementSystem.IsTouchable = false;
         DotAnimator.CloseAnimation(mainPanel, onComplete: () =>
         {
             ClearBuildingPanel();
             gameObject.SetActive(false);
+            placementSystem.IsTouchable = true;
         });
     }
 }

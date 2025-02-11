@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
 using Directory = System.IO.Directory;
@@ -62,15 +63,11 @@ public class SaveLoadManager
         TypeNameHandling = TypeNameHandling.All,
     };
 
-    static SaveLoadManager()
+    public static bool IsSaveExists()
     {
-        if (!Load())
-        {
-            Data = new SaveDataVC();
-            Data.OnFirstCreation();
-            Save();
-        }
+        return Directory.Exists(SaveDirectory);
     }
+    
 
     public static bool Save(int slot = 0)
     {
@@ -87,16 +84,29 @@ public class SaveLoadManager
         return true;
     }
 
-    public static bool Load(int slot = 0)
+    public static async UniTask Load(int slot = 0)
     {
         if (slot < 0 || slot >= SaveFileName.Length)
-            return false;
+            return ;
 
         var path = Path.Combine(SaveDirectory, SaveFileName[slot]);
         if (!Directory.Exists(SaveDirectory))
-            return false;
+        {
+            Data = new SaveDataVC();
+            Data.OnFirstCreation();
+            Save();
+        }
 
-        var json = File.ReadAllText(path);
+        string json;
+        try
+        {
+            json = await File.ReadAllTextAsync(path); // 비동기 파일 읽기
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error reading file: {ex.Message}");
+            return;
+        }
         var saveData = JsonConvert.DeserializeObject<SaveData>(json, settings);
         while (saveData.Version < SaveDataVersion)
         {
@@ -104,6 +114,5 @@ public class SaveLoadManager
         }
 
         Data = saveData as SaveDataVC;
-        return true;
     }
 }

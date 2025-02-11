@@ -21,12 +21,15 @@ public class TimerBarUI : MonoBehaviour
     private DateTime plantedTime;
     private DateTime finishTime;
 
+    private Vector3 worldPosition;
+
     private bool isActivatedOnFrame = false;
     
     public void SetInfo(DateTime plantedTime, DateTime finishTime, Vector3 position)
     {
         this.plantedTime = plantedTime;
         this.finishTime = finishTime;
+        worldPosition = position;
         TimeSpan productTime = finishTime - plantedTime;
         TimeSpan remainTime = finishTime - DateTime.Now;
         TimeSpan proceededTime = DateTime.Now - plantedTime;
@@ -36,7 +39,7 @@ public class TimerBarUI : MonoBehaviour
         transform.position = new Vector3(screenPoint.x, screenPoint.y + offset, screenPoint.z);
 
         slider.value = (float)(proceededTime.TotalSeconds / productTime.TotalSeconds);
-        timerText.text = MakeTimeString(remainTime);
+        timerText.text = MakeTimeString(remainTime.Add(TimeSpan.FromSeconds(1)));
 
         isActivatedOnFrame = true;
         ResetFlag();
@@ -70,7 +73,11 @@ public class TimerBarUI : MonoBehaviour
         TimeSpan proceededTime = DateTime.Now - plantedTime;
         
         slider.value = (float)(proceededTime.TotalSeconds / productTime.TotalSeconds);
-        timerText.text = MakeTimeString(remainTime);
+        timerText.text = MakeTimeString(remainTime.Add(TimeSpan.FromSeconds(1)));
+        
+        float offset = Screen.dpi / defaultPixel * yAxisOffset;
+        var screenPoint = Camera.main.WorldToScreenPoint(worldPosition);
+        transform.position = new Vector3(screenPoint.x, screenPoint.y + offset, screenPoint.z);
     }
 
     private String MakeTimeString(TimeSpan timeSpan)

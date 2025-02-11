@@ -238,12 +238,13 @@ public class Farm : MonoBehaviour, IBuilding, ILoadableBuilding
                 if (isTouching)
                 {
                     cursor.transform.position = currentTouch.position;
-                    if (panel.activeSelf == true &&
-                        RectTransformUtility.RectangleContainsScreenPoint(rectTransform, currentTouch.position)
+                    if (panel.activeSelf  &&
+                        !RectTransformUtility.RectangleContainsScreenPoint(rectTransform, currentTouch.position)
                         && isEverPlanted)
                     {
                         panel.SetActive(false);
                     }
+                    farmingUI.SetScrollRectActivation(RectTransformUtility.RectangleContainsScreenPoint(rectTransform, currentTouch.position));
                     Vector3 touchedPlanePos = InputManager.Instance.Vector2PositionToPlane(currentTouch.position);
                     Vector3Int touchedTilePos = grid.WorldToCell(touchedPlanePos);
                     if (prevCursorPosition != touchedTilePos)

@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class Delivery : MonoBehaviour, IBuilding, ILoadableBuilding
 {
+    private static readonly int clientCount = 7;
     private static readonly int maxTaskCount = 4;
     private static readonly int minimumLevel = 4;
     
@@ -37,7 +38,6 @@ public class Delivery : MonoBehaviour, IBuilding, ILoadableBuilding
         DateTime lastUpdateTime = SaveLoadManager.Data.deliverySaveData.lastUpdateTime;
         DateTime now = DateTime.Now;
         DateTime today6AM = new DateTime(now.Year, now.Month, now.Day, 6, 0, 0);
-        Debug.Log($"{lastUpdateTime <= today6AM}, {SaveLoadManager.Data.deliverySaveData.deliveryList.Count}");
         bool timeChanged = lastUpdateTime <= today6AM && today6AM < now;
         if (timeChanged || 
             SaveLoadManager.Data.deliverySaveData.deliveryList.Count == 0)
@@ -45,6 +45,9 @@ public class Delivery : MonoBehaviour, IBuilding, ILoadableBuilding
             SaveLoadManager.Data.deliverySaveData.deliveryList.Clear();
             SaveLoadManager.Data.deliverySaveData.deliveryList = GetRandomTask();
             SaveLoadManager.Data.deliverySaveData.lastUpdateTime = now;
+
+            var clinetIds = Enumerable.Range(1, clientCount + 1).OrderBy(x => Random.value).Take(maxTaskCount).ToList();
+            SaveLoadManager.Data.deliverySaveData.clientIds = clinetIds;
         }
     }
 

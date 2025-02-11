@@ -9,6 +9,12 @@ public enum Languages
     English,
 }
 
+public enum SceneIds
+{
+    TitleScene,
+    MainScene,
+}
+
 public enum SoIds
 {
     BuildingDatabase,
@@ -71,6 +77,8 @@ public static class PathFormat
     public const string iconPath = "Sprites/Icons/{0}";
     public const string itemIconPathWithName = "Sprites/Icons/Item_Icon_{0}";
     public const string buildingIconPathWithName = "Sprites/Icons/Building_Icon_{0}";
+    public const string expIconPath = "Sprites/Icons/Icon_Level";
+    public const string goldIconPath = "Sprites/Icons/Item_Icon_Coin";
 }
 
 public static class CustomString
@@ -81,7 +89,7 @@ public static class CustomString
 public static class Variables
 {
     public static Languages currentLanguage = Languages.Korean;
-    public static int constructionBuildingId = 3000;
+    public static int constructionBuildingId = 3100;
 }
 
 public static class StringKeys
@@ -106,6 +114,6 @@ public static class Consts
     public const int zAxisAreaCount = 6;
     public const int AreaLength = 10;
     public const int StartingArea = 8;
-    public const int AreaCount = 32;
+    public const int AreaCount = 36;
 }
 

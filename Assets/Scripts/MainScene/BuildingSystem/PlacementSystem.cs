@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.IO.Pipes;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -178,7 +176,6 @@ public class PlacementSystem : MonoBehaviour
             else if (!gridData.HasAuthority(touchedTilePos))
             {
                 areaManager.OnTilePressed(touchedTilePos);
-                
             }
         }
         if (buildingState == null)

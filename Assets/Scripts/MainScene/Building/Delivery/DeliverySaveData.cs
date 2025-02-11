@@ -8,5 +8,5 @@ public class DeliverySaveData
 {
     public DateTime lastUpdateTime;
     public List<(int, bool)> deliveryList = new();
-
+    public List<int> clientIds = new();
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public static class Extension
 {
@@ -21,7 +22,6 @@ public static class Extension
             Mathf.RoundToInt(vector3.z)
         );
     }
-
     public static int GetAreaNumber(this Vector3Int position)
     {
         return position.z / Consts.AreaLength * Consts.xAxisAreaCount + position.x / Consts.AreaLength + 1;
@@ -67,5 +67,22 @@ public static class Extension
             sb.AppendWithBlank(second.ToString());
             sb.Append(DataTableManager.StringTable.Get("TIME_SECOND"));
         }
+    }
+
+    public static bool IsTouchOverUI(this EventSystem eventSystem)
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            PointerEventData eventData = new PointerEventData(EventSystem.current)
+            {
+                position = touch.position
+            };
+
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventData, results);
+            return results.Count > 0;
+        }
+        return false;
     }
 }

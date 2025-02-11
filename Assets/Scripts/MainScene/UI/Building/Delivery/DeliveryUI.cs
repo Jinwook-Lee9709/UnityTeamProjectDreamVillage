@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class DeliveryUI : MonoBehaviour
 {
+    [SerializeField] PlacementSystem placementSystem;
     [SerializeField] DeliveryDatabaseSO deliveryDatabase;
     [SerializeField] private OrderPanel[] orderPanels;
     [SerializeField] private GameObject mainPanel;
@@ -28,8 +29,9 @@ public class DeliveryUI : MonoBehaviour
         {
             var pair = 
                 SaveLoadManager.Data.deliverySaveData.deliveryList[i];
+            int portraitIndex = SaveLoadManager.Data.deliverySaveData.clientIds[i];
             DeliveryData deliveryData = deliveryDatabase.Get(pair.Item1);
-            orderPanels[i].Init(pair.Item1, deliveryData, pair.Item2, OnSend);
+            orderPanels[i].Init(pair.Item1, deliveryData, pair.Item2, OnSend, portraitIndex);
         }
     }
 
@@ -50,7 +52,12 @@ public class DeliveryUI : MonoBehaviour
 
     public void OnClose()
     {
-        DotAnimator.DissolveOutAnimation(backgroundImage, onComplete:() => gameObject.SetActive(false));
+        placementSystem.IsTouchable = false;
+        DotAnimator.DissolveOutAnimation(backgroundImage, onComplete:() =>
+        {
+            gameObject.SetActive(false);
+            placementSystem.IsTouchable = true;
+        });
         DotAnimator.CloseAnimation(mainPanel);
         OnClosed?.Invoke();
     }

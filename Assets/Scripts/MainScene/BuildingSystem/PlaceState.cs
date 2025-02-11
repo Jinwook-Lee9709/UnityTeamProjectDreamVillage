@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlaceState : IBuildingState
 {
@@ -30,11 +31,16 @@ public class PlaceState : IBuildingState
         this.gridData = gridData;
         this.previewSystem = previewSystem;
         this.cameraManager = cameraManager;
+        
         currentBuildingData = buildingDatabase.Get(id);
-        previewSystem.enabled = true;
+        
         var startPos = grid.WorldToCell(InputManager.Instance.CenterPositionToPlane());
         bool isValid = gridData.IsValid(startPos, currentBuildingData.size);
+        previewSystem.enabled = true;
         previewSystem.ShowPlacementPreview(currentBuildingData.prefab, startPos, isValid);
+
+        cameraManager.DragMove = false;
+        cameraManager.ScreenEdgeMove = true;
     }
 
     public bool OnAction()
@@ -70,9 +76,12 @@ public class PlaceState : IBuildingState
 
     public void UpdateState()
     {
-        CheckIsPreviewTouched();
-        CheckIsTouchEnded();
-        if (fingerId != -1)
+        // CheckIsPreviewTouched();
+        // CheckIsTouchEnded();
+        if (Input.touchCount > 0 && EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+            return;
+        
+        if (Input.touchCount == 1)
         {
             Vector3 touchedPos = InputManager.Instance.Vector2PositionToPlane(Input.GetTouch(0).position);
             Vector3 touchedTile = grid.WorldToCell(touchedPos);
@@ -86,45 +95,47 @@ public class PlaceState : IBuildingState
         }
     }
 
-    private void CheckIsTouchEnded()
-    {
-        if (Input.touches.Length != 1 && fingerId != -1)
-            fingerId = -1;
-        for (int i = 0; i < Input.touchCount; i++)
-        {
-            Touch touch = Input.GetTouch(i);
-
-            if (fingerId != -1 && (touch.phase == TouchPhase.Canceled || touch.phase == TouchPhase.Ended))
-            {
-                fingerId = -1;
-                cameraManager.ScreenEdgeMove = false;
-                cameraManager.DragMove = true;
-            }
-        }
-    }
-
-    private void CheckIsPreviewTouched()
-    {
-        if (Input.touches.Length == 1 && fingerId == -1)
-        {
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began)
-            {
-                Vector3 touchPos = grid.WorldToCell(InputManager.Instance.Vector2PositionToPlane(touch.position));
-                if (touchPos.x == previewSystem.currentPreviewPosition.x &&
-                    touchPos.z == previewSystem.currentPreviewPosition.z)
-                {
-                    fingerId = touch.fingerId;
-                    cameraManager.ScreenEdgeMove = true;
-                    cameraManager.DragMove = false;
-                }
-            }
-        }
-    }
+    // private void CheckIsTouchEnded()
+    // {
+    //     if (Input.touches.Length != 1 && fingerId != -1)
+    //         fingerId = -1;
+    //     for (int i = 0; i < Input.touchCount; i++)
+    //     {
+    //         Touch touch = Input.GetTouch(i);
+    //
+    //         if (fingerId != -1 && (touch.phase == TouchPhase.Canceled || touch.phase == TouchPhase.Ended))
+    //         {
+    //             fingerId = -1;
+    //             cameraManager.ScreenEdgeMove = false;
+    //             cameraManager.DragMove = true;
+    //         }
+    //     }
+    // }
+    //
+    // private void CheckIsPreviewTouched()
+    // {
+    //     if (Input.touches.Length == 1 && fingerId == -1)
+    //     {
+    //         Touch touch = Input.GetTouch(0);
+    //         if (touch.phase == TouchPhase.Began)
+    //         {
+    //             Vector3 touchPos = grid.WorldToCell(InputManager.Instance.Vector2PositionToPlane(touch.position));
+    //             if (touchPos.x == previewSystem.currentPreviewPosition.x &&
+    //                 touchPos.z == previewSystem.currentPreviewPosition.z)
+    //             {
+    //                 fingerId = touch.fingerId;
+    //                 cameraManager.ScreenEdgeMove = true;
+    //                 cameraManager.DragMove = false;
+    //             }
+    //         }
+    //     }
+    // }
 
     public void EndState()
     {
         previewSystem.EndPlacementPreview();
+        cameraManager.DragMove = true;
+        cameraManager.ScreenEdgeMove = false;
         previewSystem.enabled = false;
     }
 }

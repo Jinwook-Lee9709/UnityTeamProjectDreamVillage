@@ -6,8 +6,6 @@ using UnityEngine.Rendering.UI;
 
 public class GridData
 {
-    private const int constructionId = 3000;
-    
     BuildingDatabaseSO buildingDatabase;
     Dictionary<Vector3Int, PlacementData> placedObects = new ();
 
@@ -17,7 +15,6 @@ public class GridData
     {
         string soPath = String.Format(PathFormat.soPath, SoIds.BuildingDatabase.ToString());
         buildingDatabase = Resources.Load<BuildingDatabaseSO>(soPath);
-        constructionPrefab = buildingDatabase.Get(constructionId).prefab;
     }
 
     public void AddObject(int guid, int buildingDataId, Vector3Int position, BuildingData buildingData, bool isFlip, bool isFirst = true)
@@ -38,8 +35,9 @@ public class GridData
 
         if (buildingData.productionTime != 0 && isFirst)
         {
-            data.buildingDataId = constructionId;
-            data.prefab = constructionPrefab;
+            int constructionBuildingId = Variables.constructionBuildingId + (buildingData.size.x - 1) * 2 + (buildingData.size.y - 1);
+            data.buildingDataId = constructionBuildingId;
+            data.prefab = buildingDatabase.Get(constructionBuildingId).prefab;
         }
         else
         {
@@ -110,16 +108,16 @@ public class GridData
         {
             for (int j = 0; j < size.y; j++)
             {
-                if (placedObects.ContainsKey(position + new Vector3Int(i, 0, j)))
+                Vector3Int tilePos = position + new Vector3Int(i, 0, j);
+                int areaNumber = tilePos.GetAreaNumber();
+                if (placedObects.ContainsKey(tilePos) || !SaveLoadManager.Data.AreaAuthority[areaNumber])
                     return false;
+                bool isValidNumber = SaveLoadManager.Data.AreaAuthority.ContainsKey(areaNumber);
+                if (isValidNumber && !SaveLoadManager.Data.AreaAuthority[areaNumber])
+                {
+                    return false;
+                }
             }
-        }
-
-        int areaNumber = position.GetAreaNumber();
-        bool isValidNumber = SaveLoadManager.Data.AreaAuthority.ContainsKey(areaNumber);
-        if (isValidNumber)
-        {
-            return SaveLoadManager.Data.AreaAuthority[areaNumber];
         }
         return true;
     }

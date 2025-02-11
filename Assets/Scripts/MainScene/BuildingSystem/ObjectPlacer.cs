@@ -1,13 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ObjectPlacer : MonoBehaviour
 {
+    private static readonly string expIconPath = "Sprites/Icons/Icon_Level";
+    private static readonly string populationIconPath = "Sprites/Icons/Icon_Population";
+    
     [SerializeField] private BuildingDatabaseSO buildingDatabase;
     
     public GameObject parents;
     public GameManager gameManager;
-    public UiManager uiManaqger;
+    public UiManager uiManager;
     private Dictionary<int, GameObject> Objects = new();
 
     public Dictionary<int, GameObject> ObjectDictionary { get => Objects; }
@@ -21,18 +25,38 @@ public class ObjectPlacer : MonoBehaviour
         GameObject obj = null;
         if (isNeedTime && isFirst)
         {
-            prefab = buildingDatabase.Get(Variables.constructionBuildingId).prefab;
+            int constructionBuildingId = Variables.constructionBuildingId + 2 * (buildingData.size.x - 1) + (buildingData.size.y - 1);
+            prefab = buildingDatabase.Get(constructionBuildingId).prefab;
             obj = Instantiate(prefab , position, Quaternion.identity);
             var construction = obj.GetComponent<Construction>();
             construction.SetBuildingInfo(buildingId);
         }
         else
         {
-            prefab = buildingDatabase.Get(buildingId).prefab;
+            prefab = buildingData.prefab;
             obj = Instantiate(prefab , position, Quaternion.identity);
+            if (isFirst)
+            {
+                SaveLoadManager.Data.Population += buildingData.population;
+                SaveLoadManager.Data.Exp += buildingData.exp;
+                
+                DefaultUI defaultUI = uiManager.GetPanel(MainSceneUiIds.Default).GetComponent<DefaultUI>();
+                if (buildingData.exp != 0)
+                {
+                    var expEndPosition = defaultUI.levelImage.position;
+                    var expSprite = Resources.Load<Sprite>(expIconPath);
+                    uiManager.iconAnimator.MoveFromWorldToUI(position + Vector3.up, expEndPosition, expSprite, 0.3f);
+                }
+                if (buildingData.population != 0)
+                {
+                    var populationEndPosition = defaultUI.populationImage.position;
+                    var populationSprite = Resources.Load<Sprite>(populationIconPath);
+                    uiManager.iconAnimator.MoveFromWorldToUI(position + Vector3.up, populationEndPosition, populationSprite, 0.3f);
+                }
+            }
         }
         obj.transform.parent = parents.transform;
-        obj.GetComponent<IBuilding>().Init(gameManager, uiManaqger);
+        obj.GetComponent<IBuilding>().Init(gameManager, uiManager);
         if (isFlip)
         {
             obj.transform.GetChild(0).transform.Rotate(Vector3.up, 90f);
@@ -42,11 +66,12 @@ public class ObjectPlacer : MonoBehaviour
     }
 
     public void ChangeObject(int guid, GameObject prefab)
-    {
+    { 
         var oldObj = Objects[guid];
-        GameObject obj = Instantiate(prefab, oldObj.transform.position, oldObj.transform.rotation);
+        GameObject obj = Instantiate(prefab, oldObj.transform.position, Quaternion.identity);
+        obj.transform.GetChild(0).rotation = oldObj.transform.GetChild(0).rotation;
         obj.transform.parent = parents.transform;
-        obj.GetComponent<IBuilding>().Init(gameManager, uiManaqger);
+        obj.GetComponent<IBuilding>().Init(gameManager, uiManager);
         
         Objects.Remove(guid);
         Destroy(oldObj);

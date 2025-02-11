@@ -23,6 +23,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float edgeMoveSensi = 1f;
     [SerializeField] private float edgeRatio = 0.1f;
     [SerializeField] private PlacementSystem placementSystem;
+    [SerializeField] private Camera uiCamera;
     private Camera mainCamera;
 
     [SerializeField] private CameraInput currentCameraInput = 0;
@@ -67,6 +68,10 @@ public class CameraManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.touchCount == 0)
+            return;
+        if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+            return;
         float newCameraSize = mainCamera.orthographicSize -= MultiTouchManager.Instance.Pinch;
         mainCamera.orthographicSize = Mathf.Clamp(newCameraSize, minimumSize, maximumSize);
 
@@ -85,7 +90,7 @@ public class CameraManager : MonoBehaviour
 
     private void UpdateDragMove()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
             return;
         Vector2 dragVector = MultiTouchManager.Instance.Drag;
         Vector3 moveVector = -dragVector.ScreenVectorToWorldVector();
@@ -94,7 +99,7 @@ public class CameraManager : MonoBehaviour
 
     private bool UpdateEdgeMove()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
             return false;
         if (Input.touchCount == 1)
         {
@@ -115,5 +120,10 @@ public class CameraManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void LateUpdate()
+    {
+        uiCamera.orthographicSize = mainCamera.orthographicSize;
     }
 }

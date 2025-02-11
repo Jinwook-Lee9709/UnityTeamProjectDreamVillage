@@ -20,6 +20,7 @@ public static class BuildingDataConverter
         public int exp { get; set; }
         public float productionTime { get; set; }
         public int necessaryCost { get; set; }
+        public int population { get; set; }
     }
 
     public static void Load()
@@ -35,6 +36,7 @@ public static class BuildingDataConverter
             building.exp = data.exp;
             building.productionTime = data.productionTime;
             building.cost = data.necessaryCost;
+            building.population = data.population;
             building.prefab = Resources.Load<GameObject>(String.Format(PrefabPath, data.ID));
             building.size = building.prefab?.GetComponent<BuildingSize>()?.size ?? Vector2Int.zero;
             dict.Add(data.ID, building);
