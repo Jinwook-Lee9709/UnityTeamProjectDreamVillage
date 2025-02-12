@@ -39,7 +39,7 @@ MonoBehaviour:
         buildingType: 2
         level: 1
         exp: 10
-        productionTime: 10
+        productionTime: 300
         cost: 700
         population: 1
         size: {x: 1, y: 1}
@@ -162,7 +162,7 @@ MonoBehaviour:
         productionTime: 0
         cost: 0
         population: 0
-        size: {x: 1, y: 1}
+        size: {x: 1, y: 2}
         prefab: {fileID: 2533845934863396869, guid: 2e9c6536c3d744d18a0210241373d8de, type: 3}
     - Key: 3100
       Value:

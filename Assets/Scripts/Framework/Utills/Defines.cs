@@ -52,6 +52,7 @@ public enum MainSceneUiIds
     Factory,
     BuildingShop,
     Delivery,
+    Tutorial,
 }
 
 [Serializable]
