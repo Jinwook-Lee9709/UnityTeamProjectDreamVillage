@@ -34,17 +34,6 @@ public class InventoryUI : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-
-        //For test
-        if (!SaveLoadManager.Data.inventory.Dictionary.Any())
-        {
-            foreach (var item in itemDatabase.Dictionary)
-            {
-                SaveLoadManager.Data.inventory.AddItem(item.Key, 200);
-            }
-
-        }
-
         
         var inven = SaveLoadManager.Data.inventory.Dictionary;
         var query = inven

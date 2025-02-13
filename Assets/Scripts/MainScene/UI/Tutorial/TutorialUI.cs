@@ -15,6 +15,7 @@ public class TutorialUI : MonoBehaviour
     [SerializeField] private Image backgroundImage;
     [SerializeField] private Button leftButton;
     [SerializeField] private Button rightButton;
+    [SerializeField] private PlacementSystem placementSystem;
 
     [SerializedDictionary, SerializeField] private SerializedDictionary<TutorialState, List<Image>> sequenceDictionary;
 
@@ -66,6 +67,7 @@ public class TutorialUI : MonoBehaviour
     public void OnClose()
     {
         sequenceDictionary[currentTutorialState][currentPage].gameObject.SetActive(false);
+        placementSystem.IsTouchable = true;
         DotAnimator.DissolveOutAnimation(backgroundImage);
         DotAnimator.CloseAnimation(panel, onComplete: () => gameObject.SetActive(false));
     }
