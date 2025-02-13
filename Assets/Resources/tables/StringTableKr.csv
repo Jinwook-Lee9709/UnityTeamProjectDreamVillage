@@ -109,8 +109,33 @@ DELIVERY_RESET_EXPLAIN,주문은 매일 아침 9시에 초기화됩니다
 TAP_START,TAP TO START
 EXIT,EXIT
 SETTING_TITLE,설정
-RESET_SAVE,세이브파일 초기화
 MUSIC_VOLUME,음악 음량
 SFX_VOLUME,효과음 음량
+RESET_SAVE,세이브파일 리셋하기
 SAVE,저장하기
 END_GAME,종료하기
+TUTORIAL_FARM_1,"원하는 작물을 심으려면 밭을 선택한 후, 씨앗을 밭에 드래그 하세요! \n작물마다 성장 시간이 다르니 확인 후 심어보세요."
+TUTORIAL_FARM_2,"농사가 완료된 작물은 '쟁기' 도구를 사용해 밭을 드래그하여 한 번에 수확할 수 있습니다."
+TUTORIAL_FARM_3,"수확한 작물은 창고에 보관 되며, 판매하거나 가공하여 더 가치 있는 상품을 만들 수 있습니다."
+TUORIAL_BUILDING_1,"상점에서 원하는 건물을 구매하고 건물을 원하는 위치에 배치하세요!"
+TUORIAL_BUILDING_2,"건물 이동 학인 버튼을 누르면 구매가 확정 됩니다."
+TUORIAL_BUILDING_3,"건물은 길게 눌러 이동하거나 회전할 수 있어요!"
+TUTORIAL_FACTORY_1,"제작하려는 아이템을 공장의 작업 박스 위에 가져다 놓으면 아이템 제작이 시작됩니다."
+TUTORIAL_FACTORY_2,"아이템은 하나씩 순차적으로 제작되며, 제작 시간이 필요합니다."
+TUTORIAL_FACTORY_3,"제작이 완료된 아이템은 창고로 자동 이동 되며, 필요 시 판매하거나 다른 상품으로 가공할 수 있습니다."
+TUTORIAL_FACTORY_4,"일부 아이템은 특정 레벨을 달성해야 제작할 수 있습니다."
+TUTORIAL_STORAGE_1,"현재 보유한 아이템을 확인하려면 곳간으로 이동하세요!"
+TUTORIAL_STORAGE_2,"곳간에서는 아이템의 개수를 파악할 수 있으며, 필요 없는 아이템은 판매해 추가 재화를 확보할 수 있습니다."
+TUTORIAL_EXPANSION_1,"마을의 공간을 확장 하려면 지도에 보이는 안개를 눌러 확장할 지역을 선택하세요."
+TUTORIAL_EXPANSION_2,"확장에는 특정 자원(예: 돈, 아이템 등)이 필요하며, 확장 후에는 새로운 건물을 짓거나 농장을 추가할 수 있습니다."
+TUTORIAL_DELIVERY_1,"헬기를 이용하면 마을에서 생산한 상품을 배달하고 보상을 받을 수 있습니다."
+TUTORIAL_DELIVERY_2,"헬기 주문을 확인한 후, 필요한 아이템을 준비해 헬기에 적재하면 배달이 시작됩니다."
+TUTORIAL_DELIVERY_3,"배달을 완료하면 경험치와 보상을 받을 수 있으며, 몇몇 주문으로 희귀한 아이템을 획득할 수도 있습니다."
+FARMING,농사
+FACTORY,공장
+STORAGE,곳간
+EXPANSION,공간 확장
+HELI_DELIVERY,헬기 배달
+CONSTRUCTION_AND_MOVE,건물 설치 및 이동
+TUTORIAL_DIALOGUE1,"우리 마을에 오신 걸 환영해요! 나는 이 마을의 이장, 제이슨이라고 해요. 이곳을 다시 활기찬 마을로 만들 사람이 필요해요. 함께 멋진 마을을 만들어 볼까요?"
+TUTORIAL_DIALOGUE2,"그전에 몇 가지 중요한 것들을 알려드릴게요!"

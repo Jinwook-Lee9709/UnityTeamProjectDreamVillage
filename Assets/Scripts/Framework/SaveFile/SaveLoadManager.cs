@@ -84,6 +84,13 @@ public class SaveLoadManager
         return true;
     }
 
+    public static void DeleteSave()
+    {
+        DirectoryInfo dir = new DirectoryInfo (SaveDirectory);
+        dir.Attributes=System.IO.FileAttributes.Normal;
+        dir.Delete(true);
+    }
+
     public static async UniTask Load(int slot = 0)
     {
         if (slot < 0 || slot >= SaveFileName.Length)
@@ -95,6 +102,7 @@ public class SaveLoadManager
             Data = new SaveDataVC();
             Data.OnFirstCreation();
             Save();
+            
         }
 
         string json;

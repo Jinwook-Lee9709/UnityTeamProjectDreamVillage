@@ -1,30 +1,27 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LocalizationText : MonoBehaviour
 {
     public string stringId;
 #if UNITY_EDITOR
     public Languages editorLang;
-#endif    
+#endif
     private TextMeshProUGUI text;
 
     private void Awake()
     {
         text = GetComponent<TextMeshProUGUI>();
-    }
-
-    private void OnEnable()
-    {
         if (Application.isPlaying)
         {
-            OnChangeLanguage(Variables.currentLanguage);    
+            OnChangeLanguage(Variables.currentLanguage);
         }
         else
         {
 #if UNITY_EDITOR
             OnChangeLanguage(editorLang);
-#endif    
+#endif
         }
     }
 
@@ -32,6 +29,6 @@ public class LocalizationText : MonoBehaviour
     {
         var stringTableId = DataTableIds.String[(int)lang];
         var stringTable = DataTableManager.Get<StringTable>(stringTableId);
-        text.text = stringTable.Get(stringId);
+        text.text = stringTable.Get(stringId).Replace("\\n", "\n");
     }
 }

@@ -5,15 +5,26 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static string expString = "Exp";
+    private static string levelName = "Level";
     [SerializeField] public CameraManager cameraManager;
     [SerializeField] private PlacementSystem placementSystem;
     [SerializeField] private LevelUpDatabaseSO levelUpDatabase;
+    [SerializeField] private TutorialUI tutorialUI;
     public void Start()
     {
         SaveLoadManager.Data.PropertyChanged += OnSaveDataChanged;
+
+        if (PlayerPrefs.GetInt("isFirst") == 1)
+            PlayTutorial();
         
         //for test
         Application.targetFrameRate = 120;
+    }
+
+    private void PlayTutorial()
+    {
+        placementSystem.IsTouchable = false;
+        tutorialUI.ShowTutorial(TutorialUI.TutorialState.FirstTutorial);
     }
 
     public PlacementSystem PlacementSystem
@@ -40,7 +51,24 @@ public class GameManager : MonoBehaviour
             SaveLoadManager.Data.Exp = currentExp;
             SaveLoadManager.Data.Level = level;
         }
+
+        if (e.PropertyName == levelName)
+        {
+            CheckLevelEvent();
+        }
     }
+
+    public void CheckLevelEvent()
+    {
+        if (SaveLoadManager.Data.Level == 4)
+        {
+            tutorialUI.ShowTutorial(TutorialUI.TutorialState.DeliveryTutorial);
+        }
+    }
+    
+    
+    
+    
     
     // For test
     [Range(10, 150)]

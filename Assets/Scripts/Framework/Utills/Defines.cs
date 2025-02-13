@@ -118,3 +118,13 @@ public static class Consts
     public const int AreaCount = 36;
 }
 
+public enum AudioNames
+{
+    Coin,
+    Plant,
+    Close,
+    Popup,
+    Music1,
+    Music2
+}
+

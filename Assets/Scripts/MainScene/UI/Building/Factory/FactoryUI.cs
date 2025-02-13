@@ -106,6 +106,7 @@ public class FactoryUI : MonoBehaviour
         DotAnimator.DissolveInAnimation(backgroundImage, alpha:0.7f);
         DotAnimator.PopupAnimation(mainPanel);
         DotAnimator.PopupAnimation(bottomPanel);
+        SoundManager.Instance.PlaySfxByName(AudioNames.Popup.ToString());
     }
 
 
@@ -303,6 +304,7 @@ public class FactoryUI : MonoBehaviour
         });
         DotAnimator.CloseAnimation(mainPanel);
         DotAnimator.CloseAnimation(bottomPanel);
+        SoundManager.Instance.PlaySfxByName(AudioNames.Close.ToString());
 
         scrollRect.enabled = true;
 

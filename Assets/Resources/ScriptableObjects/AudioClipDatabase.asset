@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a27fb3218914dc7b6ea7b66a0cad0e, type: 3}
+  m_Name: AudioClipDatabase
+  m_EditorClassIdentifier: 
+  audioClipDictionary:
+    _serializedList:
+    - Key: Coin
+      Value: {fileID: 8300000, guid: 16871d34c42c24490be5cef4be10c1fb, type: 3}
+    - Key: Plant
+      Value: {fileID: 8300000, guid: 10e92efb8c2b5439e9a7dd6530d79049, type: 3}
+    - Key: Close
+      Value: {fileID: 8300000, guid: a6db43857f2b6402582f449b5cbdcb40, type: 3}
+    - Key: Popup
+      Value: {fileID: 8300000, guid: 45bf00aaf3cbd407fb9415cd931bb443, type: 3}
+    - Key: Music1
+      Value: {fileID: 8300000, guid: 512730080a6221f4ca848586ae6074af, type: 3}
+    - Key: Music2
+      Value: {fileID: 8300000, guid: 6803fc65614c0b9418c487f54f721c52, type: 3}

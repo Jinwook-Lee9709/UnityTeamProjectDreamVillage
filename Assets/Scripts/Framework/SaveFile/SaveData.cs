@@ -14,7 +14,7 @@ public class SaveDataV1 : SaveData, INotifyPropertyChanged
 {
     #region Properties
 
-    private int level = 10;
+    private int level = 1;
 
     public int Level
     {

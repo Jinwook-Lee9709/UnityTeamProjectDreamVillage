@@ -14,7 +14,8 @@ public class SceneChanger : MonoBehaviour
     public void OnStartButtonTouched()
     {
         button.gameObject.SetActive(false);
-        loadUI.gameObject.SetActive(true);
+        loadUI.gameObject.SetActive(true); 
+        PlayerPrefs.SetInt("isFirst",SaveLoadManager.IsSaveExists() ? 0 : 1);
         LoadData();
     }
     
@@ -46,7 +47,6 @@ public class SceneChanger : MonoBehaviour
             var progressVal = Mathf.Clamp01(async.progress / 0.9f);
             slider.value = progressVal;
             text.text = String.Format(percentForamt, (progressVal * 100).ToString("F0"));
-            Debug.Log(async.isDone);
             if(progressVal ==1)
                 async.allowSceneActivation = true;
             await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken: this.GetCancellationTokenOnDestroy());

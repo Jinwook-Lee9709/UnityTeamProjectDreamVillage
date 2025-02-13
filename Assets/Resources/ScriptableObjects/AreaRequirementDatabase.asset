@@ -18,359 +18,359 @@ MonoBehaviour:
       Value:
         requiredLevel: 4
         needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        requiredCount1: 50
+        needItemId2: 1002
+        requiredCount2: 45
+        needItemId3: 1003
+        requiredCount3: 40
+        requiredGold: 500
     - Key: 2
       Value:
         requiredLevel: 3
         needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        requiredCount1: 40
+        needItemId2: 1002
+        requiredCount2: 35
+        needItemId3: 1003
+        requiredCount3: 30
+        requiredGold: 300
     - Key: 3
       Value:
         requiredLevel: 5
         needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        requiredCount1: 60
+        needItemId2: 1002
+        requiredCount2: 55
+        needItemId3: 1003
+        requiredCount3: 50
+        requiredGold: 700
     - Key: 4
       Value:
         requiredLevel: 8
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
+        needItemId1: 8033
+        requiredCount1: 4
+        needItemId2: 8034
         requiredCount2: 3
-        needItemId3: 1001
+        needItemId3: 8035
         requiredCount3: 3
-        requiredGold: 1000
+        requiredGold: 1400
     - Key: 5
       Value:
         requiredLevel: 13
-        needItemId1: 1001
+        needItemId1: 8033
         requiredCount1: 3
-        needItemId2: 1001
+        needItemId2: 8034
         requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId3: 8035
+        requiredCount3: 5
+        requiredGold: 3000
     - Key: 6
       Value:
         requiredLevel: 14
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId1: 8033
+        requiredCount1: 5
+        needItemId2: 8034
+        requiredCount2: 2
+        needItemId3: 8035
+        requiredCount3: 4
+        requiredGold: 3300
     - Key: 7
       Value:
         requiredLevel: 4
         needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        requiredCount1: 50
+        needItemId2: 1002
+        requiredCount2: 45
+        needItemId3: 1003
+        requiredCount3: 40
+        requiredGold: 500
     - Key: 8
       Value:
         requiredLevel: 0
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId1: 0
+        requiredCount1: 0
+        needItemId2: 0
+        requiredCount2: 0
+        needItemId3: 0
+        requiredCount3: 0
+        requiredGold: 0
     - Key: 9
       Value:
         requiredLevel: 3
         needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        requiredCount1: 40
+        needItemId2: 1002
+        requiredCount2: 35
+        needItemId3: 1003
+        requiredCount3: 30
+        requiredGold: 300
     - Key: 10
       Value:
         requiredLevel: 7
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
+        needItemId1: 8033
+        requiredCount1: 2
+        needItemId2: 8034
+        requiredCount2: 1
+        needItemId3: 8035
         requiredCount3: 3
-        requiredGold: 1000
+        requiredGold: 1100
     - Key: 11
       Value:
         requiredLevel: 10
-        needItemId1: 1001
+        needItemId1: 8033
         requiredCount1: 3
-        needItemId2: 1001
+        needItemId2: 8034
         requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId3: 8035
+        requiredCount3: 2
+        requiredGold: 2000
     - Key: 12
       Value:
         requiredLevel: 15
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId1: 8033
+        requiredCount1: 5
+        needItemId2: 8034
+        requiredCount2: 4
+        needItemId3: 8035
+        requiredCount3: 2
+        requiredGold: 3600
     - Key: 13
       Value:
         requiredLevel: 5
         needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        requiredCount1: 60
+        needItemId2: 1002
+        requiredCount2: 55
+        needItemId3: 1003
+        requiredCount3: 50
+        requiredGold: 700
     - Key: 14
       Value:
         requiredLevel: 2
         needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        requiredCount1: 30
+        needItemId2: 1002
+        requiredCount2: 25
+        needItemId3: 1003
+        requiredCount3: 20
+        requiredGold: 100
     - Key: 15
       Value:
         requiredLevel: 6
         needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        requiredCount1: 70
+        needItemId2: 1002
+        requiredCount2: 65
+        needItemId3: 1003
+        requiredCount3: 60
+        requiredGold: 900
     - Key: 16
       Value:
         requiredLevel: 8
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
+        needItemId1: 8033
+        requiredCount1: 4
+        needItemId2: 8034
         requiredCount2: 3
-        needItemId3: 1001
+        needItemId3: 8035
         requiredCount3: 3
-        requiredGold: 1000
+        requiredGold: 1400
     - Key: 17
       Value:
         requiredLevel: 11
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId1: 8033
+        requiredCount1: 2
+        needItemId2: 8034
+        requiredCount2: 4
+        needItemId3: 8035
+        requiredCount3: 2
+        requiredGold: 2300
     - Key: 18
       Value:
         requiredLevel: 16
-        needItemId1: 1001
+        needItemId1: 8033
         requiredCount1: 3
-        needItemId2: 1001
+        needItemId2: 8034
         requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId3: 8035
+        requiredCount3: 5
+        requiredGold: 3900
     - Key: 19
       Value:
         requiredLevel: 9
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
+        needItemId1: 8033
+        requiredCount1: 2
+        needItemId2: 8034
+        requiredCount2: 2
+        needItemId3: 8035
         requiredCount3: 3
-        requiredGold: 1000
+        requiredGold: 1700
     - Key: 20
       Value:
         requiredLevel: 6
         needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        requiredCount1: 70
+        needItemId2: 1002
+        requiredCount2: 65
+        needItemId3: 1003
+        requiredCount3: 60
+        requiredGold: 900
     - Key: 21
       Value:
         requiredLevel: 7
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
+        needItemId1: 8033
+        requiredCount1: 2
+        needItemId2: 8034
+        requiredCount2: 1
+        needItemId3: 8035
         requiredCount3: 3
-        requiredGold: 1000
+        requiredGold: 1100
     - Key: 22
       Value:
         requiredLevel: 9
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
+        needItemId1: 8033
+        requiredCount1: 2
+        needItemId2: 8034
+        requiredCount2: 2
+        needItemId3: 8035
         requiredCount3: 3
-        requiredGold: 1000
+        requiredGold: 1700
     - Key: 23
       Value:
         requiredLevel: 10
-        needItemId1: 1001
+        needItemId1: 8033
         requiredCount1: 3
-        needItemId2: 1001
+        needItemId2: 8034
         requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId3: 8035
+        requiredCount3: 2
+        requiredGold: 2000
     - Key: 24
       Value:
         requiredLevel: 17
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId1: 8033
+        requiredCount1: 2
+        needItemId2: 8034
+        requiredCount2: 5
+        needItemId3: 8035
+        requiredCount3: 4
+        requiredGold: 4300
     - Key: 25
       Value:
         requiredLevel: 14
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId1: 8033
+        requiredCount1: 5
+        needItemId2: 8034
+        requiredCount2: 2
+        needItemId3: 8035
+        requiredCount3: 4
+        requiredGold: 3300
     - Key: 26
       Value:
         requiredLevel: 12
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
+        needItemId1: 8033
+        requiredCount1: 1
+        needItemId2: 8034
+        requiredCount2: 4
+        needItemId3: 8035
         requiredCount3: 3
-        requiredGold: 1000
+        requiredGold: 2700
     - Key: 27
       Value:
         requiredLevel: 13
-        needItemId1: 1001
+        needItemId1: 8033
         requiredCount1: 3
-        needItemId2: 1001
+        needItemId2: 8034
         requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId3: 8035
+        requiredCount3: 5
+        requiredGold: 3000
     - Key: 28
       Value:
         requiredLevel: 11
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId1: 8033
+        requiredCount1: 2
+        needItemId2: 8034
+        requiredCount2: 4
+        needItemId3: 8035
+        requiredCount3: 2
+        requiredGold: 2300
     - Key: 29
       Value:
         requiredLevel: 12
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
+        needItemId1: 8033
+        requiredCount1: 1
+        needItemId2: 8034
+        requiredCount2: 4
+        needItemId3: 8035
         requiredCount3: 3
-        requiredGold: 1000
+        requiredGold: 2700
     - Key: 30
       Value:
         requiredLevel: 18
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId1: 8033
+        requiredCount1: 4
+        needItemId2: 8034
+        requiredCount2: 5
+        needItemId3: 8035
+        requiredCount3: 4
+        requiredGold: 4700
     - Key: 31
       Value:
         requiredLevel: 15
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId1: 8033
+        requiredCount1: 5
+        needItemId2: 8034
+        requiredCount2: 4
+        needItemId3: 8035
+        requiredCount3: 2
+        requiredGold: 3600
     - Key: 32
       Value:
         requiredLevel: 16
-        needItemId1: 1001
+        needItemId1: 8033
         requiredCount1: 3
-        needItemId2: 1001
+        needItemId2: 8034
         requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId3: 8035
+        requiredCount3: 5
+        requiredGold: 3900
     - Key: 33
       Value:
         requiredLevel: 17
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId1: 8033
+        requiredCount1: 2
+        needItemId2: 8034
+        requiredCount2: 5
+        needItemId3: 8035
+        requiredCount3: 4
+        requiredGold: 4300
     - Key: 34
       Value:
         requiredLevel: 18
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId1: 8033
+        requiredCount1: 4
+        needItemId2: 8034
+        requiredCount2: 5
+        needItemId3: 8035
+        requiredCount3: 4
+        requiredGold: 4700
     - Key: 35
       Value:
         requiredLevel: 19
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId1: 8033
+        requiredCount1: 5
+        needItemId2: 8034
+        requiredCount2: 5
+        needItemId3: 8035
+        requiredCount3: 4
+        requiredGold: 5000
     - Key: 36
       Value:
         requiredLevel: 19
-        needItemId1: 1001
-        requiredCount1: 3
-        needItemId2: 1001
-        requiredCount2: 3
-        needItemId3: 1001
-        requiredCount3: 3
-        requiredGold: 1000
+        needItemId1: 8033
+        requiredCount1: 5
+        needItemId2: 8034
+        requiredCount2: 5
+        needItemId3: 8035
+        requiredCount3: 4
+        requiredGold: 5000

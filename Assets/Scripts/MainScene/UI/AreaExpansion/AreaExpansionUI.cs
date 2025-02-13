@@ -49,6 +49,8 @@ public class AreaExpansionUI : MonoBehaviour
 
         DotAnimator.DissolveInAnimation(backGround, alpha:backgroundAlpha);
         DotAnimator.PopupAnimation(mainPanel);
+        
+        SoundManager.Instance.PlaySfxByName(AudioNames.Popup.ToString());
     }
 
     private bool UpdateGoldPanel(int requiredGold)
@@ -86,6 +88,8 @@ public class AreaExpansionUI : MonoBehaviour
     {
         DotAnimator.DissolveOutAnimation(backGround);
         DotAnimator.CloseAnimation(mainPanel, onComplete: () => gameObject.SetActive(false));
+        
+        SoundManager.Instance.PlaySfxByName(AudioNames.Close.ToString());
         OnClose?.Invoke();
     }
 }

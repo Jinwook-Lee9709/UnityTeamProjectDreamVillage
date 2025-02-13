@@ -26,6 +26,7 @@ public class Farm : MonoBehaviour, IBuilding, ILoadableBuilding
     private static readonly string growPrefabPath = "Prefabs/Crops/Crop_Prefab_{0}_Grow";
     private static readonly string completePrefabPath = "Prefabs/Crops/Crop_Prefab_{0}_Complete";
     private static readonly string expIconPath = "Sprites/Icons/Icon_Level";
+    private static readonly String cropSfxName = "Plant";
     
     [SerializeField] private GameObject[] cropsPivot;
     [SerializeField] private int selectedCropIndex;
@@ -63,6 +64,13 @@ public class Farm : MonoBehaviour, IBuilding, ILoadableBuilding
     public DateTime? PlantedTime { get { return plantedTime; } }
     public DateTime? FinishTime { get { return finishTime; } }
     public int PlantedCropId { get { return plantedCropId; } }
+
+    public AudioClip cropSound;
+    
+    private void Awake()
+    {
+        cropSound = Resources.Load<AudioClipDatabase>(String.Format(PathFormat.soPath, nameof(AudioClipDatabase))).Get(cropSfxName);
+    }
     
     public void Load(BuildingTaskData buildingTaskData)
     {
@@ -355,6 +363,8 @@ public class Farm : MonoBehaviour, IBuilding, ILoadableBuilding
             finishTime = plantTime + TimeSpan.FromSeconds(cropRecipeDatabase.Get(id).productionTime);
             plantedCropId = id;
             farmState = FarmState.Growing;
+            
+            SoundManager.Instance.PlaySfx(cropSound);
         }
     }
 
@@ -383,6 +393,8 @@ public class Farm : MonoBehaviour, IBuilding, ILoadableBuilding
         {
             Destroy(crop.transform.GetChild(0).gameObject);
         }
+        
+        SoundManager.Instance.PlaySfx(cropSound);
         
         
     }

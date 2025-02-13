@@ -48,7 +48,8 @@ public class BuildingShopUI : MonoBehaviour
         SetBuildingPanel(BuildingTypes.Farm);
         DotAnimator.DissolveInAnimation(backgroundImage, alpha:0.7f);
         DotAnimator.PopupAnimation(mainPanel);
-        SaveLoadManager.Save();
+        
+        SoundManager.Instance.PlaySfxByName(AudioNames.Popup.ToString());
     }
 
     private void OnCategoryButtonTouched(BuildingTypes type)
@@ -119,9 +120,11 @@ public class BuildingShopUI : MonoBehaviour
         placementSystem.IsTouchable = false;
         DotAnimator.CloseAnimation(mainPanel, onComplete: () =>
         {
+            SoundManager.Instance.PlaySfxByName(AudioNames.Close.ToString());
             ClearBuildingPanel();
             gameObject.SetActive(false);
             placementSystem.IsTouchable = true;
         });
+        
     }
 }

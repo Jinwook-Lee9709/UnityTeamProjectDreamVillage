@@ -91,6 +91,7 @@ public class SellPopup : MonoBehaviour
         SaveLoadManager.Data.Gold += itemDatabase.Get(currentItemId).price * CurrentAmount;
         Debug.Log(SaveLoadManager.Data.Gold);
         SaveLoadManager.Data.inventory.RemoveItem(currentItemId, CurrentAmount);
+        SoundManager.Instance.PlaySfxByName(AudioNames.Coin.ToString());
         OnSell.Invoke();
         ClosePopupUI();
     }

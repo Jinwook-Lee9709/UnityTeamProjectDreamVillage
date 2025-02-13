@@ -21,6 +21,7 @@ public class DeliveryUI : MonoBehaviour
         
         DotAnimator.DissolveInAnimation(backgroundImage, alpha:0.7f);
         DotAnimator.PopupAnimation(mainPanel);
+        SoundManager.Instance.PlaySfxByName(AudioNames.Popup.ToString());
     }
 
     private void UpdateOrderPanels()
@@ -59,6 +60,8 @@ public class DeliveryUI : MonoBehaviour
             placementSystem.IsTouchable = true;
         });
         DotAnimator.CloseAnimation(mainPanel);
+        SoundManager.Instance.PlaySfxByName(AudioNames.Close.ToString());
+        
         OnClosed?.Invoke();
     }
     
