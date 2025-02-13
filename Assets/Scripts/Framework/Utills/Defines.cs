@@ -27,6 +27,7 @@ public enum SoIds
 public enum UniqueBuildingId
 {
     Construction = 3000,
+    Farm = 3001,
     HeliPad = 3015,
 }
 

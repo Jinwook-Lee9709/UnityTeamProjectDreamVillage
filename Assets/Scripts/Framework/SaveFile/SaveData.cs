@@ -44,7 +44,7 @@ public class SaveDataV1 : SaveData, INotifyPropertyChanged
         }
     }
 
-    private int gold = 100000;
+    private int gold = 100;
 
     public int Gold
     {
@@ -101,7 +101,16 @@ public class SaveDataV1 : SaveData, INotifyPropertyChanged
         BuildingSaveData heliPad = new();
         heliPad.buildingId = (int)UniqueBuildingId.HeliPad;
         heliPad.position = new Vector3Int(16, 0 ,18);
+        BuildingSaveData farm1 = new();
+        farm1.buildingId = (int)UniqueBuildingId.Farm;
+        farm1.position = new Vector3Int(16, 0 ,15);
+        BuildingSaveData farm2 = new();
+        farm2.buildingId = (int)UniqueBuildingId.Farm;
+        farm2.position = new Vector3Int(15, 0 ,15);
+        buildings.Add(farm1);
+        buildings.Add(farm2);
         buildings.Add(heliPad);
+
     }
 
     public override SaveData VersionUp()

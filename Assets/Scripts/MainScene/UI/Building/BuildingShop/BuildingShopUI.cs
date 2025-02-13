@@ -123,7 +123,6 @@ public class BuildingShopUI : MonoBehaviour
             SoundManager.Instance.PlaySfxByName(AudioNames.Close.ToString());
             ClearBuildingPanel();
             gameObject.SetActive(false);
-            placementSystem.IsTouchable = true;
         });
         
     }

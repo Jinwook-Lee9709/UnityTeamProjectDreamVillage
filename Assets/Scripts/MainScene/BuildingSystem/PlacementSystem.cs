@@ -29,7 +29,7 @@ public class PlacementSystem : MonoBehaviour
     
     public ObjectPlacer ObjectPlacer => objectPlacer;
 
-    private bool isTouchable = true;
+    [SerializeField] private bool isTouchable = true;
 
     public bool IsTouchable
     {
