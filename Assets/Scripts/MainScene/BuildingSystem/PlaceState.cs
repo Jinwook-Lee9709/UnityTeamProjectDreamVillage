@@ -83,10 +83,13 @@ public class PlaceState : IBuildingState
         
         if (Input.touchCount == 1)
         {
+            if (Input.GetTouch(0).phase == TouchPhase.Ended || Input.GetTouch(0).phase == TouchPhase.Canceled)
+                return;
             Vector3 touchedPos = InputManager.Instance.Vector2PositionToPlane(Input.GetTouch(0).position);
             Vector3 touchedTile = grid.WorldToCell(touchedPos);
             if (touchedTile != prevTouchPos)
             {
+
                 previewSystem.MovePreviewObject(touchedTile);
                 GetCurrentPreviewValidity(out var validity);
                 previewSystem.UpdatePreview(validity);

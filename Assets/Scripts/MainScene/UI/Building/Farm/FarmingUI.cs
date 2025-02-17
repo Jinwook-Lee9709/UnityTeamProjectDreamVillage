@@ -17,9 +17,11 @@ public class FarmingUI : MonoBehaviour
     [SerializeField] private FarmPopup popup;
     [SerializeField] private RectTransform frameBoundary;
     [SerializeField] private ScrollRect scrollRect;
+    [SerializeField] private PlacementSystem placementSystem;
     private ObjectPool<Image> imagePool;
     private List<Image> images = new();
-    
+    private int rectTouchingFingerId = -1;
+
     private void Awake()
     {
         imagePool = new ObjectPool<Image>(prefab, poolParent, 20);
@@ -52,6 +54,7 @@ public class FarmingUI : MonoBehaviour
             images.Add(image);
             i++;
         }
+
         RectTransform contentRect = content.GetComponent<RectTransform>();
         contentRect.pivot = new Vector2(0, 0.5f); // 좌측 정렬
         contentRect.anchoredPosition = new Vector2(0, 0);
@@ -62,7 +65,7 @@ public class FarmingUI : MonoBehaviour
     {
         if (Input.touchCount == 1)
         {
-            var cropInfo =  cropRecipe.Get(itemId);
+            var cropInfo = cropRecipe.Get(itemId);
             var imageRect = image.rectTransform;
             var frameTopPoint = frameBoundary.GetMiddleTopPosition();
             var popupRect = popup.GetComponent<RectTransform>();
@@ -90,8 +93,31 @@ public class FarmingUI : MonoBehaviour
                 popup.gameObject.SetActive(false);
             }
         }
+
+        if (Input.touchCount == 1)
+        {
+            if (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Ended)
+            {
+                var touchPos = Input.GetTouch(0).position;
+                if (RectTransformUtility.RectangleContainsScreenPoint(frameBoundary, touchPos))
+                {
+                    rectTouchingFingerId = Input.touches[0].fingerId;
+                    placementSystem.IsTouchable = false;
+                }
+            }
+        }
+
+        foreach (var touch in Input.touches)
+        {
+            if (touch.fingerId == rectTouchingFingerId &&
+                (touch.phase == TouchPhase.Canceled || touch.phase == TouchPhase.Ended))
+            {
+                placementSystem.IsTouchable = true;
+                rectTouchingFingerId = -1;
+            }
+        }
     }
-    
+
 
     public void ShowHarvestUI(Action callback)
     {
@@ -101,7 +127,10 @@ public class FarmingUI : MonoBehaviour
         image.sprite = Resources.Load<Sprite>(sicklePath);
         images.Add(image);
         ImageTouchHandler imgTouchHandler = image.gameObject.GetComponent<ImageTouchHandler>();
-        imgTouchHandler.OnTouch += (Image image, bool interactable) => { if(interactable) callback(); };
+        imgTouchHandler.OnTouch += (Image image, bool interactable) =>
+        {
+            if (interactable) callback();
+        };
         imgTouchHandler.Interactable = true;
 
         RectTransform contentRect = content.GetComponent<RectTransform>();
@@ -124,10 +153,11 @@ public class FarmingUI : MonoBehaviour
             imgTouchHandler.ClearEvent();
             imagePool.ReturnToPool(image);
         }
+
         images.Clear();
         gameObject.SetActive(false);
     }
-    
+
     private void SetPivot(RectTransform rectTransform, Vector2 newPivot)
     {
         Vector2 size = rectTransform.rect.size;

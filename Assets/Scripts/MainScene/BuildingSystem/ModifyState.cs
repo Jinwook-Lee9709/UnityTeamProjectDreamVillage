@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ModifyState : IBuildingState
 {
@@ -12,7 +13,7 @@ public class ModifyState : IBuildingState
     private PreviewSystem previewSystem;
     private GameObject originalObject;
     private CameraManager cameraManager;
-    
+
 
     private float fingerId = -1;
     private Vector3 prevTouchPos;
@@ -43,6 +44,7 @@ public class ModifyState : IBuildingState
         {
             OnRotation();
         }
+
         originalObject.SetActive(false);
     }
 
@@ -63,8 +65,8 @@ public class ModifyState : IBuildingState
     {
         Vector3 previewPosition = previewSystem.currentPreviewPosition;
         Vector3Int gridPosition = grid.WorldToCell(previewPosition);
-        Vector2Int flipedSize = new Vector2Int(currentBuildingData.size.y,currentBuildingData.size.x);
-        validity = gridData.IsValid(gridPosition, previewSystem.IsFlip? flipedSize : currentBuildingData.size);
+        Vector2Int flipedSize = new Vector2Int(currentBuildingData.size.y, currentBuildingData.size.x);
+        validity = gridData.IsValid(gridPosition, previewSystem.IsFlip ? flipedSize : currentBuildingData.size);
         return gridPosition;
     }
 
@@ -81,9 +83,13 @@ public class ModifyState : IBuildingState
 
     public void UpdateState()
     {
-        CheckIsPreviewTouched();
-        CheckIsTouchEnded();
-        if (fingerId != -1)
+        // CheckIsPreviewTouched();
+        // CheckIsTouchEnded();
+        if (Input.touchCount > 0 && EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+            return;
+
+        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended ||
+            Input.GetTouch(0).phase == TouchPhase.Canceled)
         {
             Vector3 touchedPos = InputManager.Instance.Vector2PositionToPlane(Input.GetTouch(0).position);
             Vector3 touchedTile = grid.WorldToCell(touchedPos);
@@ -97,41 +103,42 @@ public class ModifyState : IBuildingState
         }
     }
 
-    private void CheckIsTouchEnded()
-    {
-        if (Input.touches.Length != 1 && fingerId != -1)
-            fingerId = -1;
-        for (int i = 0; i < Input.touchCount; i++)
-        {
-            Touch touch = Input.GetTouch(i);
 
-            if (fingerId != -1 && (touch.phase == TouchPhase.Canceled || touch.phase == TouchPhase.Ended))
-            {
-                fingerId = -1;
-                cameraManager.ScreenEdgeMove = false;
-                cameraManager.DragMove = true;
-            }
-        }
-    }
-
-    private void CheckIsPreviewTouched()
-    {
-        if (Input.touches.Length == 1 && fingerId == -1)
-        {
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began)
-            {
-                Vector3 touchPos = grid.WorldToCell(InputManager.Instance.Vector2PositionToPlane(touch.position));
-                if (touchPos.x == previewSystem.currentPreviewPosition.x &&
-                    touchPos.z == previewSystem.currentPreviewPosition.z)
-                {
-                    fingerId = touch.fingerId;
-                    cameraManager.ScreenEdgeMove = true;
-                    cameraManager.DragMove = false;
-                }
-            }
-        }
-    }
+    // private void CheckIsTouchEnded()
+    // {
+    //     if (Input.touches.Length != 1 && fingerId != -1)
+    //         fingerId = -1;
+    //     for (int i = 0; i < Input.touchCount; i++)
+    //     {
+    //         Touch touch = Input.GetTouch(i);
+    //
+    //         if (fingerId != -1 && (touch.phase == TouchPhase.Canceled || touch.phase == TouchPhase.Ended))
+    //         {
+    //             fingerId = -1;
+    //             cameraManager.ScreenEdgeMove = false;
+    //             cameraManager.DragMove = true;
+    //         }
+    //     }
+    // }
+    //
+    // private void CheckIsPreviewTouched()
+    // {
+    //     if (Input.touches.Length == 1 && fingerId == -1)
+    //     {
+    //         Touch touch = Input.GetTouch(0);
+    //         if (touch.phase == TouchPhase.Began)
+    //         {
+    //             Vector3 touchPos = grid.WorldToCell(InputManager.Instance.Vector2PositionToPlane(touch.position));
+    //             if (touchPos.x == previewSystem.currentPreviewPosition.x &&
+    //                 touchPos.z == previewSystem.currentPreviewPosition.z)
+    //             {
+    //                 fingerId = touch.fingerId;
+    //                 cameraManager.ScreenEdgeMove = true;
+    //                 cameraManager.DragMove = false;
+    //             }
+    //         }
+    //     }
+    // }
 
     public void EndState()
     {

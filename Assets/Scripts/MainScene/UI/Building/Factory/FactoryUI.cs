@@ -242,6 +242,8 @@ public class FactoryUI : MonoBehaviour
                     scrollRect.enabled = true;
                     popup.gameObject.SetActive(false);
                 }
+                if(!RectTransformUtility.RectangleContainsScreenPoint(frameBoundary, touch.position)) 
+                    popup.gameObject.SetActive(false);
 
                 if (isTouching)
                 {

@@ -24,7 +24,6 @@ public class InventoryUI : MonoBehaviour
     {
         currentFilterType = ItemType.All;
         SetInventorySlot();
-
         closeButton.onClick.AddListener(ClosePanel);
     }
 

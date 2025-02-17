@@ -11,13 +11,13 @@ public class MainSettingUI : MonoBehaviour
     [SerializeField] private Slider sfxSlider;
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private Image backgroundImage;
+    [SerializeField] private PlacementSystem placementSystem;
     public void Start()
     {
         float musicVol = SoundManager.Instance.MusicVolume;
         musicSlider.value = musicVol != 0 ? Mathf.Pow(10, musicVol / 20) : 1;
         float sfxVol = SoundManager.Instance.SfxVolume;
         sfxSlider.value = sfxVol != 0 ? Mathf.Pow(10, sfxVol / 20) : 1;
-        
     }
     
     public void OnSaveButtonTouched()
@@ -36,6 +36,7 @@ public class MainSettingUI : MonoBehaviour
         DotAnimator.DissolveInAnimation(backgroundImage, alpha:0.7F);
         DotAnimator.PopupAnimation(mainPanel);
         SoundManager.Instance.PlaySfxByName(AudioNames.Popup.ToString());
+        placementSystem.IsTouchable = false;
     }
     
     public void OnClose()
@@ -43,6 +44,7 @@ public class MainSettingUI : MonoBehaviour
         DotAnimator.DissolveOutAnimation(backgroundImage);
         DotAnimator.CloseAnimation(mainPanel, onComplete: () => { gameObject.SetActive(false); });
         SoundManager.Instance.PlaySfxByName(AudioNames.Close.ToString());
+        placementSystem.IsTouchable = true;
     }
     
 

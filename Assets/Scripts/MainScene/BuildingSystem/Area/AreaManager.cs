@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AreaManager : MonoBehaviour
+public class  AreaManager : MonoBehaviour
 {
     private static readonly string lockIconPath = "Sprites/Icons/Icon_Lock";
     private static readonly Vector3 CameraOffset = new Vector3(-13f, 15f, -13f);
@@ -99,7 +99,7 @@ public class AreaManager : MonoBehaviour
 
     public void OnUIClosed()
     {
-        indicatorImage.material.DOFade(0, moveDuration);
+        indicatorImage.material.DOFade(0, moveDuration).OnComplete(()=>{ indicatorImage.gameObject.SetActive(true);});
         placementSystem.IsTouchable = true;
     }
 

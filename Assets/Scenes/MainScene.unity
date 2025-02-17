@@ -938,7 +938,7 @@ MonoBehaviour:
   cursorIndicator: {fileID: 1403283602}
   cursorScale: {fileID: 1402043071}
   cursorRotation: {fileID: 1124175389}
-  cellIndicatorRenderer: {fileID: 2093315794}
+  cellIndicatorRenderer: {fileID: 198381176}
 --- !u!1 &33195167
 GameObject:
   m_ObjectHideFlags: 0
@@ -4015,6 +4015,7 @@ MonoBehaviour:
   sfxSlider: {fileID: 1761626389}
   mainPanel: {fileID: 1991665881}
   backgroundImage: {fileID: 134516127}
+  placementSystem: {fileID: 0}
 --- !u!1001 &140288653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27525,11 +27526,6 @@ MonoBehaviour:
   placementSystem: {fileID: 865917810}
   levelUpDatabase: {fileID: 11400000, guid: 92827ce5099874373a359f3e3c2a9da7, type: 2}
   tutorialUI: {fileID: 1613662329}
-  fontSize: 47
-  color: {r: 1, g: 0, b: 0, a: 1}
-  width: 170.9
-  height: 300
-  showFrameRate: 1
 --- !u!1 &1454109298
 GameObject:
   m_ObjectHideFlags: 0
@@ -39257,11 +39253,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimumSize: 1.5
-  maximumSize: 5
+  maximumSize: 8
   pinchSensi: 1
   dragSensi: 0.01
   edgeMoveSensi: 0.1
   edgeRatio: 0.13
+  swipeTime: 0.3
+  swipeThreshold: 100
+  deceleration: 0.3
+  swipeMoveSpeedRatio: 100
+  maxSwipeSpeed: 100
+  swipeStopThreshold: 1
   restrictionBorderPivots:
     _serializedList:
     - Key: 0
@@ -42737,6 +42739,7 @@ MonoBehaviour:
   popup: {fileID: 364947572}
   frameBoundary: {fileID: 5855072891806354850}
   scrollRect: {fileID: 8299197077710588521}
+  placementSystem: {fileID: 865917810}
 --- !u!222 &6309510003771556210
 CanvasRenderer:
   m_ObjectHideFlags: 0

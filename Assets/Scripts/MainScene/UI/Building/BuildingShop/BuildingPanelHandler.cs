@@ -50,7 +50,7 @@ public class BuildingPanelHandler : MonoBehaviour
 
     private void SetUnauthorizedUI(BuildingData data)
     {
-        if (SaveLoadManager.Data.Level <= data.level)
+        if (SaveLoadManager.Data.Level < data.level)
         {
             levelPlate.SetActive(true);
             sb.Append(DataTableManager.StringTable.Get(StringKeys.required));
@@ -60,7 +60,7 @@ public class BuildingPanelHandler : MonoBehaviour
             return;
         }
 
-        if (SaveLoadManager.Data.Gold <= data.cost)
+        if (SaveLoadManager.Data.Gold < data.cost)
         {
             costPlate.SetActive(true);
             sb.AppendWithBlank(data.cost.ToString());

@@ -64,7 +64,6 @@ public class SoundManager : Singleton<SoundManager>
         var sources = Camera.main.GetComponents<AudioSource>();
         foreach (var source in sources)
         {
-            Debug.Log(source.outputAudioMixerGroup.name);
             if (source.outputAudioMixerGroup.name == AudioType.Music.ToString())
             {
                 musicSource = source;

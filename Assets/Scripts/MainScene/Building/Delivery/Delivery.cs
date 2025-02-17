@@ -46,7 +46,7 @@ public class Delivery : MonoBehaviour, IBuilding, ILoadableBuilding
             SaveLoadManager.Data.deliverySaveData.deliveryList = GetRandomTask();
             SaveLoadManager.Data.deliverySaveData.lastUpdateTime = now;
 
-            var clinetIds = Enumerable.Range(1, clientCount + 1).OrderBy(x => Random.value).Take(maxTaskCount).ToList();
+            var clinetIds = Enumerable.Range(1, clientCount).OrderBy(x => Random.value).Take(maxTaskCount).ToList();
             SaveLoadManager.Data.deliverySaveData.clientIds = clinetIds;
         }
     }

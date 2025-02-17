@@ -96,6 +96,7 @@ public class BuildingShopUI : MonoBehaviour
     private void OnBudilngPanelTouched(int id)
     {
         placementSystem.StartPlacement(id);
+        placementSystem.IsTouchable = false;
         StopUI();
     }
 
@@ -117,7 +118,6 @@ public class BuildingShopUI : MonoBehaviour
     private void StopUI()
     {
         DotAnimator.DissolveOutAnimation(backgroundImage, onComplete:() => gameObject.SetActive(false));
-        placementSystem.IsTouchable = false;
         DotAnimator.CloseAnimation(mainPanel, onComplete: () =>
         {
             SoundManager.Instance.PlaySfxByName(AudioNames.Close.ToString());

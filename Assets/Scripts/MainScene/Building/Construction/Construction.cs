@@ -97,6 +97,8 @@ public class Construction : MonoBehaviour, IBuilding, ILoadableBuilding
                 var populationSprite = Resources.Load<Sprite>(populationIconPath);
                 uiManager.iconAnimator.MoveFromWorldToUI(transform.position + Vector3.up, populationEndPosition, populationSprite, 0.3f);
             }
+
+            SaveLoadManager.Save();
             
             uiManager.iconAnimator.DisablePopupIcon(completeIcon);
             completeIcon = null;
