@@ -34,9 +34,9 @@ EverGrow는 3D 아이소메트릭 기반 건설타이쿤 게임입니다. 유저
 
 ## 콘텐츠
 
-|<img width="200" alt="스크린샷 2025-05-21 오전 10 54 55" src="https://github.com/user-attachments/assets/fba34ab0-1e08-4f96-bbee-5a28aeed15ae" />|<img width="200" alt="스크린샷3" src="https://github.com/user-attachments/assets/1738d27d-6f62-4266-9a33-3b850ca617d8" />|<img width="200" alt="스크린샷4" src="https://github.com/user-attachments/assets/8cd80765-ac5b-4d11-9be7-30afbbc51c0b" />|<img width="200" alt="스크린샷 2025-05-28 오후 5 39 59" src="https://github.com/user-attachments/assets/8fa671b0-d0f1-4216-aa52-9b8a13e050f6" />|
+|<img width="1134" alt="스크린샷 2025-05-30 오후 12 30 13" src="https://github.com/user-attachments/assets/4972c65d-5b37-47b5-801d-a4d95e7eed24" />|<img width="1135" alt="스크린샷 2025-05-30 오후 12 31 19" src="https://github.com/user-attachments/assets/1fa5bcf8-cca1-4fbc-b684-54c2da60c0ff" />|<img width="1137" alt="스크린샷 2025-05-30 오후 12 29 26" src="https://github.com/user-attachments/assets/d4bf4160-a21e-4604-866f-cce56ba71d8d" />|<img width="1134" alt="스크린샷 2025-05-30 오후 12 30 29" src="https://github.com/user-attachments/assets/ddae7d77-edbd-4114-825a-d91a9e4eb261" />|
 |:---:|:---:|:---:|:--:|
-|직원 고용|랭킹 시스템|홍보 시스템|미션 시스템|
+|농사|건설|공산품 생산|영역 확장|
 
 
 
